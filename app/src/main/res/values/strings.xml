@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AppTravel</string>
+    <string name="menu_header">Travel organizer</string>
+    <string name="settings_string">Settings</string>
+    <string name="new_travel">New travel</string>
+    <string name="saved_travels">Saved travels</string>
 </resources>
