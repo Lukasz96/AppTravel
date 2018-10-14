@@ -1,22 +1,71 @@
 package com.example.lukasz.apptravel;
 
+import android.app.Activity;
+import android.app.Application;
+import android.arch.persistence.room.Room;
+import android.content.Context;
+
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.lukasz.apptravel.db.*;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    AppDatabase mDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDb= AppDatabase.getInstance(this.getApplicationContext());
         setContentView(R.layout.activity_main);
+        final Button button = findViewById(R.id.button);
+        final Button button2 = findViewById(R.id.button2);
+        final Button button3 = findViewById(R.id.button3);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mDb.userDao().insertUser(new User(0,"Lukasz",21));
+                mDb.userDao().insertUser(new User(0,"Tomek",21));
+                mDb.userDao().insertUser(new User(0,"Marek",23));
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+              Intent intent = new Intent(MainActivity.this, Test.class);
+              List<User> users=mDb.userDao().getUsers();
+              intent.putExtra("users", (Serializable)users);
+              startActivity(intent);
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                mDb.userDao().deleteAllUsers();
+                Toast.makeText(MainActivity.this, "Usunieto wszystkie rekordy!",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -65,4 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
         return inSampleSize;
     }
+
+
+
 }
