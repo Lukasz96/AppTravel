@@ -22,16 +22,23 @@ public interface UserDao {
     void insertUser(User user);
 
     @Query("SELECT * FROM user")
-    public List<User> getUsers();
+    List<User> getUsers();
     @Update
-    public void updateUsers(User... users);
+    void updateUsers(User... users);
+
+
     @Delete
-    public void deleteUsers(User... users);
+    void deleteUsers(User... users);
 
     @Query("delete from user where user_id=:id")
     int deleteUser(int id);
 
     @Query("DELETE FROM user")
-    public void deleteAllUsers();
+    void deleteAllUsers();
+
+    @Query("SELECT * FROM user WHERE user_id=:id ")
+    User getUserById(long id);
+
+
 
 }

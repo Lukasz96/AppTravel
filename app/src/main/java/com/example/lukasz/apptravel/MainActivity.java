@@ -44,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 mDb.userDao().insertUser(new User(0,"Lukasz",21));
                 mDb.userDao().insertUser(new User(0,"Tomek",21));
                 mDb.userDao().insertUser(new User(0,"Marek",23));
+                long index=mDb.userDao().getUsers().get(0).getUserId();
+     //           Address address=new Address(0,"Ulica","Miasto",index);
+     //           mDb.addressDao().insertAddress(address);
+            //    Address a1=mDb.addressDao().getAddress();
+             //   System.out.println("MIASTO Z INNERA"+mDb.addressDao().getCity());
             }
         });
 

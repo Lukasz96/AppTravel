@@ -3,11 +3,14 @@ package com.example.lukasz.apptravel.db;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import static android.arch.persistence.room.ForeignKey.CASCADE;
 
 @Entity
 public class User implements Serializable {
@@ -20,6 +23,8 @@ public class User implements Serializable {
     public String firstName;
 
     public int age;
+
+
 
     public long getUserId() {
         return userId;
