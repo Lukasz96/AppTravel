@@ -20,5 +20,5 @@ public interface ElementListyDoSpakowaniaDao {
 
     @Query("SELECT * FROM elementlistydospakowania INNER JOIN listadospakowania ON listaDoSpakowania.id=listaDoSpakowaniaId " +
             "WHERE listaDoSpakowania.id=:idListy")
-    List<ElementListyDoSpakowania> getElementyZDanejListy(int idListy);
+    List<ElementListyDoSpakowania> getElementyDoSpakowaniaZDanejListy(int idListy);
 }

@@ -7,46 +7,39 @@ import android.support.annotation.NonNull;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = { @ForeignKey(entity=ListaDoSpakowania.class,
+@Entity(foreignKeys = { @ForeignKey(entity=ListaDoZakupu.class,
         parentColumns = "id",
-        childColumns = "listaDoSpakowaniaId",
+        childColumns = "listaDoZakupuId",
         onDelete = CASCADE),
         @ForeignKey(entity = Kategoria.class,
         parentColumns = "id",
         childColumns = "idKategorii",
         onDelete = CASCADE)})
-public class ElementListyDoSpakowania {
+public class ElementListyZakupow {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private int listaDoSpakowaniaId;
+    private int listaDoZakupuId;
     @NonNull
     private String nazwa;
-    private boolean czySpakowane;
-
-    public boolean isCzyPrzekazanoDoZakupu() {
-        return czyPrzekazanoDoZakupu;
-    }
-
-    public void setCzyPrzekazanoDoZakupu(boolean czyPrzekazanoDoZakupu) {
-        this.czyPrzekazanoDoZakupu = czyPrzekazanoDoZakupu;
-    }
-
-    private boolean czyPrzekazanoDoZakupu;
+    @NonNull
     private int ilosc;
     private int idKategorii;
     private String uwaga;
+    @NonNull
+    private boolean czyKupione;
+    private double cena;
 
-    public ElementListyDoSpakowania(int id, int listaDoSpakowaniaId, @NonNull String nazwa,
-                                    boolean czySpakowane, boolean czyPrzekazanoDoZakupu, int ilosc, int idKategorii, String uwaga) {
+    public ElementListyZakupow(int id, int listaDoZakupuId, @NonNull String nazwa, @NonNull int ilosc,
+                               int idKategorii, String uwaga, @NonNull boolean czyKupione, double cena) {
         this.id = id;
-        this.listaDoSpakowaniaId = listaDoSpakowaniaId;
+        this.listaDoZakupuId = listaDoZakupuId;
         this.nazwa = nazwa;
-        this.czySpakowane = czySpakowane;
-        this.czyPrzekazanoDoZakupu = czyPrzekazanoDoZakupu;
         this.ilosc = ilosc;
         this.idKategorii = idKategorii;
         this.uwaga = uwaga;
+        this.czyKupione = czyKupione;
+        this.cena = cena;
     }
 
     public int getId() {
@@ -57,12 +50,12 @@ public class ElementListyDoSpakowania {
         this.id = id;
     }
 
-    public int getListaDoSpakowaniaId() {
-        return listaDoSpakowaniaId;
+    public int getListaDoZakupuId() {
+        return listaDoZakupuId;
     }
 
-    public void setListaDoSpakowaniaId(int listaDoSpakowaniaId) {
-        this.listaDoSpakowaniaId = listaDoSpakowaniaId;
+    public void setListaDoZakupuId(int listaDoZakupuId) {
+        this.listaDoZakupuId = listaDoZakupuId;
     }
 
     @NonNull
@@ -74,19 +67,12 @@ public class ElementListyDoSpakowania {
         this.nazwa = nazwa;
     }
 
-    public boolean isCzySpakowane() {
-        return czySpakowane;
-    }
-
-    public void setCzySpakowane(boolean czySpakowane) {
-        this.czySpakowane = czySpakowane;
-    }
-
+    @NonNull
     public int getIlosc() {
         return ilosc;
     }
 
-    public void setIlosc(int ilosc) {
+    public void setIlosc(@NonNull int ilosc) {
         this.ilosc = ilosc;
     }
 
@@ -104,5 +90,22 @@ public class ElementListyDoSpakowania {
 
     public void setUwaga(String uwaga) {
         this.uwaga = uwaga;
+    }
+
+    @NonNull
+    public boolean isCzyKupione() {
+        return czyKupione;
+    }
+
+    public void setCzyKupione(@NonNull boolean czyKupione) {
+        this.czyKupione = czyKupione;
+    }
+
+    public double getCena() {
+        return cena;
+    }
+
+    public void setCena(double cena) {
+        this.cena = cena;
     }
 }
