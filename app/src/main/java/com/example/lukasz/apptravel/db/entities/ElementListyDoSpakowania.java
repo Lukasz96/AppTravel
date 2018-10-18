@@ -23,6 +23,29 @@ public class ElementListyDoSpakowania {
     @NonNull
     private String nazwa;
     private boolean czySpakowane;
+    @NonNull
+    private boolean czyPrzekazanoDoZakupu;
+    private int ilosc;
+    private double cena;
+    private boolean czyKupione;
+    private int idKategorii;
+    private String uwaga;
+
+
+    public ElementListyDoSpakowania(int id, int listaDoSpakowaniaId, @NonNull String nazwa, boolean czySpakowane,
+                                    @NonNull boolean czyPrzekazanoDoZakupu, int ilosc, double cena, boolean czyKupione,
+                                    int idKategorii, String uwaga) {
+        this.id = id;
+        this.listaDoSpakowaniaId = listaDoSpakowaniaId;
+        this.nazwa = nazwa;
+        this.czySpakowane = czySpakowane;
+        this.czyPrzekazanoDoZakupu = czyPrzekazanoDoZakupu;
+        this.ilosc = ilosc;
+        this.cena = cena;
+        this.czyKupione = czyKupione;
+        this.idKategorii = idKategorii;
+        this.uwaga = uwaga;
+    }
 
     public boolean isCzyPrzekazanoDoZakupu() {
         return czyPrzekazanoDoZakupu;
@@ -30,23 +53,6 @@ public class ElementListyDoSpakowania {
 
     public void setCzyPrzekazanoDoZakupu(boolean czyPrzekazanoDoZakupu) {
         this.czyPrzekazanoDoZakupu = czyPrzekazanoDoZakupu;
-    }
-
-    private boolean czyPrzekazanoDoZakupu;
-    private int ilosc;
-    private int idKategorii;
-    private String uwaga;
-
-    public ElementListyDoSpakowania(int id, int listaDoSpakowaniaId, @NonNull String nazwa,
-                                    boolean czySpakowane, boolean czyPrzekazanoDoZakupu, int ilosc, int idKategorii, String uwaga) {
-        this.id = id;
-        this.listaDoSpakowaniaId = listaDoSpakowaniaId;
-        this.nazwa = nazwa;
-        this.czySpakowane = czySpakowane;
-        this.czyPrzekazanoDoZakupu = czyPrzekazanoDoZakupu;
-        this.ilosc = ilosc;
-        this.idKategorii = idKategorii;
-        this.uwaga = uwaga;
     }
 
     public int getId() {
@@ -104,5 +110,21 @@ public class ElementListyDoSpakowania {
 
     public void setUwaga(String uwaga) {
         this.uwaga = uwaga;
+    }
+
+    public double getCena() {
+        return cena;
+    }
+
+    public void setCena(double cena) {
+        this.cena = cena;
+    }
+
+    public boolean isCzyKupione() {
+        return czyKupione;
+    }
+
+    public void setCzyKupione(boolean czyKupione) {
+        this.czyKupione = czyKupione;
     }
 }

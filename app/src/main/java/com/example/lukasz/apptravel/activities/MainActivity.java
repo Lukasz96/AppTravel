@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
              mDb.podrozDao().insertPodroz(new Podroz(0,"podroz1", new Date(),new Date(),null));
             try{
-                mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(new ListaDoSpakowania(0,"lista1", false, 1));
+                mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(new ListaDoSpakowania(0,"lista1",
+                        false, 1));
             } catch (SQLiteConstraintException e){
                 Toast.makeText(MainActivity.this, "1 Podróż może mieć 1 listę!",
                         Toast.LENGTH_LONG).show();
@@ -64,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout constraintLayout= findViewById(R.id.mainActivity);
         int backgroundImageId=R.drawable.main_menu_background;
         BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(this.getApplicationContext());
-        Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,800,1200);
+        Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
+                800,1200);
         constraintLayout.setBackground(backgroundImage);
 
     }

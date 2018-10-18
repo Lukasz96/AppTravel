@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
+import com.example.lukasz.apptravel.db.ElementDoZakupu;
 import com.example.lukasz.apptravel.db.entities.ListaDoSpakowania;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface ListaDoSpakowaniaDao {
 
     @Query("SELECT * FROM listadospakowania")
     List<ListaDoSpakowania> getAllListyDoSpakowania();
+
 }
