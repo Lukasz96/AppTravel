@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="settings_string">Ustawienia</string>
     <string name="app_name">Organizer podróży</string>
     <string name="menu_header">Organizer podróży</string>
     <string name="new_travel">Nowa podróż</string>
-    <string name="saved_travels">Zapisane podróże</string>
+    <string name="saved_travels">Moje podróże</string>
+    <string name="general_stats">Statystyki</string>
+
 </resources>

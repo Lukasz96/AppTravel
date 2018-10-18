@@ -28,35 +28,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mDb= AppDatabase.getInstance(this.getApplicationContext());
         setContentView(R.layout.activity_main);
+
         final Button button = findViewById(R.id.button);
         final Button button2 = findViewById(R.id.button2);
         final Button button3 = findViewById(R.id.button3);
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-             mDb.podrozDao().insertPodroz(new Podroz(0,"podroz1", new Date(),new Date(),null));
-            try{
-                mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(new ListaDoSpakowania(0,"lista1",
-                        false, 1));
-            } catch (SQLiteConstraintException e){
-                Toast.makeText(MainActivity.this, "1 Podróż może mieć 1 listę!",
-                        Toast.LENGTH_LONG).show();
-            }
+                Intent intent=new Intent(MainActivity.this, CreateTravelActivity.class);
+                startActivity(intent);
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-              Intent intent = new Intent(MainActivity.this, Test.class);
-              startActivity(intent);
+
             }
         });
 
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-        //        mDb.userDao().deleteAllUsers();
-                Toast.makeText(MainActivity.this, "Usunieto wszystkie rekordy!",
-                        Toast.LENGTH_LONG).show();
             }
         });
 
@@ -66,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         int backgroundImageId=R.drawable.main_menu_background;
         BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(this.getApplicationContext());
         Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
-                800,1200);
+                400,600);
         constraintLayout.setBackground(backgroundImage);
 
     }
