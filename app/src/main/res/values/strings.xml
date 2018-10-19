@@ -4,4 +4,13 @@
     <string name="new_travel">New travel</string>
     <string name="saved_travels">My travels</string>
     <string name="general_stats">Stats</string>
+    <string name="nonameerror">Please type travel name</string>
+    <string name="nodatefromerror">Please select start date</string>
+    <string name="nodatetoerror">Please select ending date</string>
+    <string name="nobudgeterror">Please type travel\'s budget</string>
+    <string name="traveldataeditinfo">Please give travel\'s data. You can change them later.</string>
+    <string name="labeldatefrom">Date from (DD-MM-YYYY)</string>
+    <string name="labeldateto">Date to (DD-MM-YYYY)</string>
+    <string name="labeltravelname">Travel name</string>
+    <string name="labelbudget">Travel\'s budget</string>
 </resources>

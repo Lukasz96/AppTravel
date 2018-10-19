@@ -5,5 +5,14 @@
     <string name="new_travel">Nowa podróż</string>
     <string name="saved_travels">Moje podróże</string>
     <string name="general_stats">Statystyki</string>
+    <string name="nonameerror">Proszę wpisać nazwę podróży</string>
+    <string name="nodatefromerror">Proszę wpisać datę początku podróży</string>
+    <string name="nodatetoerror">Proszę wpisać datę końca podróży</string>
+    <string name="nobudgeterror">Proszę wpisać budżet podróży</string>
+    <string name="traveldataeditinfo">Proszę podać dane podróży. Będzie je można później zmienić.</string>
+    <string name="labeldatefrom">Data od (DD-MM-RRRR)</string>
+    <string name="labeldateto">Data do (DD-MM-RRRR)</string>
+    <string name="labeltravelname">Nazwa podróży</string>
+    <string name="labelbudget">Budżet na podróż</string>
 
 </resources>

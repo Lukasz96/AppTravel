@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.Test" />
-        <activity android:name=".activities.CreateTravelActivity"></activity>
+        <activity android:name=".activities.CreateTravelActivity">
+            android:windowSoftInputMode="stateUnchanged"
+        </activity>
     </application>
 
 </manifest>
