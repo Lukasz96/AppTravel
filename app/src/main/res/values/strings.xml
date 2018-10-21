@@ -7,10 +7,16 @@
     <string name="nonameerror">Please type travel name</string>
     <string name="nodatefromerror">Please select start date</string>
     <string name="nodatetoerror">Please select ending date</string>
-    <string name="nobudgeterror">Please type travel\'s budget</string>
-    <string name="traveldataeditinfo">Please give travel\'s data. You can change them later.</string>
-    <string name="labeldatefrom">Date from (DD-MM-YYYY)</string>
-    <string name="labeldateto">Date to (DD-MM-YYYY)</string>
+    <string name="nobudgeterror">Please type travel budget</string>
+    <string name="traveldataeditinfo">Please give travel data. You can change them later.</string>
+    <string name="labeldatefrom">Date from (DD MM YYYY)</string>
+    <string name="labeldateto">Date to (DD MM YYYY)</string>
     <string name="labeltravelname">Travel name</string>
-    <string name="labelbudget">Travel\'s budget</string>
+    <string name="labelbudget">Travel budget</string>
+    <string name="baddateformaterror">Please type correct date</string>
+    <string name="datetosmallererror">Second date cannot be the earlier one</string>
+    <string name="decimalplaceserror">Max two decimal places</string>
+    <string name="submittext">Submit</string>
+    <string name="maxninenumbers">Maximum 9 characters</string>
+    <string name="maxthirtyletters">Maximum 30 letters</string>
 </resources>

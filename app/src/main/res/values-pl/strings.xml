@@ -10,9 +10,15 @@
     <string name="nodatetoerror">Proszę wpisać datę końca podróży</string>
     <string name="nobudgeterror">Proszę wpisać budżet podróży</string>
     <string name="traveldataeditinfo">Proszę podać dane podróży. Będzie je można później zmienić.</string>
-    <string name="labeldatefrom">Data od (DD-MM-RRRR)</string>
-    <string name="labeldateto">Data do (DD-MM-RRRR)</string>
+    <string name="labeldatefrom">Data od (DD MM RRRR)</string>
+    <string name="labeldateto">Data do (DD MM RRRR)</string>
     <string name="labeltravelname">Nazwa podróży</string>
     <string name="labelbudget">Budżet na podróż</string>
+    <string name="baddateformaterror">Proszę podac poprawną datę</string>
+    <string name="datetosmallererror">Druga data nie może być wcześniejsza</string>
+    <string name="decimalplaceserror">Maksymalnie 2 miejsca po przecinku</string>
+    <string name="submittext">Stwórz</string>
+    <string name="maxninenumbers">Maksymalnie 9 znaków</string>
+    <string name="maxthirtyletters">Maksymalnie 30 liter</string>
 
 </resources>

@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093">
+        app:layout_constraintVertical_bias="0.447">
 
 
         <android.support.design.widget.TextInputLayout
@@ -80,13 +80,13 @@
                 <ImageButton
                     android:id="@+id/imageButton"
                     android:layout_width="47dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
-                    android:background="@null"
+                    android:background="@drawable/imagebuttoncalendar"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/datefromlayout"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/calendaricon" />
 
             </android.support.constraint.ConstraintLayout>
@@ -95,22 +95,93 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/datetolayout"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="8dp"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/error_appearance"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/datetoinput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/labeldateto"
+                        android:inputType="date"
+                        android:singleLine="true" />
+
+
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/imageButton2"
+                    android:layout_width="47dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/imagebuttoncalendar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/datetolayout"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/calendaricon" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/travelbudgetlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="9"
+            app:errorEnabled="true"
+            app:errorTextAppearance="@style/error_appearance">
+
+            <EditText
+                android:id="@+id/travelbudgetinput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/labelbudget"
+                android:inputType="numberDecimal"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
     </LinearLayout>
 
 
     <Button
         android:id="@+id/button6"
         android:layout_width="164dp"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="64dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Button"
+        android:background="@drawable/buttonsubmit"
+        android:text="@string/submittext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
