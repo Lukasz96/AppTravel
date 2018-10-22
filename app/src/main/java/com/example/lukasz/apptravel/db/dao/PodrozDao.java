@@ -31,7 +31,7 @@ public interface PodrozDao {
     void deletePodroze(Podroz... podroze);
 
     @Query("delete from Podroz where id=:id")
-    int deleteUser(long id);
+    int deletePodrozById(long id);
 
     @Query("DELETE FROM Podroz")
     void deleteAllPodroze();
@@ -41,6 +41,9 @@ public interface PodrozDao {
 
     @Query("SELECT dataOd FROM podroz WHERE id=1")
     Date getDate();
+
+    @Query("UPDATE Podroz SET nazwa=:nowaNazwa, dataOd=:from, dataDo=:to, budzet=:budget WHERE id=:id")
+    void updatePodrozById(long id, String nowaNazwa, Date from, Date to, double budget);
 
 
 

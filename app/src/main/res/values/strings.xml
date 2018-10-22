@@ -31,4 +31,14 @@
     <string name="yeslabel">Yes</string>
     <string name="nolabel">No</string>
     <string name="expensesbuttonlabel">Expenses</string>
+    <string name="deletedinfo">Deleted successfully</string>
+    <string name="newtravellabel">New travel</string>
+    <string name="updatebuttonlabel">Update</string>
+    <string name="updateactivitylabel">Travel update</string>
+    <string name="authorlabel">Author</string>
+    <string name="credits">Credits</string>
+    <string name="closelabel">Close</string>
+    <string name="authorinfo">Łukasz Dutka is the author of this app.</string>
+    <string name="creditsinfo">Background photo by Jake Blucker on Unsplash.</string>
+    <string name="creditsinfotwo">Icons made by Freepik and Pause08 from www.flaticon.com</string>
 </resources>

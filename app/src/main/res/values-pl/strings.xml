@@ -32,5 +32,15 @@
     <string name="yeslabel">Tak</string>
     <string name="nolabel">Nie</string>
     <string name="expensesbuttonlabel">Wydatki</string>
+    <string name="deletedinfo">Usunięto pomyślnie</string>
+    <string name="newtravellabel">Nowa podróż</string>
+    <string name="updatebuttonlabel">Zaktualizuj</string>
+    <string name="updateactivitylabel">Aktualizacja podróży</string>
+    <string name="authorlabel">Autor</string>
+    <string name="credits">Źródła grafik</string>
+    <string name="authorinfo">Autorem aplikacji jest Łukasz Dutka</string>
+    <string name="closelabel">Zamknij</string>
+    <string name="creditsinfo">Zdjęcie w tle: Jake Blucker z Unsplash.</string>
+    <string name="creditsinfotwo">Ikony: Freepik i Pause08 z www.flaticon.com</string>
 
 </resources>

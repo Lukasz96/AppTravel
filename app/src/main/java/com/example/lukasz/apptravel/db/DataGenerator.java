@@ -2,6 +2,7 @@ package com.example.lukasz.apptravel.db;
 
 import com.example.lukasz.apptravel.db.entities.Kategoria;
 import com.example.lukasz.apptravel.db.entities.KategoriaPrzejazdu;
+import com.example.lukasz.apptravel.db.entities.KategoriaWydatku;
 
 import java.util.List;
 
@@ -25,6 +26,14 @@ public class DataGenerator {
                 new KategoriaPrzejazdu(0, "Rower"),
                 new KategoriaPrzejazdu(0,"Pieszo"),
                 new KategoriaPrzejazdu(0,"Inne")
+        };
+    }
+    public static KategoriaWydatku[] populateKategorieWydatku() {
+        return new KategoriaWydatku[] {
+                new KategoriaWydatku(0, "Nocleg"),
+                new KategoriaWydatku(0, "Jedzenie"),
+                new KategoriaWydatku(0, "Zwiedzanie"),
+                new KategoriaWydatku(0, "Inne")
         };
     }
 }

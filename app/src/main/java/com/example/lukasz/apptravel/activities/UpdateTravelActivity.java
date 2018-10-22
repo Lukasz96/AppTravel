@@ -35,7 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class CreateTravelActivity extends AppCompatActivity {
+public class UpdateTravelActivity extends AppCompatActivity {
 
     private TextInputLayout nameTravel;
     private TextInputLayout dateFromLayout;
@@ -50,32 +50,39 @@ public class CreateTravelActivity extends AppCompatActivity {
     private EditText budgetInput;
     private DateInputValidator dateInputValidator;
     private AppDatabase mDb;
+    private long travelIdToUpdate;
     Calendar calendarFrom = Calendar.getInstance();
     Calendar calendarTo = Calendar.getInstance();
     DatePickerDialog.OnDateSetListener dateFrom;
     DatePickerDialog.OnDateSetListener dateTo;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_travel);
+        setContentView(R.layout.activity_update_travel);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(getString(R.string.newtravellabel));
-
-
+        actionBar.setTitle(getString(R.string.updateactivitylabel));
+        Intent intent=getIntent();
+        travelIdToUpdate=intent.getLongExtra("travelIdToUpdate",0);
         editName=findViewById(R.id.travelnameinput);
         nameTravel=findViewById(R.id.travelnamelayout);
         dateFromLayout=findViewById(R.id.datefromlayout);
         budgetLauout=findViewById(R.id.travelbudgetlayout);
         dateToLayout=findViewById(R.id.datetolayout);
-        buttonSubmit=findViewById(R.id.button6);
+        buttonSubmit=findViewById(R.id.button11);
         budgetInput=findViewById(R.id.travelbudgetinput);
         buttonSubmit.setEnabled(false);
         dateFromButton=findViewById(R.id.imageButton);
         dateFromInput=findViewById(R.id.datefrominput);
         dateToButton=findViewById(R.id.imageButton2);
         dateToInput=findViewById(R.id.datetoinput);
+
+        editName.setText(intent.getStringExtra("nazwa"));
+        dateFromInput.setText(intent.getStringExtra("dataOd"));
+        dateToInput.setText(intent.getStringExtra("dataDo"));
+        budgetInput.setText(Double.toString(intent.getDoubleExtra("budzet",0)));
 
         ////////////// USTAWIANIE TŁA
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -167,9 +174,11 @@ public class CreateTravelActivity extends AppCompatActivity {
                 }
                 double budget=Double.parseDouble(budgetInput.getText().toString());
 
-                long travelId=mDb.podrozDao().insertPodroz(new Podroz(0,travelName,date1,date2,budget));
-                Intent intent=new Intent(CreateTravelActivity.this, TravelMainMenuActivity.class);
-                intent.putExtra("travelId",travelId);
+                mDb.podrozDao().updatePodrozById(travelIdToUpdate, travelName, date1,date2,budget);
+
+               // long travelId=mDb.podrozDao().insertPodroz(new Podroz(0,travelName,date1,date2,budget));
+                Intent intent=new Intent(UpdateTravelActivity.this, TravelMainMenuActivity.class);
+                intent.putExtra("travelId",travelIdToUpdate);
                 startActivity(intent);
             }
         });
@@ -206,14 +215,14 @@ public class CreateTravelActivity extends AppCompatActivity {
 
         dateFromButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new DatePickerDialog(CreateTravelActivity.this, dateFrom, calendarFrom.get(Calendar.YEAR),
+                new DatePickerDialog(UpdateTravelActivity.this, dateFrom, calendarFrom.get(Calendar.YEAR),
                         calendarFrom.get(Calendar.MONTH), calendarFrom.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
         dateToButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new DatePickerDialog(CreateTravelActivity.this, dateTo, calendarTo.get(Calendar.YEAR),
+                new DatePickerDialog(UpdateTravelActivity.this, dateTo, calendarTo.get(Calendar.YEAR),
                         calendarTo.get(Calendar.MONTH), calendarTo.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -355,20 +364,20 @@ public class CreateTravelActivity extends AppCompatActivity {
             checkIfEnableButton();
         }
         else if(s.toString().contains(".")) {
-                int integerPlaces = s.toString().indexOf('.');
-                int decimalPlaces = s.toString().length() - integerPlaces - 1;
-                if (decimalPlaces > 2) {
-                    budgetLauout.setError(getString(R.string.decimalplaceserror));
-                    checkIfEnableButton();
-                }
-                else{
-                    budgetLauout.setError(null);
-                    checkIfEnableButton();
-                }
+            int integerPlaces = s.toString().indexOf('.');
+            int decimalPlaces = s.toString().length() - integerPlaces - 1;
+            if (decimalPlaces > 2) {
+                budgetLauout.setError(getString(R.string.decimalplaceserror));
+                checkIfEnableButton();
             }
+            else{
+                budgetLauout.setError(null);
+                checkIfEnableButton();
+            }
+        }
         else {
-             budgetLauout.setError(null);
-             checkIfEnableButton();
+            budgetLauout.setError(null);
+            checkIfEnableButton();
         }
 
 
@@ -388,13 +397,13 @@ public class CreateTravelActivity extends AppCompatActivity {
     public void checkIfEnableButton(){
         if(
                 TextUtils.isEmpty(dateToLayout.getError()) &&
-                TextUtils.isEmpty(dateFromLayout.getError()) &&
-                TextUtils.isEmpty(budgetLauout.getError()) &&
-                TextUtils.isEmpty(nameTravel.getError()) &&
-                !dateToInput.getText().toString().equals("") &&
-                !dateFromInput.getText().toString().equals("") &&
-                !budgetInput.getText().toString().equals("") &&
-                !editName.getText().toString().equals("")){
+                        TextUtils.isEmpty(dateFromLayout.getError()) &&
+                        TextUtils.isEmpty(budgetLauout.getError()) &&
+                        TextUtils.isEmpty(nameTravel.getError()) &&
+                        !dateToInput.getText().toString().equals("") &&
+                        !dateFromInput.getText().toString().equals("") &&
+                        !budgetInput.getText().toString().equals("") &&
+                        !editName.getText().toString().equals("")){
             buttonSubmit.setEnabled(true);
         }
         else buttonSubmit.setEnabled(false);

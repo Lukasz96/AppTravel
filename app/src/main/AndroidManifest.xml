@@ -19,7 +19,8 @@
         <activity android:name=".activities.CreateTravelActivity">
             android:windowSoftInputMode="stateUnchanged"
         </activity>
-        <activity android:name=".activities.TravelMainMenuActivity"></activity>
+        <activity android:name=".activities.TravelMainMenuActivity" />
+        <activity android:name=".activities.UpdateTravelActivity"></activity>
     </application>
 
 </manifest>
