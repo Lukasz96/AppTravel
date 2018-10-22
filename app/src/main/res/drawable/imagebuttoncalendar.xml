@@ -4,13 +4,15 @@
     <item android:state_pressed="true">
         <shape>
             <solid android:color="#FFFFFF" />
-            <corners android:radius="85dp" />
+            <corners android:radius="9dp" />
+            <stroke android:width="2dp" android:color="@color/colorPrimary"/>
         </shape>
     </item>
     <item>
         <shape>
-            <solid android:color="#E0FFFFFF" />
-            <corners android:radius="85dp" />
+            <solid android:color="@null" />
+            <corners android:radius="9dp" />
+            <stroke android:width="2dp" android:color="@color/colorPrimary"/>
         </shape>
     </item>
 

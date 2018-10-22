@@ -279,7 +279,6 @@ public class CreateTravelActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            System.out.println("POROWNANIE -------- "+date1.compareTo(date2));
             if(date1.compareTo(date2)>0){
                 dateToLayout.setError(getString(R.string.datetosmallererror));
                 checkIfEnableButton();
