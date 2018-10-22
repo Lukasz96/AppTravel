@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface NotatkaDao {
     @Insert
-    void insertNotatka(Notatka notatka);
+    long insertNotatka(Notatka notatka);
 
     @Query("SELECT * FROM Notatka")
     List<Notatka> getNotatki();

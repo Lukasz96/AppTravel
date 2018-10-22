@@ -15,15 +15,15 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 public class Notatka implements Serializable {
 
     @PrimaryKey
-    private int id;
+    private long id;
     private String tresc;
-    private int podrozId;
+    private long podrozId;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -35,15 +35,15 @@ public class Notatka implements Serializable {
         this.tresc = tresc;
     }
 
-    public int getPodrozId() {
+    public long getPodrozId() {
         return podrozId;
     }
 
-    public void setPodrozId(int podrozId) {
+    public void setPodrozId(long podrozId) {
         this.podrozId = podrozId;
     }
 
-    public Notatka(int id, String tresc, int podrozId) {
+    public Notatka(long id, String tresc, long podrozId) {
         this.id = id;
         this.tresc = tresc;
         this.podrozId = podrozId;

@@ -13,7 +13,7 @@ import java.util.List;
 public interface KategoriaPrzejazduDao {
 
     @Insert
-    void insertKategoriaPrzejazdu(KategoriaPrzejazdu kategoriaPrzejazdu);
+    long insertKategoriaPrzejazdu(KategoriaPrzejazdu kategoriaPrzejazdu);
 
     @Query("SELECT * FROM kategoriaprzejazdu")
     List<KategoriaPrzejazdu> getAllKategoriaPrzejazdu();

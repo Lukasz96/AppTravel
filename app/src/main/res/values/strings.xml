@@ -19,4 +19,16 @@
     <string name="submittext">Submit</string>
     <string name="maxninenumbers">Maximum 9 characters</string>
     <string name="maxthirtyletters">Maximum 30 letters</string>
+    <string name="shoppinglistbuttonlabel">Shopping list</string>
+    <string name="topackbuttonlabel">To pack</string>
+    <string name="ridesbuttonlabel">Rides</string>
+    <string name="notesbuttonlabel">Notes</string>
+    <string name="statsbuttonlabel">Travel stats</string>
+    <string name="editlabel">Edit</string>
+    <string name="deletelabel">Delete</string>
+    <string name="cautionlabel">Caution</string>
+    <string name="deletequestion">Do you really want to delete this travel with all its data?</string>
+    <string name="yeslabel">Yes</string>
+    <string name="nolabel">No</string>
+    <string name="expensesbuttonlabel">Expenses</string>
 </resources>

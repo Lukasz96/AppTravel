@@ -16,12 +16,12 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 public class ListaDoSpakowania {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
     @NonNull
     private String nazwa;
     @NonNull
     private boolean czyCalaSpelniona;
-    private int podrozId;
+    private long podrozId;
 
     @NonNull
     public boolean isCzyCalaSpelniona() {
@@ -34,14 +34,14 @@ public class ListaDoSpakowania {
 
 
 
-    public ListaDoSpakowania(int id, @NonNull String nazwa, @NonNull boolean czyCalaSpelniona, int podrozId) {
+    public ListaDoSpakowania(long id, @NonNull String nazwa, @NonNull boolean czyCalaSpelniona, long podrozId) {
         this.id = id;
         this.nazwa = nazwa;
         this.czyCalaSpelniona = czyCalaSpelniona;
         this.podrozId = podrozId;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -60,7 +60,7 @@ public class ListaDoSpakowania {
 
 
 
-    public int getPodrozId() {
+    public long getPodrozId() {
         return podrozId;
     }
 

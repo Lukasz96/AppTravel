@@ -1,6 +1,7 @@
 package com.example.lukasz.apptravel.activities;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,16 +23,35 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
 
-    AppDatabase mDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDb= AppDatabase.getInstance(this.getApplicationContext());
         setContentView(R.layout.activity_main);
 
         final Button button = findViewById(R.id.button);
         final Button button2 = findViewById(R.id.button2);
         final Button button3 = findViewById(R.id.button3);
+
+        ////////////// USTAWIANIE TŁA
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Display display = getWindowManager().getDefaultDisplay();
+            ConstraintLayout constraintLayout= findViewById(R.id.mainActivity);
+            int backgroundImageId=R.drawable.main_menu_background_landscape;
+            BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(getApplicationContext());
+            Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
+                    600,400);
+            constraintLayout.setBackground(backgroundImage);
+        }
+        else {
+            Display display = getWindowManager().getDefaultDisplay();
+            ConstraintLayout constraintLayout = findViewById(R.id.mainActivity);
+            int backgroundImageId = R.drawable.main_menu_background;
+            BackgroundImageCalc backgroundImageCalc = new BackgroundImageCalc(getApplicationContext());
+            Drawable backgroundImage = backgroundImageCalc.getCalculatedBackroundImage(display, backgroundImageId,
+                    400, 600);
+            constraintLayout.setBackground(backgroundImage);
+        }
+        ///////////////////////////////
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -53,13 +73,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Display display = getWindowManager().getDefaultDisplay();
-        ConstraintLayout constraintLayout= findViewById(R.id.mainActivity);
-        int backgroundImageId=R.drawable.main_menu_background;
-        BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(this.getApplicationContext());
-        Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
-                400,600);
-        constraintLayout.setBackground(backgroundImage);
+
 
     }
 

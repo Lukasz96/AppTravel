@@ -18,8 +18,8 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 public class ElementListyDoSpakowania {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
-    private int listaDoSpakowaniaId;
+    private long id;
+    private long listaDoSpakowaniaId;
     @NonNull
     private String nazwa;
     private boolean czySpakowane;
@@ -28,13 +28,13 @@ public class ElementListyDoSpakowania {
     private int ilosc;
     private double cena;
     private boolean czyKupione;
-    private int idKategorii;
+    private long idKategorii;
     private String uwaga;
 
 
-    public ElementListyDoSpakowania(int id, int listaDoSpakowaniaId, @NonNull String nazwa, boolean czySpakowane,
+    public ElementListyDoSpakowania(long id, long listaDoSpakowaniaId, @NonNull String nazwa, boolean czySpakowane,
                                     @NonNull boolean czyPrzekazanoDoZakupu, int ilosc, double cena, boolean czyKupione,
-                                    int idKategorii, String uwaga) {
+                                    long idKategorii, String uwaga) {
         this.id = id;
         this.listaDoSpakowaniaId = listaDoSpakowaniaId;
         this.nazwa = nazwa;
@@ -55,7 +55,7 @@ public class ElementListyDoSpakowania {
         this.czyPrzekazanoDoZakupu = czyPrzekazanoDoZakupu;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -63,7 +63,7 @@ public class ElementListyDoSpakowania {
         this.id = id;
     }
 
-    public int getListaDoSpakowaniaId() {
+    public long getListaDoSpakowaniaId() {
         return listaDoSpakowaniaId;
     }
 
@@ -96,7 +96,7 @@ public class ElementListyDoSpakowania {
         this.ilosc = ilosc;
     }
 
-    public int getIdKategorii() {
+    public long getIdKategorii() {
         return idKategorii;
     }
 

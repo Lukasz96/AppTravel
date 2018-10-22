@@ -8,16 +8,16 @@ import android.support.annotation.NonNull;
 public class Kategoria {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
     @NonNull
     private String nazwaKategorii;
 
-    public Kategoria(int id, @NonNull String nazwaKategorii) {
+    public Kategoria(long id, @NonNull String nazwaKategorii) {
         this.id = id;
         this.nazwaKategorii = nazwaKategorii;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

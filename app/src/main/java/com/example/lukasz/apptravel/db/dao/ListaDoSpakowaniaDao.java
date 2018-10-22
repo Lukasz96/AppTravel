@@ -13,7 +13,7 @@ import java.util.List;
 public interface ListaDoSpakowaniaDao {
 
     @Insert
-    void insertListeDoSpakowania(ListaDoSpakowania listaDoSpakowania);
+    long insertListeDoSpakowania(ListaDoSpakowania listaDoSpakowania);
 
     @Query("SELECT * FROM listadospakowania")
     List<ListaDoSpakowania> getAllListyDoSpakowania();

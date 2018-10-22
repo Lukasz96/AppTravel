@@ -12,7 +12,7 @@ import java.util.List;
 public interface PrzejazdDao {
 
     @Insert
-    void insertPrzejazd(Przejazd przejazd);
+    long insertPrzejazd(Przejazd przejazd);
 
     @Query("SELECT * FROM przejazd")
     List<Przejazd> getAllPrzejazdy();

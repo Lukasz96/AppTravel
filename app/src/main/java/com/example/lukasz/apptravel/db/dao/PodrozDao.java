@@ -19,7 +19,7 @@ public interface PodrozDao {
     void insertAll(List<Podroz> podroz);
 
     @Insert
-    void insertPodroz(Podroz podroz);
+    long insertPodroz(Podroz podroz);
 
     @Query("SELECT * FROM Podroz")
     List<Podroz> getPodroze();
@@ -31,13 +31,13 @@ public interface PodrozDao {
     void deletePodroze(Podroz... podroze);
 
     @Query("delete from Podroz where id=:id")
-    int deleteUser(int id);
+    int deleteUser(long id);
 
     @Query("DELETE FROM Podroz")
     void deleteAllPodroze();
 
     @Query("SELECT * FROM Podroz WHERE id=:id ")
-    Podroz getPodrozById(int id);
+    Podroz getPodrozById(long id);
 
     @Query("SELECT dataOd FROM podroz WHERE id=1")
     Date getDate();

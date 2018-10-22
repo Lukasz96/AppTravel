@@ -24,9 +24,9 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 public class Przejazd {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
-    private int podrozId;
-    private int kategoriaPrzejazduId;
+    private long id;
+    private long podrozId;
+    private long kategoriaPrzejazduId;
     @NonNull
     private String nazwa;
     @NonNull
@@ -37,7 +37,7 @@ public class Przejazd {
     private Date dataDo;
     private Double koszt;
 
-    public Przejazd(int id, int podrozId, int kategoriaPrzejazduId, @NonNull String nazwa, @NonNull Date dataOd, @NonNull Date dataDo, Double koszt) {
+    public Przejazd(long id, long podrozId, long kategoriaPrzejazduId, @NonNull String nazwa, @NonNull Date dataOd, @NonNull Date dataDo, Double koszt) {
         this.id = id;
         this.podrozId = podrozId;
         this.kategoriaPrzejazduId = kategoriaPrzejazduId;
@@ -47,7 +47,7 @@ public class Przejazd {
         this.koszt = koszt;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -55,7 +55,7 @@ public class Przejazd {
         this.id = id;
     }
 
-    public int getPodrozId() {
+    public long getPodrozId() {
         return podrozId;
     }
 
@@ -63,7 +63,7 @@ public class Przejazd {
         this.podrozId = podrozId;
     }
 
-    public int getKategoriaPrzejazduId() {
+    public long getKategoriaPrzejazduId() {
         return kategoriaPrzejazduId;
     }
 

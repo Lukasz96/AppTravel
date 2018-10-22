@@ -12,7 +12,7 @@ import java.util.List;
 public interface KategoriaDao {
 
     @Insert
-    void insertKategoria(Kategoria kategoria);
+    long insertKategoria(Kategoria kategoria);
 
     @Query("SELECT * FROM kategoria")
     List<Kategoria> getAllKategoria();

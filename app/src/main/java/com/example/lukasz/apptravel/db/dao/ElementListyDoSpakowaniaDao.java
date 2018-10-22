@@ -14,19 +14,19 @@ import java.util.List;
 public interface ElementListyDoSpakowaniaDao {
 
     @Insert
-    void insertElementListyDoSpakowania(ElementListyDoSpakowania elementListyDoSpakowania);
+    long insertElementListyDoSpakowania(ElementListyDoSpakowania elementListyDoSpakowania);
 
     @Query("SELECT * FROM elementlistydospakowania")
     List<ElementListyDoSpakowania> getAllElementyListyDoSpakowania();
 
     @Query("SELECT elementlistydospakowania.id, listaDoSpakowaniaId, elementlistydospakowania.nazwa, czySpakowane, czyPrzekazanoDoZakupu, ilosc, cena, czyKupione, idKategorii, uwaga FROM elementlistydospakowania INNER JOIN listadospakowania ON listaDoSpakowania.id=listaDoSpakowaniaId " +
             "WHERE listaDoSpakowania.id=:idListy")
-    List<ElementListyDoSpakowania> getElementyDoSpakowaniaZDanejListy(int idListy);
+    List<ElementListyDoSpakowania> getElementyDoSpakowaniaZDanejListy(long idListy);
 
     @Query("SELECT elementlistydospakowania.nazwa,ilosc,cena,czyKupione,kategoria.nazwaKategorii,uwaga FROM elementlistydospakowania" +
             " INNER JOIN kategoria ON kategoria.id=idKategorii" +
             " INNER JOIN listadospakowania ON listadospakowania.id=listaDoSpakowaniaId" +
             " INNER JOIN podroz ON podroz.id=listadospakowania.podrozId" +
             " WHERE podroz.id=:idPodrozy")
-    List<ElementDoZakupu> getElementyDoZakupuDlaPodrozy(int idPodrozy);
+    List<ElementDoZakupu> getElementyDoZakupuDlaPodrozy(long idPodrozy);
 }

@@ -20,5 +20,17 @@
     <string name="submittext">Stwórz</string>
     <string name="maxninenumbers">Maksymalnie 9 znaków</string>
     <string name="maxthirtyletters">Maksymalnie 30 liter</string>
+    <string name="shoppinglistbuttonlabel">Lista zakupów</string>
+    <string name="topackbuttonlabel">Do spakowania</string>
+    <string name="ridesbuttonlabel">Przejazdy</string>
+    <string name="notesbuttonlabel">Notatki</string>
+    <string name="statsbuttonlabel">Statystyki podróży</string>
+    <string name="editlabel">Edytuj</string>
+    <string name="deletelabel">Usuń</string>
+    <string name="cautionlabel">Uwaga</string>
+    <string name="deletequestion">Czy na pewno chcesz usunąć tą podróż z jej danymi?</string>
+    <string name="yeslabel">Tak</string>
+    <string name="nolabel">Nie</string>
+    <string name="expensesbuttonlabel">Wydatki</string>
 
 </resources>

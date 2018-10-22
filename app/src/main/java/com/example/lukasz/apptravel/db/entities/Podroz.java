@@ -14,7 +14,7 @@ import java.util.Date;
 public class Podroz implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private long id;
     @NonNull
     private String nazwa;
     @NonNull
@@ -25,11 +25,11 @@ public class Podroz implements Serializable {
     private Date dataDo;
     private Double budzet;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -68,7 +68,7 @@ public class Podroz implements Serializable {
         this.budzet = budzet;
     }
 
-    public Podroz(int id, @NonNull String nazwa, @NonNull Date dataOd, @NonNull Date dataDo, Double budzet) {
+    public Podroz(long id, @NonNull String nazwa, @NonNull Date dataOd, @NonNull Date dataDo, Double budzet) {
         this.id = id;
         this.nazwa = nazwa;
         this.dataOd = dataOd;

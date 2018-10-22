@@ -1,6 +1,8 @@
 package com.example.lukasz.apptravel.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputLayout;
@@ -21,6 +23,8 @@ import android.widget.ImageButton;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.datevalidator.DateInputValidator;
+import com.example.lukasz.apptravel.db.AppDatabase;
+import com.example.lukasz.apptravel.db.entities.Podroz;
 import com.example.lukasz.apptravel.imageCalc.BackgroundImageCalc;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
@@ -45,6 +49,7 @@ public class CreateTravelActivity extends AppCompatActivity {
     private EditText editName;
     private EditText budgetInput;
     private DateInputValidator dateInputValidator;
+    private AppDatabase mDb;
     Calendar calendarFrom = Calendar.getInstance();
     Calendar calendarTo = Calendar.getInstance();
     DatePickerDialog.OnDateSetListener dateFrom;
@@ -73,13 +78,24 @@ public class CreateTravelActivity extends AppCompatActivity {
         dateToInput=findViewById(R.id.datetoinput);
 
         ////////////// USTAWIANIE TŁA
-        Display display = getWindowManager().getDefaultDisplay();
-        ConstraintLayout constraintLayout= findViewById(R.id.createtravelactivity);
-        int backgroundImageId=R.drawable.main_menu_background;
-        BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(this.getApplicationContext());
-        Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
-                400,600);
-        constraintLayout.setBackground(backgroundImage);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            Display display = getWindowManager().getDefaultDisplay();
+            ConstraintLayout constraintLayout= findViewById(R.id.createtravelactivity);
+            int backgroundImageId=R.drawable.main_menu_background_landscape;
+            BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(this.getApplicationContext());
+            Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
+                    600,400);
+            constraintLayout.setBackground(backgroundImage);
+        }
+        else {
+            Display display = getWindowManager().getDefaultDisplay();
+            ConstraintLayout constraintLayout = findViewById(R.id.createtravelactivity);
+            int backgroundImageId = R.drawable.main_menu_background;
+            BackgroundImageCalc backgroundImageCalc = new BackgroundImageCalc(this.getApplicationContext());
+            Drawable backgroundImage = backgroundImageCalc.getCalculatedBackroundImage(display, backgroundImageId,
+                    400, 600);
+            constraintLayout.setBackground(backgroundImage);
+        }
         ///////////////////////////////
 
         editName.addTextChangedListener(new TextWatcher() {
@@ -137,6 +153,27 @@ public class CreateTravelActivity extends AppCompatActivity {
             }
         });
 
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mDb= AppDatabase.getInstance(getApplicationContext());
+                String travelName=editName.getText().toString();
+                Date date1 = null;
+                Date date2 = null;
+                try {
+                    date1=new SimpleDateFormat("dd/MM/yyyy").parse(dateFromInput.getText().toString());
+                    date2=new SimpleDateFormat("dd/MM/yyyy").parse(dateToInput.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                double budget=Double.parseDouble(budgetInput.getText().toString());
+
+                long travelId=mDb.podrozDao().insertPodroz(new Podroz(0,travelName,date1,date2,budget));
+                Intent intent=new Intent(CreateTravelActivity.this, TravelMainMenuActivity.class);
+                intent.putExtra("travelId",travelId);
+                startActivity(intent);
+            }
+        });
+
 
 
         dateFrom = new DatePickerDialog.OnDateSetListener() {
@@ -145,8 +182,6 @@ public class CreateTravelActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
 
-                Date date1=null;
-                Date date2=null;
                 calendarFrom.set(Calendar.YEAR, year);
                 calendarFrom.set(Calendar.MONTH, monthOfYear);
                 calendarFrom.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -160,9 +195,6 @@ public class CreateTravelActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-
-                Date date1=null;
-                Date date2=null;
 
                 calendarTo.set(Calendar.YEAR, year);
                 calendarTo.set(Calendar.MONTH, monthOfYear);
@@ -212,9 +244,6 @@ public class CreateTravelActivity extends AppCompatActivity {
 
     private void validateDateFrom(Editable s) {
 
-        Date date1=null;
-        Date date2=null;
-
         dateFromLayout.setError(null);
         dateInputValidator=new DateInputValidator();
 
@@ -233,14 +262,11 @@ public class CreateTravelActivity extends AppCompatActivity {
 
     private void validateDateTo(Editable s) {
 
-        Date date1=null;
-        Date date2=null;
-
         dateToLayout.setError(null);
         dateInputValidator=new DateInputValidator();
 
         if (TextUtils.isEmpty(s)) {
-            dateToLayout.setError(getString(R.string.nodatefromerror));
+            dateToLayout.setError(getString(R.string.nodatetoerror));
             checkIfEnableButton();
         }
         else if (!dateInputValidator.validate(s.toString())){
@@ -320,22 +346,32 @@ public class CreateTravelActivity extends AppCompatActivity {
             budgetLauout.setError(getString(R.string.nobudgeterror));
             checkIfEnableButton();
         }
-        if (s.toString().length()>9){
+        else if (s.toString().length()>9){
             budgetLauout.setError(getString(R.string.maxninenumbers));
             checkIfEnableButton();
         }
-        else {
-            int integerPlaces = s.toString().indexOf('.');
-            int decimalPlaces = s.toString().length() - integerPlaces - 1;
-            if(decimalPlaces>2){
-                budgetLauout.setError(getString(R.string.decimalplaceserror));
-                checkIfEnableButton();
-            }
-            else{
-                budgetLauout.setError(null);
-                checkIfEnableButton();
-            }
+        else if (".".equals(s.toString())){
+            budgetLauout.setError(getString(R.string.nobudgeterror));
+            checkIfEnableButton();
         }
+        else if(s.toString().contains(".")) {
+                int integerPlaces = s.toString().indexOf('.');
+                int decimalPlaces = s.toString().length() - integerPlaces - 1;
+                if (decimalPlaces > 2) {
+                    budgetLauout.setError(getString(R.string.decimalplaceserror));
+                    checkIfEnableButton();
+                }
+                else{
+                    budgetLauout.setError(null);
+                    checkIfEnableButton();
+                }
+            }
+        else {
+             budgetLauout.setError(null);
+             checkIfEnableButton();
+        }
+
+
     }
 
     @Override
@@ -363,4 +399,6 @@ public class CreateTravelActivity extends AppCompatActivity {
         }
         else buttonSubmit.setEnabled(false);
     }
+
+
 }
