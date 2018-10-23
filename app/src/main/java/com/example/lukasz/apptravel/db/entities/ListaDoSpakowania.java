@@ -19,25 +19,15 @@ public class ListaDoSpakowania {
     private long id;
     @NonNull
     private String nazwa;
-    @NonNull
-    private boolean czyCalaSpelniona;
     private long podrozId;
 
-    @NonNull
-    public boolean isCzyCalaSpelniona() {
-        return czyCalaSpelniona;
-    }
-
-    public void setCzyCalaSpelniona(@NonNull boolean czyCalaSpelniona) {
-        this.czyCalaSpelniona = czyCalaSpelniona;
-    }
 
 
 
-    public ListaDoSpakowania(long id, @NonNull String nazwa, @NonNull boolean czyCalaSpelniona, long podrozId) {
+
+    public ListaDoSpakowania(long id, @NonNull String nazwa, long podrozId) {
         this.id = id;
         this.nazwa = nazwa;
-        this.czyCalaSpelniona = czyCalaSpelniona;
         this.podrozId = podrozId;
     }
 

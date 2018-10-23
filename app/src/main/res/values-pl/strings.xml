@@ -28,7 +28,7 @@
     <string name="editlabel">Edytuj</string>
     <string name="deletelabel">Usuń</string>
     <string name="cautionlabel">Uwaga</string>
-    <string name="deletequestion">Czy na pewno chcesz usunąć tą podróż z jej danymi?</string>
+    <string name="deletetravelquestion">Czy na pewno chcesz usunąć tą podróż z jej danymi?</string>
     <string name="yeslabel">Tak</string>
     <string name="nolabel">Nie</string>
     <string name="expensesbuttonlabel">Wydatki</string>
@@ -42,5 +42,15 @@
     <string name="closelabel">Zamknij</string>
     <string name="creditsinfo">Zdjęcie w tle: Jake Blucker z Unsplash.</string>
     <string name="creditsinfotwo">Ikony: Freepik i Pause08 z www.flaticon.com</string>
+    <string name="makenewpacklistlabel">Stwórz nową listę</string>
+    <string name="copyexistingpacklistlabel">Skopiuj i modyfikuj istniejącą listę</string>
+    <string name="noexistinglistlabel">Nie istnieje jeszcze żadna stworzona lista.</string>
+    <string name="createingnewpacklistlabel">Tworzenie nowej listy</string>
+    <string name="title_activity_pack_list">Lista do spakowania</string>
+    <string name="tabclotheslabel">Ubrania</string>
+    <string name="tabhygienelabel">Higiena</string>
+    <string name="tabdocumentslabel">Dokumenty</string>
+    <string name="tabotherslabel">Inne</string>
+    <string name="deletepacklistquestion">Czy na pewno chcesz usunąć tą listę rzeczy do spakowania?</string>
 
 </resources>

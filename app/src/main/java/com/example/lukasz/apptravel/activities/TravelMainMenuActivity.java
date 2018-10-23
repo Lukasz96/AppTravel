@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -79,7 +80,29 @@ public class TravelMainMenuActivity extends AppCompatActivity {
             constraintLayout.setBackground(backgroundImage);
         }
         ///////////////////////////////
+
+        toPackButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podroz.getId())==null){
+                    boolean areExistingPacklists;
+
+                    if(mDb.listaDoSpakowaniaDao().getAllListyDoSpakowania().isEmpty()) areExistingPacklists=false;
+                    else areExistingPacklists=true;
+                    Intent intent=new Intent(TravelMainMenuActivity.this, NoExistingPacklistChioceActivity.class);
+                    intent.putExtra("travelId",podroz.getId());
+                    intent.putExtra("areExistingPacklists",areExistingPacklists);
+                    startActivity(intent);
+                }
+                else {
+                    Intent intent=new Intent(TravelMainMenuActivity.this, PackListActivity.class);
+                    intent.putExtra("travelId",podroz.getId());
+                    startActivity(intent);
+                }
+            }
+        });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -105,7 +128,7 @@ public class TravelMainMenuActivity extends AppCompatActivity {
             case R.id.deleteicon:
                 new AlertDialog.Builder(this)
                         .setTitle(getString(R.string.cautionlabel))
-                        .setMessage(getString(R.string.deletequestion))
+                        .setMessage(getString(R.string.deletetravelquestion))
                         .setIcon(getResources().getDrawable(R.drawable.deleteicon))
                         .setPositiveButton(getString(R.string.yeslabel), new DialogInterface.OnClickListener() {
 

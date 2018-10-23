@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppTravel</string>
+    <string name="app_name">Travel organizer</string>
     <string name="menu_header">Travel organizer</string>
     <string name="new_travel">New travel</string>
     <string name="saved_travels">My travels</string>
@@ -27,7 +27,7 @@
     <string name="editlabel">Edit</string>
     <string name="deletelabel">Delete</string>
     <string name="cautionlabel">Caution</string>
-    <string name="deletequestion">Do you really want to delete this travel with all its data?</string>
+    <string name="deletetravelquestion">Do you really want to delete this travel with all its data?</string>
     <string name="yeslabel">Yes</string>
     <string name="nolabel">No</string>
     <string name="expensesbuttonlabel">Expenses</string>
@@ -41,4 +41,15 @@
     <string name="authorinfo">Łukasz Dutka is the author of this app.</string>
     <string name="creditsinfo">Background photo by Jake Blucker on Unsplash.</string>
     <string name="creditsinfotwo">Icons made by Freepik and Pause08 from www.flaticon.com</string>
+    <string name="makenewpacklistlabel">Create list from scratch</string>
+    <string name="copyexistingpacklistlabel">Copy and edit existing list</string>
+    <string name="noexistinglistlabel">You have not created any list yet.</string>
+    <string name="createingnewpacklistlabel">Creating new list</string>
+    <string name="title_activity_pack_list">To pack list</string>
+    <string name="tabclotheslabel">Clothes</string>
+    <string name="tabhygienelabel">Hygiene</string>
+    <string name="tabdocumentslabel">Documents</string>
+    <string name="tabotherslabel">Others</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="deletepacklistquestion">Do you really want to delete this list to pack?</string>
 </resources>

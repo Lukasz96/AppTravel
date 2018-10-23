@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/appicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity">
@@ -20,7 +20,13 @@
             android:windowSoftInputMode="stateUnchanged"
         </activity>
         <activity android:name=".activities.TravelMainMenuActivity" />
-        <activity android:name=".activities.UpdateTravelActivity"></activity>
+        <activity android:name=".activities.UpdateTravelActivity" />
+        <activity android:name=".activities.NoExistingPacklistChioceActivity" />
+        <activity android:name=".activities.ChoosePacklistActivity" />
+        <activity
+            android:name=".activities.PackListActivity"
+            android:label="@string/title_activity_pack_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
