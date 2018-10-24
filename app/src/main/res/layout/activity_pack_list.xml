@@ -39,23 +39,27 @@
                 android:id="@+id/tabclothes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:icon="@drawable/clothesicon"
                 android:text="@string/tabclotheslabel" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabhygiene"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:icon="@drawable/hygieneicon"
                 android:text="@string/tabhygienelabel" />
 
             <android.support.design.widget.TabItem
                 android:id="@+id/tabdocuments"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:icon="@drawable/documentsicon"
                 android:text="@string/tabdocumentslabel" />
             <android.support.design.widget.TabItem
                 android:id="@+id/tabItem3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:icon="@drawable/othericon"
                 android:text="@string/tabotherslabel" />
 
         </com.example.lukasz.apptravel.packlisttools.CustomTabLayout>
