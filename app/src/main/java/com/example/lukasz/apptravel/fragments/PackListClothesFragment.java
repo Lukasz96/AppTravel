@@ -11,6 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.lukasz.apptravel.R;
+import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
+import com.example.lukasz.apptravel.packlisttools.PackListAdapter;
+
+import java.util.ArrayList;
 
 public class PackListClothesFragment extends Fragment {
 
@@ -22,18 +26,24 @@ public class PackListClothesFragment extends Fragment {
 
         View view=inflater.inflate(R.layout.packlistclothesfragmentlayout,container,false);
         packListId=getArguments().getLong("bundlePackListId");
+        System.out.println(" PACK LIST ID -------- "+packListId);
+        ArrayList<ElementListyDoSpakowania> list=new ArrayList<>();
+        list.add(new ElementListyDoSpakowania(3,packListId,"nazwa",false,
+                false,1,5,false,3,""));
+        list.add(new ElementListyDoSpakowania(3,packListId,"nazwa",true,
+                false,1,5,false,3,""));
+        list.add(new ElementListyDoSpakowania(3,packListId,"nazwa",false,
+                false,1,5,false,3,""));
+        list.add(new ElementListyDoSpakowania(3,packListId,"nazwa",true,
+                false,1,5,false,3,""));
 
-        String[] packlists={Long.toString(packListId)};
+
 
         ListView listView=view.findViewById(R.id.listviewfragmentclothestopack);
 
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(
-                getActivity(),
-                android.R.layout.simple_list_item_1,
-                packlists
-        );
+        PackListAdapter packListAdapter = new PackListAdapter(this.getContext(),R.layout.topacklistitemlayout,list);
 
-        listView.setAdapter(arrayAdapter);
+        listView.setAdapter(packListAdapter);
 
         return view;
     }
