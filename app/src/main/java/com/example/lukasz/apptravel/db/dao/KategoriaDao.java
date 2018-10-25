@@ -20,4 +20,10 @@ public interface KategoriaDao {
     @Insert
     void insertKategorie(Kategoria[]kategorias);
 
+    @Query("SELECT nazwaKategorii FROM kategoria")
+    List<String> getAllNazwyKategorii();
+
+    @Query("SELECT id FROM kategoria WHERE nazwaKategorii=:nazwaKategorii")
+    long getIdKategoriiOdNazwy(String nazwaKategorii);
+
 }

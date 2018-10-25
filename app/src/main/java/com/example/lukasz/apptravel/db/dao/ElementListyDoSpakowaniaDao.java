@@ -19,14 +19,17 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT * FROM elementlistydospakowania")
     List<ElementListyDoSpakowania> getAllElementyListyDoSpakowania();
 
-    @Query("SELECT elementlistydospakowania.id, listaDoSpakowaniaId, elementlistydospakowania.nazwa, czySpakowane, czyPrzekazanoDoZakupu, ilosc, cena, czyKupione, idKategorii, uwaga FROM elementlistydospakowania INNER JOIN listadospakowania ON listaDoSpakowania.id=listaDoSpakowaniaId " +
+    @Query("SELECT elementlistydospakowania.id, listaDoSpakowaniaId, elementlistydospakowania.nazwa, czySpakowane, czyPrzekazanoDoZakupu, ilosc, cena, czyKupione, idKategorii FROM elementlistydospakowania INNER JOIN listadospakowania ON listaDoSpakowania.id=listaDoSpakowaniaId " +
             "WHERE listaDoSpakowania.id=:idListy")
     List<ElementListyDoSpakowania> getElementyDoSpakowaniaZDanejListy(long idListy);
 
-    @Query("SELECT elementlistydospakowania.nazwa,ilosc,cena,czyKupione,kategoria.nazwaKategorii,uwaga FROM elementlistydospakowania" +
+    @Query("SELECT elementlistydospakowania.nazwa,ilosc,cena,czyKupione,kategoria.nazwaKategorii FROM elementlistydospakowania" +
             " INNER JOIN kategoria ON kategoria.id=idKategorii" +
             " INNER JOIN listadospakowania ON listadospakowania.id=listaDoSpakowaniaId" +
             " INNER JOIN podroz ON podroz.id=listadospakowania.podrozId" +
             " WHERE podroz.id=:idPodrozy")
     List<ElementDoZakupu> getElementyDoZakupuDlaPodrozy(long idPodrozy);
+
+    @Query("UPDATE elementlistydospakowania SET czyspakowane=:czySpakowane WHERE id=:id")
+    void updateCzySpakowanyElementById(long id, boolean czySpakowane);
 }

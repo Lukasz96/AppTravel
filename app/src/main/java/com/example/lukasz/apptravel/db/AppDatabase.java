@@ -6,8 +6,10 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 
+import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.dao.ElementListyDoSpakowaniaDao;
 import com.example.lukasz.apptravel.db.dao.KategoriaDao;
 import com.example.lukasz.apptravel.db.dao.KategoriaPrzejazduDao;
@@ -69,9 +71,9 @@ public abstract class AppDatabase extends RoomDatabase {
                         Executors.newSingleThreadScheduledExecutor().execute(new Runnable() {
                             @Override
                             public void run() {
-                                getInstance(context).kategoriaDao().insertKategorie(dataGenerator.populateKategorieRzeczy());
-                                getInstance(context).kategoriaPrzejazduDao().insertKategoriePrzejazdu(dataGenerator.populateKategoriePrzejazdu());
-                                getInstance(context).kategoriaWydatkuDao().insertKategorieWydatku(dataGenerator.populateKategorieWydatku());
+                                getInstance(context).kategoriaDao().insertKategorie(dataGenerator.populateKategorieRzeczy(context));
+                                getInstance(context).kategoriaPrzejazduDao().insertKategoriePrzejazdu(dataGenerator.populateKategoriePrzejazdu(context));
+                                getInstance(context).kategoriaWydatkuDao().insertKategorieWydatku(dataGenerator.populateKategorieWydatku(context));
                             }
                         });
                     }

@@ -29,12 +29,11 @@ public class ElementListyDoSpakowania {
     private double cena;
     private boolean czyKupione;
     private long idKategorii;
-    private String uwaga;
 
 
     public ElementListyDoSpakowania(long id, long listaDoSpakowaniaId, @NonNull String nazwa, boolean czySpakowane,
                                     @NonNull boolean czyPrzekazanoDoZakupu, int ilosc, double cena, boolean czyKupione,
-                                    long idKategorii, String uwaga) {
+                                    long idKategorii) {
         this.id = id;
         this.listaDoSpakowaniaId = listaDoSpakowaniaId;
         this.nazwa = nazwa;
@@ -44,7 +43,6 @@ public class ElementListyDoSpakowania {
         this.cena = cena;
         this.czyKupione = czyKupione;
         this.idKategorii = idKategorii;
-        this.uwaga = uwaga;
     }
 
     public boolean isCzyPrzekazanoDoZakupu() {
@@ -102,14 +100,6 @@ public class ElementListyDoSpakowania {
 
     public void setIdKategorii(int idKategorii) {
         this.idKategorii = idKategorii;
-    }
-
-    public String getUwaga() {
-        return uwaga;
-    }
-
-    public void setUwaga(String uwaga) {
-        this.uwaga = uwaga;
     }
 
     public double getCena() {

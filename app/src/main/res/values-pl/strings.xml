@@ -52,5 +52,22 @@
     <string name="tabdocumentslabel">Dokumenty</string>
     <string name="tabotherslabel">Inne</string>
     <string name="deletepacklistquestion">Czy na pewno chcesz usunąć tą listę rzeczy do spakowania?</string>
+    <string name="newitemtobacktitle">Nowa rzecz</string>
+    <string name="namenewitemtopacklabel">Nazwa</string>
+    <string name="nonameitemtopackerror">Proszę wpisac nazwę rzeczy</string>
+    <string name="quantitylabel">Ilość sztuk</string>
+    <string name="categorylabel">Kategoria</string>
+    <string name="carlabel">Auto</string>
+    <string name="planelabel">Samolot</string>
+    <string name="trainlabel">Pociąg</string>
+    <string name="shiplabel">Statek</string>
+    <string name="bikelabel">Rower</string>
+    <string name="onfootlabel">Pieszo</string>
+    <string name="otherlabel">Inne</string>
+    <string name="accomodationlabel">Noclegi</string>
+    <string name="foodlabel">Jedzenie</string>
+    <string name="sightseeinglabel">Zwiedzanie</string>
+    <string name="givetoshoplistcheckbox">Do zakupienia</string>
+    <string name="addbuttonlabel">Dodaj</string>
 
 </resources>

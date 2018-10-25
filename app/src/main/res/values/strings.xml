@@ -52,4 +52,21 @@
     <string name="tabotherslabel">Others</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="deletepacklistquestion">Do you really want to delete this list to pack?</string>
+    <string name="newitemtobacktitle">New thing to pack</string>
+    <string name="namenewitemtopacklabel">Name</string>
+    <string name="nonameitemtopackerror">Please type item name</string>
+    <string name="quantitylabel">Quantity</string>
+    <string name="categorylabel">Category</string>
+    <string name="carlabel">Car</string>
+    <string name="planelabel">Plane</string>
+    <string name="trainlabel">Train</string>
+    <string name="shiplabel">Ship</string>
+    <string name="bikelabel">Bike</string>
+    <string name="onfootlabel">On foot</string>
+    <string name="otherlabel">Other</string>
+    <string name="accomodationlabel">Accomodation</string>
+    <string name="foodlabel">Food</string>
+    <string name="sightseeinglabel">Sightseeing</string>
+    <string name="givetoshoplistcheckbox">To buy</string>
+    <string name="addbuttonlabel">Add</string>
 </resources>

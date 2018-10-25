@@ -78,9 +78,9 @@ public class PackListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-      //          Intent intent=new Intent(PackListActivity.this, CreateNewPackItemActivity.class);
-      //          intent.putExtra("packListId",packListId);
-      //          startActivity(intent);
+                Intent intent=new Intent(PackListActivity.this, AddNewPackListItemActivity.class);
+                intent.putExtra("packListId",packListId);
+                startActivity(intent);
             }
         });
 
