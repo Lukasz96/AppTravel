@@ -2,23 +2,29 @@ package com.example.lukasz.apptravel.packlisttools;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.example.lukasz.apptravel.fragments.PackListClothesFragment;
+import com.example.lukasz.apptravel.fragments.PackListDocumentsFragment;
+import com.example.lukasz.apptravel.fragments.PackListHygieneFragment;
+import com.example.lukasz.apptravel.fragments.PackListOthersFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +33,7 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
 
     private Context context;
     private int mResource;
-  //  private TextView textView;
+    private ArrayList<ElementListyDoSpakowania> lista;
     private TextView circleCounter;
     private CheckBox checkBox;
     private TextView menuItem;
@@ -36,6 +42,7 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
     public PackListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<ElementListyDoSpakowania> objects) {
         super(context, resource, objects);
         this.context=context;
+        this.lista=objects;
         mResource=resource;
     }
 
@@ -87,6 +94,27 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
             public void onClick(View v) {
                 int position=(int)v.getTag();
                 ElementListyDoSpakowania elementListyDoSpakowania=getItem(position);
+
+                PopupMenu popupMenu = new PopupMenu(context, v);
+                popupMenu.inflate(R.menu.packlistitemmenu);
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.editpacklistitem:
+
+                                break;
+                            case R.id.deletepacklistitem:
+                                mDb.elementListyDoSpakowaniaDao().
+                                        deleteElementListyDoSpakowaniaById(elementListyDoSpakowania.getId());
+
+                                        updateReceiptsList(mDb.elementListyDoSpakowaniaDao().getElementyListyDoSpakowaniaByKategoriaFromList(listaDoSpakowaniaId,elementListyDoSpakowania.getIdKategorii()));
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
             }
         });
 
@@ -109,6 +137,12 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
             else buttonView.setPaintFlags(buttonView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
         }
     };
+
+    public void updateReceiptsList(List<ElementListyDoSpakowania> newlist) {
+        lista.clear();
+        lista.addAll(newlist);
+        notifyDataSetChanged();
+    }
 
 
 }

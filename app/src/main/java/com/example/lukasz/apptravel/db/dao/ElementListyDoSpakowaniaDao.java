@@ -35,4 +35,7 @@ public interface ElementListyDoSpakowaniaDao {
 
     @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId AND idKategorii=:kategoriaId")
     List<ElementListyDoSpakowania> getElementyListyDoSpakowaniaByKategoriaFromList(long listaId, long kategoriaId);
+
+    @Query("DELETE FROM elementlistydospakowania WHERE id=:id")
+    void deleteElementListyDoSpakowaniaById(long id);
 }
