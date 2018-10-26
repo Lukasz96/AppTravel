@@ -12,15 +12,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
+import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
+import com.example.lukasz.apptravel.db.entities.Podroz;
 import com.gildaswise.horizontalcounter.HorizontalCounter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AddNewPackListItemActivity extends AppCompatActivity {
@@ -29,9 +35,11 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
    private EditText nameInput;
    private HorizontalCounter horizontalCounter;
    private long packListId;
+    private long travelId;
    private Spinner kategoriaSpinner;
    private AppDatabase mDb;
    private Button buttonSubmit;
+   private CheckBox isToBuyCheckbox;
 
 
 
@@ -48,9 +56,13 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         packListId=intent.getLongExtra("packListId",0);
+        travelId=intent.getLongExtra("travelId",0);
+
 
         itemNameLayout=findViewById(R.id.itemtopacknamelayout);
         nameInput=findViewById(R.id.itemtopacknameinput);
+
+        isToBuyCheckbox=findViewById(R.id.istobuycheckobox);
 
         horizontalCounter=findViewById(R.id.horizontal_counter);
         horizontalCounter.setDisplayingInteger(true);
@@ -84,6 +96,28 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
                 if (!hasFocus) {
                     validateEditText(((EditText) v).getText());
                 }
+            }
+        });
+
+        buttonSubmit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mDb= AppDatabase.getInstance(getApplicationContext());
+                String packItemName=nameInput.getText().toString();
+                double dquantity = horizontalCounter.getCurrentValue();
+                int quantity= (int)dquantity;
+                long categoryId=mDb.kategoriaDao().getIdKategoriiOdNazwy(kategoriaSpinner.getSelectedItem().toString());
+
+                boolean isToBuy=isToBuyCheckbox.isChecked();
+
+                ElementListyDoSpakowania elementListyDoSpakowania =
+                        new ElementListyDoSpakowania(0,packListId,packItemName,false,
+                                isToBuy,quantity,0,false,categoryId);
+
+                mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(elementListyDoSpakowania);
+                Intent intent= new Intent(AddNewPackListItemActivity.this, PackListActivity.class);
+                intent.putExtra("travelId",travelId);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -125,6 +159,7 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
         }
         else buttonSubmit.setEnabled(false);
     }
+
 
 
 

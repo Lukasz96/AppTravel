@@ -116,7 +116,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/istobuycheckobox"
             android:layout_width="161dp"
             android:layout_height="36dp"
             android:layout_marginEnd="8dp"

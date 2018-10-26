@@ -32,4 +32,7 @@ public interface ElementListyDoSpakowaniaDao {
 
     @Query("UPDATE elementlistydospakowania SET czyspakowane=:czySpakowane WHERE id=:id")
     void updateCzySpakowanyElementById(long id, boolean czySpakowane);
+
+    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId AND idKategorii=:kategoriaId")
+    List<ElementListyDoSpakowania> getElementyListyDoSpakowaniaByKategoriaFromList(long listaId, long kategoriaId);
 }

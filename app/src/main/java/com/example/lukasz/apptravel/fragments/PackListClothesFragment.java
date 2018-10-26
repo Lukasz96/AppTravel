@@ -17,15 +17,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lukasz.apptravel.R;
+import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.example.lukasz.apptravel.packlisttools.PackListAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PackListClothesFragment extends Fragment {
 
     private long packListId;
     private ListView listView;
+    private AppDatabase mDb;
+    private PackListAdapter packListAdapter;
 
     @Nullable
     @Override
@@ -33,22 +37,16 @@ public class PackListClothesFragment extends Fragment {
 
         View view=inflater.inflate(R.layout.packlistclothesfragmentlayout,container,false);
         packListId=getArguments().getLong("bundlePackListId");
-        System.out.println(" PACK LIST ID -------- "+packListId);
-        ArrayList<ElementListyDoSpakowania> list=new ArrayList<>();
-        list.add(new ElementListyDoSpakowania(1,5,"nazwa",false,
-                false,11,5,false,3));
-        list.add(new ElementListyDoSpakowania(2,6,"nazwa",true,
-                false,2,5,false,3));
-        list.add(new ElementListyDoSpakowania(3,7,"nazwa",false,
-                false,3,5,false,3));
-        list.add(new ElementListyDoSpakowania(4,8,"nazwa",true,
-                false,4,5,false,3));
+        mDb= AppDatabase.getInstance(getContext());
+        long categoryId=mDb.kategoriaDao().getIdKategoriiOdNazwy(getString(R.string.tabclotheslabel));
+        ArrayList<ElementListyDoSpakowania> list=new ArrayList<ElementListyDoSpakowania>(mDb.elementListyDoSpakowaniaDao().
+                getElementyListyDoSpakowaniaByKategoriaFromList(packListId,categoryId));
 
 
 
         listView=view.findViewById(R.id.listviewfragmentclothestopack);
 
-        PackListAdapter packListAdapter = new PackListAdapter(this.getContext(),R.layout.topacklistitemlayout,list);
+        packListAdapter = new PackListAdapter(this.getContext(),R.layout.topacklistitemlayout,list);
 
 
         listView.setAdapter(packListAdapter);

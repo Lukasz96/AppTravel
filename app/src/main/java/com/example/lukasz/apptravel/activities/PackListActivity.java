@@ -60,6 +60,7 @@ public class PackListActivity extends AppCompatActivity {
 
         bundlePackListId = new Bundle();
         bundlePackListId.putLong("bundlePackListId",packListId);
+        //bundlePackListId.putLong("travelId",travelId);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -80,6 +81,7 @@ public class PackListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(PackListActivity.this, AddNewPackListItemActivity.class);
                 intent.putExtra("packListId",packListId);
+                intent.putExtra("travelId",travelId);
                 startActivity(intent);
             }
         });
@@ -195,5 +197,14 @@ public class PackListActivity extends AppCompatActivity {
         public int getCount() {
             return mDb.kategoriaDao().getAllKategoria().size();
         }
+
+
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent= new Intent(PackListActivity.this,TravelMainMenuActivity.class);
+        intent.putExtra("travelId", travelId);
+        startActivity(intent);
+        finish();
     }
 }

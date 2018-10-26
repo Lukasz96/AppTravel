@@ -30,6 +30,7 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
   //  private TextView textView;
     private TextView circleCounter;
     private CheckBox checkBox;
+    private TextView menuItem;
     private AppDatabase mDb=AppDatabase.getInstance(context);
 
     public PackListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<ElementListyDoSpakowania> objects) {
@@ -70,9 +71,9 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
         checkBox.setTag(position);
         checkBox.setOnCheckedChangeListener(checkListener);
         circleCounter=convertView.findViewById(R.id.topacklistitemcirclecounter);
-
-        checkBox.setText("IdEl: "+elementListyDoSpakowania.getId());
-        checkBox.append("listaId: "+elementListyDoSpakowania.getListaDoSpakowaniaId());
+        menuItem=convertView.findViewById(R.id.packListItemtextViewOptions);
+        menuItem.setTag(position);
+        checkBox.setText(elementListyDoSpakowania.getNazwa());
         circleCounter.setText(String.valueOf(elementListyDoSpakowania.getIlosc()));
 
         if(elementListyDoSpakowania.isCzySpakowane()){
@@ -80,6 +81,14 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
             checkBox.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
           //  parent.getChildAt(position).setBackgroundColor(Color.rgb(157,153,152));
         }
+
+        menuItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position=(int)v.getTag();
+                ElementListyDoSpakowania elementListyDoSpakowania=getItem(position);
+            }
+        });
 
 
 
@@ -95,12 +104,11 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
             int position = (int)buttonView.getTag();
             ElementListyDoSpakowania elementListyDoSpakowania=getItem(position);
             mDb.elementListyDoSpakowaniaDao().updateCzySpakowanyElementById(elementListyDoSpakowania.getId(), isChecked);
-            elementListyDoSpakowania.setCzySpakowane(isChecked);
+            //elementListyDoSpakowania.setCzySpakowane(isChecked);
             if(isChecked)buttonView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             else buttonView.setPaintFlags(buttonView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
-
-            System.out.println("ID ---- "+elementListyDoSpakowania.getId()+" czy spakowane ---- "
-                    + elementListyDoSpakowania.isCzySpakowane()+" is checked= "+isChecked);
         }
     };
+
+
 }
