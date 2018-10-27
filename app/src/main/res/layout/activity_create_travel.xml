@@ -5,6 +5,8 @@
     android:id="@+id/createtravelactivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     tools:context=".activities.CreateTravelActivity">
 
 
@@ -18,6 +20,7 @@
         android:background="@drawable/linearlayoutshape"
         android:orientation="vertical"
         android:padding="10dp"
+
         app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/labeltravelname"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:singleLine="true" />
 
         </android.support.design.widget.TextInputLayout>

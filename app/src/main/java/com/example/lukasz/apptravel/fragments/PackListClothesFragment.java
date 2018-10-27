@@ -45,11 +45,8 @@ public class PackListClothesFragment extends Fragment {
         ArrayList<ElementListyDoSpakowania> list=new ArrayList<ElementListyDoSpakowania>(mDb.elementListyDoSpakowaniaDao().
                 getElementyListyDoSpakowaniaByKategoriaFromList(packListId,categoryId));
 
-        System.out.println("LICZBA ELEMENTÓw-------------- "+list.size());
-
-
-
         listView=view.findViewById(R.id.listviewfragmentclothestopack);
+
 
         packListAdapter = new PackListAdapter(this.getContext(),R.layout.topacklistitemlayout,list);
 

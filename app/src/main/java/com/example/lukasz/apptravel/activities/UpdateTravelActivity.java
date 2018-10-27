@@ -1,5 +1,6 @@
 package com.example.lukasz.apptravel.activities;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -15,6 +16,7 @@ import android.text.TextWatcher;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -130,6 +132,7 @@ public class UpdateTravelActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     validateEditText(((EditText) v).getText());
+                    hideKeyboard(v);
                 }
             }
         });
@@ -138,6 +141,7 @@ public class UpdateTravelActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     validateBudget(((EditText) v).getText());
+                    hideKeyboard(v);
                 }
             }
         });
@@ -147,6 +151,7 @@ public class UpdateTravelActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     validateDateFrom(((EditText) v).getText());
+                    hideKeyboard(v);
                 }
             }
         });
@@ -156,6 +161,7 @@ public class UpdateTravelActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     validateDateTo(((EditText) v).getText());
+                    hideKeyboard(v);
                 }
             }
         });
@@ -408,6 +414,9 @@ public class UpdateTravelActivity extends AppCompatActivity {
         }
         else buttonSubmit.setEnabled(false);
     }
-
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 }

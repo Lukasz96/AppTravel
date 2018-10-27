@@ -70,5 +70,6 @@
     <string name="givetoshoplistcheckbox">Do zakupienia</string>
     <string name="addbuttonlabel">Dodaj</string>
     <string name="edititemtopack">Edytuj rzecz</string>
+    <string name="choosepacklisttocopylabel">Wybór listy do skopiowania</string>
 
 </resources>

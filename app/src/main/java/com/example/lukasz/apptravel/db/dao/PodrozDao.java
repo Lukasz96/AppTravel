@@ -39,8 +39,11 @@ public interface PodrozDao {
     @Query("SELECT * FROM Podroz WHERE id=:id ")
     Podroz getPodrozById(long id);
 
-    @Query("SELECT dataOd FROM podroz WHERE id=1")
-    Date getDate();
+    @Query("SELECT dataOd FROM podroz WHERE id=:id")
+    Date getDateOdByTravelId(long id);
+
+    @Query("SELECT dataOd FROM podroz WHERE id=:id")
+    Date getDateDoByTravelId(long id);
 
     @Query("UPDATE Podroz SET nazwa=:nowaNazwa, dataOd=:from, dataDo=:to, budzet=:budget WHERE id=:id")
     void updatePodrozById(long id, String nowaNazwa, Date from, Date to, double budget);

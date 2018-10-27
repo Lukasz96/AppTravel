@@ -5,6 +5,8 @@
     android:id="@+id/createtravelactivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     tools:context=".activities.CreateTravelActivity">
 
     <LinearLayout
@@ -81,7 +83,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/labeltravelname"
-                            android:inputType="text"
+                            android:inputType="textCapSentences"
                             android:singleLine="true" />
 
 
