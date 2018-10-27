@@ -116,6 +116,7 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
                 mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(elementListyDoSpakowania);
                 Intent intent= new Intent(AddNewPackListItemActivity.this, PackListActivity.class);
                 intent.putExtra("travelId",travelId);
+                intent.putExtra("categoryId",categoryId);
                 startActivity(intent);
                 finish();
             }

@@ -108,7 +108,8 @@ public class EditPackListItemActivity extends AppCompatActivity {
                 long travelId=mDb.listaDoSpakowaniaDao().getPodrozIdFromListaDoSpakowaniaId(listaDoSpakowaniaId);
                 Intent intent = new Intent(EditPackListItemActivity.this, PackListActivity.class);
                 intent.putExtra("travelId",travelId);
-                
+                intent.putExtra("categoryId",categoryId);
+
                 startActivity(intent);
             }
         });

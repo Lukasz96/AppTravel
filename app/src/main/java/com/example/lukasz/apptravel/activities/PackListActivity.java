@@ -35,6 +35,7 @@ public class PackListActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private long travelId;
     private long packListId;
+    private long categoryId;
     AppDatabase mDb;
     private Bundle bundlePackListId;
 
@@ -55,7 +56,7 @@ public class PackListActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         travelId=intent.getLongExtra("travelId",0);
-
+        categoryId=intent.getLongExtra("categoryId",-1);
     //    travelId=intent.getLongExtra("travelId",0);
         mDb=AppDatabase.getInstance(getApplicationContext());
         packListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
@@ -74,8 +75,15 @@ public class PackListActivity extends AppCompatActivity {
 
         CustomTabLayout tabLayout =  findViewById(R.id.tabs);
 
+
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+
+        if(categoryId!=-1){
+            CustomTabLayout.Tab tab = tabLayout.getTabAt((int)categoryId-1);
+            tab.select();
+        }
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
