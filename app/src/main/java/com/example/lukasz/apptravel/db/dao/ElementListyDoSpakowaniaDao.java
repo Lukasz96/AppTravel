@@ -38,4 +38,11 @@ public interface ElementListyDoSpakowaniaDao {
 
     @Query("DELETE FROM elementlistydospakowania WHERE id=:id")
     void deleteElementListyDoSpakowaniaById(long id);
+
+    @Query("SELECT * FROM elementlistydospakowania WHERE id=:id")
+    ElementListyDoSpakowania getElementListyDoSpakowaniaById(long id);
+
+    @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, ilosc=:ilosc, czyprzekazanodozakupu=:czykupic, idkategorii=:idkategorii WHERE id=:id")
+    void updateEditItemToPack(long id, String nazwa, int ilosc, boolean czykupic, long idkategorii);
+
 }

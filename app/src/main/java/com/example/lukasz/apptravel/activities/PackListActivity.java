@@ -38,10 +38,11 @@ public class PackListActivity extends AppCompatActivity {
     AppDatabase mDb;
     private Bundle bundlePackListId;
 
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
+    private static ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class PackListActivity extends AppCompatActivity {
 
         Intent intent=getIntent();
         travelId=intent.getLongExtra("travelId",0);
+
     //    travelId=intent.getLongExtra("travelId",0);
         mDb=AppDatabase.getInstance(getApplicationContext());
         packListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
@@ -152,7 +154,11 @@ public class PackListActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.packlistclothesfragmentlayout, container, false);
+            View rootView;
+
+                    rootView = inflater.inflate(R.layout.packlistclothesfragmentlayout, container, false);
+
+
             return rootView;
         }
     }

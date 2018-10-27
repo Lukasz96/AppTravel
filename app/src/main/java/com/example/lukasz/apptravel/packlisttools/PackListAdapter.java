@@ -19,6 +19,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.lukasz.apptravel.R;
+import com.example.lukasz.apptravel.activities.EditPackListItemActivity;
+import com.example.lukasz.apptravel.activities.PackListActivity;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.example.lukasz.apptravel.fragments.PackListClothesFragment;
@@ -102,13 +104,16 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.editpacklistitem:
-
+                                Intent intent = new Intent(context, EditPackListItemActivity.class);
+                                intent.putExtra("itemId", elementListyDoSpakowania.getId());
+                                context.startActivity(intent);
                                 break;
                             case R.id.deletepacklistitem:
                                 mDb.elementListyDoSpakowaniaDao().
                                         deleteElementListyDoSpakowaniaById(elementListyDoSpakowania.getId());
-
-                                        updateReceiptsList(mDb.elementListyDoSpakowaniaDao().getElementyListyDoSpakowaniaByKategoriaFromList(listaDoSpakowaniaId,elementListyDoSpakowania.getIdKategorii()));
+                                        updateReceiptsList(mDb.elementListyDoSpakowaniaDao().
+                                                getElementyListyDoSpakowaniaByKategoriaFromList(listaDoSpakowaniaId,
+                                                        elementListyDoSpakowania.getIdKategorii()));
                                 break;
                         }
                         return false;

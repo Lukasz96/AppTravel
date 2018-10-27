@@ -27,4 +27,7 @@ public interface ListaDoSpakowaniaDao {
     @Query("delete from listadospakowania where podrozId=:id")
     int deleteListaDoSpakowaniaByTravelId(long id);
 
+    @Query("SELECT podrozId FROM listadospakowania WHERE id=:listaId")
+    long getPodrozIdFromListaDoSpakowaniaId(long listaId);
+
 }

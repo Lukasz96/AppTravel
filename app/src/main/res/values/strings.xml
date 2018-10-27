@@ -69,4 +69,5 @@
     <string name="sightseeinglabel">Sightseeing</string>
     <string name="givetoshoplistcheckbox">To buy</string>
     <string name="addbuttonlabel">Add</string>
+    <string name="edititemtopack">Edit item</string>
 </resources>
