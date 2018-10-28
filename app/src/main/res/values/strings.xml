@@ -71,4 +71,5 @@
     <string name="addbuttonlabel">Add</string>
     <string name="edititemtopack">Edit item</string>
     <string name="choosepacklisttocopylabel">Choose list to be copied</string>
+    <string name="title_activity_shopping_list">ShoppingListActivity</string>
 </resources>

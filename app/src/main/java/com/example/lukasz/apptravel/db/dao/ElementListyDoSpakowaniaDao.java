@@ -45,4 +45,8 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, ilosc=:ilosc, czyprzekazanodozakupu=:czykupic, idkategorii=:idkategorii WHERE id=:id")
     void updateEditItemToPack(long id, String nazwa, int ilosc, boolean czykupic, long idkategorii);
 
+    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:iDlistyDoSpakowania AND czyPrzekazanoDoZakupu=:czyPrzekazanoDoZakupu")
+    List<ElementListyDoSpakowania> getElementyCzyPrzekazanoDoZakupu(long iDlistyDoSpakowania, boolean czyPrzekazanoDoZakupu);
+
+
 }
