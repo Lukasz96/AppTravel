@@ -74,5 +74,9 @@
     <string name="title_activity_shopping_list">ShoppingListActivity</string>
     <string name="shoppinglistlabel">Shopping list</string>
     <string name="pricelabel">Price:</string>
-    <string name="pricetextviewlabel">Price</string>
+    <string name="pricetextviewlabel">Price (can be added later)</string>
+    <string name="badpriceformat">Bad number format</string>
+    <string name="noshopitemerror">Please type item name</string>
+    <string name="pricemorethanzeroerror">Price must be higher than 0</string>
+    <string name="addshopitemlabel">New item</string>
 </resources>
