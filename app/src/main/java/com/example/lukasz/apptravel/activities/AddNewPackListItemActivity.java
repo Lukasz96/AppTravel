@@ -113,7 +113,7 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
                 boolean isToBuy=isToBuyCheckbox.isChecked();
 
                 ElementListyDoSpakowania elementListyDoSpakowania =
-                        new ElementListyDoSpakowania(0,packListId,packItemName,false,
+                        new ElementListyDoSpakowania(0,packListId,packItemName,true, false,
                                 isToBuy,quantity,0,false,categoryId);
 
                 mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(elementListyDoSpakowania);

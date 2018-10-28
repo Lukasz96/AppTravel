@@ -59,6 +59,7 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
          long listaDoSpakowaniaId=getItem(position).getListaDoSpakowaniaId();
          String nazwa=getItem(position).getNazwa();
          boolean czySpakowane=getItem(position).isCzySpakowane();
+         boolean czyDoSpakowania=getItem(position).isCzyDoSpakowania();
          boolean czyPrzekazanoDoZakupu=getItem(position).isCzyPrzekazanoDoZakupu();
          int ilosc=getItem(position).getIlosc();
          double cena=getItem(position).getCena();
@@ -67,7 +68,7 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
 
 
          ElementListyDoSpakowania elementListyDoSpakowania=new ElementListyDoSpakowania(id,listaDoSpakowaniaId,
-                 nazwa,czySpakowane,czyPrzekazanoDoZakupu,ilosc,cena,czyKupione,idKategorii);
+                 nazwa,czyDoSpakowania,czySpakowane,czyPrzekazanoDoZakupu,ilosc,cena,czyKupione,idKategorii);
 
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(mResource,parent,false);
@@ -110,10 +111,11 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
                                 break;
                             case R.id.deletepacklistitem:
                                 mDb.elementListyDoSpakowaniaDao().
-                                        deleteElementListyDoSpakowaniaById(elementListyDoSpakowania.getId());
+                                        setCzyDoSpakowania(elementListyDoSpakowania.getId(),false);
+                                   //     deleteElementListyDoSpakowaniaById(elementListyDoSpakowania.getId());
                                         updateReceiptsList(mDb.elementListyDoSpakowaniaDao().
-                                                getElementyListyDoSpakowaniaByKategoriaFromList(listaDoSpakowaniaId,
-                                                        elementListyDoSpakowania.getIdKategorii()));
+                                                getElementyListyDoSpakowaniaByKategoriaFromListDoSpakowania(listaDoSpakowaniaId,
+                                                        elementListyDoSpakowania.getIdKategorii(),true));
                                 break;
                         }
                         return false;

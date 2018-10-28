@@ -18,11 +18,14 @@ import android.widget.Toast;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
+import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
+import com.example.lukasz.apptravel.db.entities.ListaDoSpakowania;
 import com.example.lukasz.apptravel.db.entities.Podroz;
 import com.example.lukasz.apptravel.imageCalc.BackgroundImageCalc;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class TravelMainMenuActivity extends AppCompatActivity {
 
@@ -83,7 +86,7 @@ public class TravelMainMenuActivity extends AppCompatActivity {
 
         toPackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podroz.getId())==null){
+                if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podroz.getId())==null || areOnlyShoppingItemOnList(podroz.getId())){
                     boolean areExistingPacklists;
 
                     if(mDb.listaDoSpakowaniaDao().getAllListyDoSpakowania().isEmpty()) areExistingPacklists=false;
@@ -161,5 +164,20 @@ public class TravelMainMenuActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public boolean areOnlyShoppingItemOnList(long podrozId){
+        boolean areOnlyShopping=true;
+        ListaDoSpakowania listaDoSpakowania=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozId);
+        long IdListyDoSpakowania=listaDoSpakowania.getId();
+        List<ElementListyDoSpakowania> listaElementow = mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania);
+        if(listaDoSpakowania==null) return false;
+        if (mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty()) return false;
+        else {
+            for(ElementListyDoSpakowania elementListyDoSpakowania:listaElementow){
+                if(elementListyDoSpakowania.isCzyDoSpakowania()) areOnlyShopping=false;
+            }
+        }
+        return areOnlyShopping;
     }
 }

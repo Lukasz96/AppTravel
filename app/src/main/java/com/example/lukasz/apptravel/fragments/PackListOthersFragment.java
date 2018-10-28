@@ -32,7 +32,7 @@ public class PackListOthersFragment extends Fragment {
         mDb= AppDatabase.getInstance(getContext());
         long categoryId=mDb.kategoriaDao().getIdKategoriiOdNazwy(getString(R.string.tabotherslabel));
         ArrayList<ElementListyDoSpakowania> list=new ArrayList<ElementListyDoSpakowania>(mDb.elementListyDoSpakowaniaDao().
-                getElementyListyDoSpakowaniaByKategoriaFromList(packListId,categoryId));
+                getElementyListyDoSpakowaniaByKategoriaFromListDoSpakowania(packListId,categoryId,true));
 
 
 

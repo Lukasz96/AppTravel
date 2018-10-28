@@ -67,8 +67,16 @@ public class ChoosePacklistActivity extends AppCompatActivity {
            //     System.out.println("lista do skopiowania id (ma byc 11) - "+listaDoSpakowaniaDoSkopiowania.getId());
                 List<ElementListyDoSpakowania> elementListyDoSpakowaniaDoKopiowania=mDb.elementListyDoSpakowaniaDao().
                         getElementyDoSpakowaniaZDanejListy(listaDoSpakowaniaDoSkopiowania.getId());
-                long newpackListId=mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
-                        new ListaDoSpakowania(0,podrozObecna.getNazwa(),podrozObecna.getId()));
+                long newpackListId;
+                if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozIdObecna)==null) {
+                    newpackListId = mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
+                            new ListaDoSpakowania(0, podrozObecna.getNazwa(), podrozObecna.getId()));
+                }
+                else {
+                    newpackListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozIdObecna).getId();
+                }
+               // long newpackListId=mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
+                //        new ListaDoSpakowania(0,podrozObecna.getNazwa(),podrozObecna.getId()));
            //     System.out.println("ILE SKOPPIOWAC ELEMENTOW ---------- "+elementListyDoSpakowaniaDoKopiowania.size());
                 for(ElementListyDoSpakowania element:elementListyDoSpakowaniaDoKopiowania){
                     String nazwa=element.getNazwa();
@@ -76,7 +84,7 @@ public class ChoosePacklistActivity extends AppCompatActivity {
                     long idKategorii=element.getIdKategorii();
 
                     mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(
-                            new ElementListyDoSpakowania(0, newpackListId, nazwa,false,false, ilosc,
+                            new ElementListyDoSpakowania(0, newpackListId, nazwa,true,false,false, ilosc,
                                     0, false, idKategorii));
                 }
                 Intent intent = new Intent(ChoosePacklistActivity.this, PackListActivity.class);

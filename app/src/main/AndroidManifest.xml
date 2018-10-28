@@ -31,7 +31,9 @@
         <activity android:name=".activities.EditPackListItemActivity" />
         <activity
             android:name=".activities.ShoppingListActivity"
-            android:label="@string/title_activity_shopping_list"></activity>
+            android:label="@string/title_activity_shopping_list" />
+        <activity android:name=".activities.EditShoppingListItemActivity" />
+        <activity android:name=".activities.AddNewShopListItemActivity"></activity>
     </application>
 
 </manifest>

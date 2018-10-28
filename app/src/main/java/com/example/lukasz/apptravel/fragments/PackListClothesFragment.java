@@ -43,7 +43,7 @@ public class PackListClothesFragment extends Fragment {
         mDb= AppDatabase.getInstance(getContext());
         long categoryId=mDb.kategoriaDao().getIdKategoriiOdNazwy(getString(R.string.tabclotheslabel));
         ArrayList<ElementListyDoSpakowania> list=new ArrayList<ElementListyDoSpakowania>(mDb.elementListyDoSpakowaniaDao().
-                getElementyListyDoSpakowaniaByKategoriaFromList(packListId,categoryId));
+                getElementyListyDoSpakowaniaByKategoriaFromListDoSpakowania(packListId,categoryId,true));
 
         listView=view.findViewById(R.id.listviewfragmentclothestopack);
 

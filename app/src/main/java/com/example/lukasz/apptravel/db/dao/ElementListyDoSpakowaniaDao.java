@@ -19,7 +19,7 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT * FROM elementlistydospakowania")
     List<ElementListyDoSpakowania> getAllElementyListyDoSpakowania();
 
-    @Query("SELECT elementlistydospakowania.id, listaDoSpakowaniaId, elementlistydospakowania.nazwa, czySpakowane, czyPrzekazanoDoZakupu, ilosc, cena, czyKupione, idKategorii FROM elementlistydospakowania INNER JOIN listadospakowania ON listaDoSpakowania.id=listaDoSpakowaniaId " +
+    @Query("SELECT elementlistydospakowania.id, listaDoSpakowaniaId, elementlistydospakowania.nazwa,czyDoSpakowania, czySpakowane, czyPrzekazanoDoZakupu, ilosc, cena, czyKupione, idKategorii FROM elementlistydospakowania INNER JOIN listadospakowania ON listaDoSpakowania.id=listaDoSpakowaniaId " +
             "WHERE listaDoSpakowania.id=:idListy")
     List<ElementListyDoSpakowania> getElementyDoSpakowaniaZDanejListy(long idListy);
 
@@ -33,8 +33,8 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("UPDATE elementlistydospakowania SET czyspakowane=:czySpakowane WHERE id=:id")
     void updateCzySpakowanyElementById(long id, boolean czySpakowane);
 
-    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId AND idKategorii=:kategoriaId")
-    List<ElementListyDoSpakowania> getElementyListyDoSpakowaniaByKategoriaFromList(long listaId, long kategoriaId);
+    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId AND idKategorii=:kategoriaId AND czyDoSpakowania=:czyDoSpakowania")
+    List<ElementListyDoSpakowania> getElementyListyDoSpakowaniaByKategoriaFromListDoSpakowania(long listaId, long kategoriaId, boolean czyDoSpakowania);
 
     @Query("DELETE FROM elementlistydospakowania WHERE id=:id")
     void deleteElementListyDoSpakowaniaById(long id);
@@ -48,5 +48,16 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:iDlistyDoSpakowania AND czyPrzekazanoDoZakupu=:czyPrzekazanoDoZakupu")
     List<ElementListyDoSpakowania> getElementyCzyPrzekazanoDoZakupu(long iDlistyDoSpakowania, boolean czyPrzekazanoDoZakupu);
 
+    @Query("UPDATE elementlistydospakowania SET czykupione=:czyKupione WHERE id=:id")
+    void setCzyKupione(long id, boolean czyKupione);
+
+    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:iDlistyDoSpakowania AND czyPrzekazanoDoZakupu=:czyDoZakupu")
+    List<ElementListyDoSpakowania>getAllElementyDoZakupu(long iDlistyDoSpakowania, boolean czyDoZakupu);
+
+    @Query("UPDATE elementlistydospakowania SET czyPrzekazanoDoZakupu=:czyDoZakupu WHERE id=:id")
+    void setCzyDoZakupu(long id, boolean czyDoZakupu);
+
+    @Query("UPDATE elementlistydospakowania SET czyDoSpakowania=:czyDoSpakowania WHERE id=:id")
+    void setCzyDoSpakowania(long id, boolean czyDoSpakowania);
 
 }

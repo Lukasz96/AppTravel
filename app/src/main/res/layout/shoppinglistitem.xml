@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -9,41 +10,40 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@id/topacklistitemcirclecounter"
-            android:paddingLeft="25dp">
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/shoppinglistitemcirclecounter"
+            android:paddingLeft="16dp">
 
             <CheckBox
-                android:id="@+id/checkBoxPacked"
+                android:id="@+id/checkBoxBought"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="0dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginStart="0dp"
-                android:layout_marginTop="8dp"
                 android:buttonTint="@color/colorPrimary"
-
+                android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:scaleX="1"
-                android:scaleY="1"
+                android:scaleX="1.05"
+                android:scaleY="1.05"
                 android:text="aaaa"
                 android:textSize="20sp" />
 
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/topacklistitemcirclecounter"
+            android:id="@+id/shoppinglistitemcirclecounter"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentTop="true"
             android:layout_gravity="center"
             android:layout_marginRight="12dp"
             android:layout_marginTop="8dp"
-            android:layout_toStartOf="@+id/packListItemtextViewOptions"
+            android:layout_toStartOf="@+id/shoppingListItemtextViewOptions"
             android:background="@drawable/circlecountershape"
             android:gravity="center"
             android:shadowRadius="10.0"
@@ -52,7 +52,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/packListItemtextViewOptions"
+            android:id="@+id/shoppingListItemtextViewOptions"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
@@ -64,4 +64,12 @@
             android:textSize="25sp"
             android:textStyle="bold" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textViewPrice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="45dp"
+        android:text="aaaa"
+        android:textSize="17sp" />
 </LinearLayout>

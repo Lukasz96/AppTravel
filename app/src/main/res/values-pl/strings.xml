@@ -71,5 +71,7 @@
     <string name="addbuttonlabel">Dodaj</string>
     <string name="edititemtopack">Edytuj rzecz</string>
     <string name="choosepacklisttocopylabel">Wybór listy do skopiowania</string>
+    <string name="shoppinglistlabel">Lista zakupów</string>
+    <string name="pricelabel">Cena:</string>
 
 </resources>

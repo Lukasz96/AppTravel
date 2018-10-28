@@ -70,8 +70,14 @@ public class NoExistingPacklistChioceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(NoExistingPacklistChioceActivity.this, PackListActivity.class);
                 intent.putExtra("travelId",travelId);
-                long packListId=mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
-                        new ListaDoSpakowania(0,podroz.getNazwa(),podroz.getId()));
+                long packListId;
+                if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId)==null) {
+                    packListId = mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
+                            new ListaDoSpakowania(0, podroz.getNazwa(), podroz.getId()));
+                }
+                else {
+                    packListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
+                }
                 intent.putExtra("packListId",packListId);
                 finish();
                 startActivity(intent);
