@@ -39,26 +39,14 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
 
-        ////////////// USTAWIANIE TŁA
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            Display display = getWindowManager().getDefaultDisplay();
-            ConstraintLayout constraintLayout= findViewById(R.id.mainActivity);
-            int backgroundImageId=R.drawable.main_menu_background_landscape;
-            BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(getApplicationContext());
-            Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
-                    600,400);
-            constraintLayout.setBackground(backgroundImage);
+        ConstraintLayout constraintLayout= findViewById(R.id.mainActivity);
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            constraintLayout.setBackgroundResource(R.drawable.main_menu_background);
         }
         else {
-            Display display = getWindowManager().getDefaultDisplay();
-            ConstraintLayout constraintLayout = findViewById(R.id.mainActivity);
-            int backgroundImageId = R.drawable.main_menu_background;
-            BackgroundImageCalc backgroundImageCalc = new BackgroundImageCalc(getApplicationContext());
-            Drawable backgroundImage = backgroundImageCalc.getCalculatedBackroundImage(display, backgroundImageId,
-                    400, 600);
-            constraintLayout.setBackground(backgroundImage);
+            constraintLayout.setBackgroundResource(R.drawable.main_menu_background_landscape);
         }
-        ///////////////////////////////
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

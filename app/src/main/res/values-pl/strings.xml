@@ -73,5 +73,6 @@
     <string name="choosepacklisttocopylabel">Wybór listy do skopiowania</string>
     <string name="shoppinglistlabel">Lista zakupów</string>
     <string name="pricelabel">Cena:</string>
+    <string name="pricetextviewlabel">Cena</string>
 
 </resources>

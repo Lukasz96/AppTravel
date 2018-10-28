@@ -45,26 +45,14 @@ public class NoExistingPacklistChioceActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.createingnewpacklistlabel);
 
-        ////////////// USTAWIANIE TŁA
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            Display display = getWindowManager().getDefaultDisplay();
-            ConstraintLayout constraintLayout= findViewById(R.id.noexistingpacklist);
-            int backgroundImageId=R.drawable.main_menu_background_landscape;
-            BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(this.getApplicationContext());
-            Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
-                    600,400);
-            constraintLayout.setBackground(backgroundImage);
+        ConstraintLayout constraintLayout= findViewById(R.id.noexistingpacklist);
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            constraintLayout.setBackgroundResource(R.drawable.main_menu_background);
         }
         else {
-            Display display = getWindowManager().getDefaultDisplay();
-            ConstraintLayout constraintLayout = findViewById(R.id.noexistingpacklist);
-            int backgroundImageId = R.drawable.main_menu_background;
-            BackgroundImageCalc backgroundImageCalc = new BackgroundImageCalc(this.getApplicationContext());
-            Drawable backgroundImage = backgroundImageCalc.getCalculatedBackroundImage(display, backgroundImageId,
-                    400, 600);
-            constraintLayout.setBackground(backgroundImage);
+            constraintLayout.setBackgroundResource(R.drawable.main_menu_background_landscape);
         }
-        ///////////////////////////////
 
         newListButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -62,27 +62,14 @@ public class TravelMainMenuActivity extends AppCompatActivity {
         expensesButton=findViewById(R.id.button10);
         notesButton=findViewById(R.id.button8);
         travelStatsButton=findViewById(R.id.button9);
+        ConstraintLayout constraintLayout= findViewById(R.id.travelmainmenuactivity);
 
-        ////////////// USTAWIANIE TŁA
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-            Display display = getWindowManager().getDefaultDisplay();
-            ConstraintLayout constraintLayout= findViewById(R.id.travelmainmenuactivity);
-            int backgroundImageId=R.drawable.main_menu_background_landscape;
-            BackgroundImageCalc backgroundImageCalc=new BackgroundImageCalc(this.getApplicationContext());
-            Drawable backgroundImage=backgroundImageCalc.getCalculatedBackroundImage(display,backgroundImageId,
-                    600,400);
-            constraintLayout.setBackground(backgroundImage);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            constraintLayout.setBackgroundResource(R.drawable.main_menu_background);
         }
         else {
-            Display display = getWindowManager().getDefaultDisplay();
-            ConstraintLayout constraintLayout = findViewById(R.id.travelmainmenuactivity);
-            int backgroundImageId = R.drawable.main_menu_background;
-            BackgroundImageCalc backgroundImageCalc = new BackgroundImageCalc(this.getApplicationContext());
-            Drawable backgroundImage = backgroundImageCalc.getCalculatedBackroundImage(display, backgroundImageId,
-                    400, 600);
-            constraintLayout.setBackground(backgroundImage);
+            constraintLayout.setBackgroundResource(R.drawable.main_menu_background_landscape);
         }
-        ///////////////////////////////
 
         toPackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -167,17 +154,15 @@ public class TravelMainMenuActivity extends AppCompatActivity {
     }
 
     public boolean areOnlyShoppingItemOnList(long podrozId){
-        boolean areOnlyShopping=true;
+        boolean areOnlyShopping=false;
         ListaDoSpakowania listaDoSpakowania=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozId);
         long IdListyDoSpakowania=listaDoSpakowania.getId();
-        List<ElementListyDoSpakowania> listaElementow = mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania);
+
         if(listaDoSpakowania==null) return false;
-        if (mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty()) return false;
-        else {
-            for(ElementListyDoSpakowania elementListyDoSpakowania:listaElementow){
-                if(elementListyDoSpakowania.isCzyDoSpakowania()) areOnlyShopping=false;
-            }
-        }
+        if(mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty()) return false;
+        if (!mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty() &&
+                mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(IdListyDoSpakowania, true).isEmpty()) return true;
+
         return areOnlyShopping;
     }
 }

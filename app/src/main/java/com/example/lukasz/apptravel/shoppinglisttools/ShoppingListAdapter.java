@@ -78,10 +78,9 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
 
 
 
-        if(currentEleement.isCzyKupione()){
+        if(mDb.elementListyDoSpakowaniaDao().getElementListyDoSpakowaniaById(currentEleement.getId()).isCzyKupione()){
             checkboxItem.setChecked(true);
             checkboxItem.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            //  parent.getChildAt(position).setBackgroundColor(Color.rgb(157,153,152));
         }
 
         menuItem.setOnClickListener(new View.OnClickListener() {

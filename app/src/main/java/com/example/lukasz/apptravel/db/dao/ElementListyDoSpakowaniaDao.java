@@ -19,9 +19,11 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT * FROM elementlistydospakowania")
     List<ElementListyDoSpakowania> getAllElementyListyDoSpakowania();
 
-    @Query("SELECT elementlistydospakowania.id, listaDoSpakowaniaId, elementlistydospakowania.nazwa,czyDoSpakowania, czySpakowane, czyPrzekazanoDoZakupu, ilosc, cena, czyKupione, idKategorii FROM elementlistydospakowania INNER JOIN listadospakowania ON listaDoSpakowania.id=listaDoSpakowaniaId " +
-            "WHERE listaDoSpakowania.id=:idListy")
+    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:idListy")
     List<ElementListyDoSpakowania> getElementyDoSpakowaniaZDanejListy(long idListy);
+
+    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId AND czyDoSpakowania=:czyDoSpakowania")
+    List<ElementListyDoSpakowania> getElementyZDanejListyCzyDoSpakowania(long listaId, boolean czyDoSpakowania);
 
     @Query("SELECT elementlistydospakowania.nazwa,ilosc,cena,czyKupione,kategoria.nazwaKategorii FROM elementlistydospakowania" +
             " INNER JOIN kategoria ON kategoria.id=idKategorii" +
