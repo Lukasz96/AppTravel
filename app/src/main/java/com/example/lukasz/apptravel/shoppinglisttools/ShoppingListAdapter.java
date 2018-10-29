@@ -128,13 +128,20 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
 
             if(elementListyDoSpakowania.getCena()==0 &&isChecked){
                 buttonView.setChecked(false);
-
-
+                mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), false);
                 Toast.makeText(context,R.string.nopricetobouy, Toast.LENGTH_LONG).show();
             }
             else if(elementListyDoSpakowania.getCena()>0 && isChecked) {
                 mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), isChecked);
                 buttonView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+            else if(elementListyDoSpakowania.getCena()==0 && !isChecked){
+                buttonView.setPaintFlags(buttonView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), isChecked);
+            }
+            else if(elementListyDoSpakowania.getCena()>0 && !isChecked){
+                buttonView.setPaintFlags(buttonView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), isChecked);
             }
             else {
                 buttonView.setPaintFlags(buttonView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);

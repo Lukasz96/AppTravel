@@ -143,12 +143,6 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
             priceInputLayout.setError(getString(R.string.badpriceformat));
             checkIfEnableButton();
         }
-        else if(!s.toString().isEmpty()){
-            if(Double.parseDouble(s.toString())<=0){
-                priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
-                checkIfEnableButton();
-            }
-        }
 
 
         else if(s.toString().contains(".")) {
@@ -158,11 +152,22 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
                 priceInputLayout.setError(getString(R.string.decimalplaceserror));
                 checkIfEnableButton();
             }
+
+            else if(Double.parseDouble(s.toString())<=0){
+                priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
+                checkIfEnableButton();
+            }
+
             else{
                 priceInputLayout.setError(null);
                 checkIfEnableButton();
             }
         }
+        else if(!s.toString().isEmpty() && Double.parseDouble(s.toString())<=0){
+            priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
+            checkIfEnableButton();
+        }
+
         else {
             priceInputLayout.setError(null);
             checkIfEnableButton();
