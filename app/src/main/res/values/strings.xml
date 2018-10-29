@@ -80,4 +80,5 @@
     <string name="pricemorethanzeroerror">Price must be higher than 0</string>
     <string name="addshopitemlabel">New item</string>
     <string name="budgethigherzerooerror">Budget must be higher than 0</string>
+    <string name="nopricetobouy">You have to edit item and add price to mark it as bought</string>
 </resources>

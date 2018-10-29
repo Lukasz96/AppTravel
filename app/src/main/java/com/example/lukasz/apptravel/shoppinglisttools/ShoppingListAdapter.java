@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.activities.EditPackListItemActivity;
@@ -123,10 +124,22 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
         {
             int position = (int)buttonView.getTag();
             ElementListyDoSpakowania elementListyDoSpakowania=getItem(position);
-            mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), isChecked);
 
-            if(isChecked)buttonView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-            else buttonView.setPaintFlags(buttonView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+
+            if(elementListyDoSpakowania.getCena()==0 &&isChecked){
+                buttonView.setChecked(false);
+
+
+                Toast.makeText(context,R.string.nopricetobouy, Toast.LENGTH_LONG).show();
+            }
+            else if(elementListyDoSpakowania.getCena()>0 && isChecked) {
+                mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), isChecked);
+                buttonView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            }
+            else {
+                buttonView.setPaintFlags(buttonView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), isChecked);
+            }
         }
     };
 

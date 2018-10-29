@@ -67,4 +67,7 @@ public interface ElementListyDoSpakowaniaDao {
             "WHERE listaDoSpakowaniaId=:listaId")
     void setCzyDoSpakowaniaForWholeListByListalId(long listaId, boolean czyDoSpakowania);
 
+    @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, ilosc=:ilosc, cena=:cena WHERE id=:id")
+    void updateElementListyDoZakupuById(long id, String nazwa, int ilosc, double cena );
+
 }

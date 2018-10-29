@@ -129,9 +129,11 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
             priceInputLayout.setError(getString(R.string.badpriceformat));
             checkIfEnableButton();
         }
-        else if(Double.parseDouble(s.toString())<=0){
-            priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
-            checkIfEnableButton();
+        else if(!s.toString().isEmpty()){
+            if(Double.parseDouble(s.toString())<=0){
+                priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
+                checkIfEnableButton();
+            }
         }
 
         else if(s.toString().contains(".")) {
