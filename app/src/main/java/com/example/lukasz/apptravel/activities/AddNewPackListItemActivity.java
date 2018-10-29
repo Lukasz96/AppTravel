@@ -105,7 +105,7 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mDb= AppDatabase.getInstance(getApplicationContext());
-                String packItemName=nameInput.getText().toString();
+                String packItemName=nameInput.getText().toString().trim();
                 double dquantity = horizontalCounter.getCurrentValue();
                 int quantity= (int)dquantity;
                 long categoryId=mDb.kategoriaDao().getIdKategoriiOdNazwy(kategoriaSpinner.getSelectedItem().toString());
@@ -139,7 +139,7 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
     }
 
     private void validateEditText(Editable s) {
-        if (TextUtils.isEmpty(s)) {
+        if (TextUtils.isEmpty(s) || s.toString().trim().equals("")) {
             itemNameLayout.setError(getString(R.string.nonameitemtopackerror));
             checkIfEnableButton();
         }

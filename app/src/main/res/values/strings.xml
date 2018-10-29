@@ -79,4 +79,5 @@
     <string name="noshopitemerror">Please type item name</string>
     <string name="pricemorethanzeroerror">Price must be higher than 0</string>
     <string name="addshopitemlabel">New item</string>
+    <string name="budgethigherzerooerror">Budget must be higher than 0</string>
 </resources>

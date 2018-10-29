@@ -125,6 +125,7 @@
                     android:text="@string/pricetextviewlabel"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
+                    android:maxLines="3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.055"
                     app:layout_constraintStart_toStartOf="parent"

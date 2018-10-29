@@ -157,7 +157,7 @@ public class UpdateTravelActivity extends AppCompatActivity {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mDb= AppDatabase.getInstance(getApplicationContext());
-                String travelName=editName.getText().toString();
+                String travelName=editName.getText().toString().trim();
                 Date date1 = null;
                 Date date2 = null;
                 try {
@@ -230,7 +230,7 @@ public class UpdateTravelActivity extends AppCompatActivity {
     }
 
     private void validateEditText(Editable s) {
-        if (TextUtils.isEmpty(s)) {
+        if (TextUtils.isEmpty(s) || s.toString().trim().equals("")) {
             nameTravel.setError(getString(R.string.nonameerror));
             checkIfEnableButton();
         }
@@ -355,6 +355,10 @@ public class UpdateTravelActivity extends AppCompatActivity {
         }
         else if (".".equals(s.toString())){
             budgetLauout.setError(getString(R.string.nobudgeterror));
+            checkIfEnableButton();
+        }
+        else if(Double.parseDouble(s.toString())<=0){
+            budgetLauout.setError(getString(R.string.budgethigherzerooerror));
             checkIfEnableButton();
         }
         else if(s.toString().contains(".")) {

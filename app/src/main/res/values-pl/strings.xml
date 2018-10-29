@@ -78,5 +78,6 @@
     <string name="noshopitemerror">Proszę podać nazwę rzeczy</string>
     <string name="pricemorethanzeroerror">Cena musi być wyższa niż 0</string>
     <string name="addshopitemlabel">Nowa rzecz</string>
+    <string name="budgethigherzerooerror">Budżet mus być wyższy od 0</string>
 
 </resources>

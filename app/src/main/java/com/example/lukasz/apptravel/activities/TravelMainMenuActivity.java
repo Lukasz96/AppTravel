@@ -73,6 +73,9 @@ public class TravelMainMenuActivity extends AppCompatActivity {
 
         toPackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+          //      System.out.println("-------------Czy jest lista do spakowania: "+mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podroz.getId()));
+        //        System.out.println("-------------Czy są w niej tylko zakupy: "+areOnlyShoppingItemOnList(podroz.getId()));
+
                 if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podroz.getId())==null || areOnlyShoppingItemOnList(podroz.getId())){
                     boolean areExistingPacklists;
 
@@ -157,9 +160,11 @@ public class TravelMainMenuActivity extends AppCompatActivity {
         boolean areOnlyShopping=false;
         ListaDoSpakowania listaDoSpakowania=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozId);
         long IdListyDoSpakowania=listaDoSpakowania.getId();
-
+   //     System.out.println("---------czy lista jest null   "+listaDoSpakowania.toString());
         if(listaDoSpakowania==null) return false;
+    //    System.out.println("-------- czy lista jest pusta  "+mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty());
         if(mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty()) return false;
+     //   System.out.println("-------- czy w liscie sa rzeczy do spakowania: "+mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(IdListyDoSpakowania, true).isEmpty());
         if (!mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty() &&
                 mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(IdListyDoSpakowania, true).isEmpty()) return true;
 

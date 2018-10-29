@@ -124,7 +124,8 @@ public class PackListActivity extends AppCompatActivity {
                     .setPositiveButton(getString(R.string.yeslabel), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int whichButton) {
-                            mDb.listaDoSpakowaniaDao().deleteListaDoSpakowaniaByTravelId(travelId);
+
+                            mDb.elementListyDoSpakowaniaDao().setCzyDoSpakowaniaForWholeListByListalId(packListId, false);
                             onBackPressed();
                             Toast.makeText(PackListActivity.this, getString(R.string.deletedinfo), Toast.LENGTH_LONG).show();
                         }})

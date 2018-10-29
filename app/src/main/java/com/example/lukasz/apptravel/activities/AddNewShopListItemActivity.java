@@ -107,7 +107,7 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
                 else price=Double.parseDouble(priceInput.getText().toString());
 
                 mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(
-                        new ElementListyDoSpakowania(0,listToPackId,nameInput.getText().toString(),false,false,
+                        new ElementListyDoSpakowania(0,listToPackId,nameInput.getText().toString().trim(),false,false,
                                 true,quantity,price,false,1));
 
                 Intent intent=new Intent(AddNewShopListItemActivity.this, ShoppingListActivity.class);
@@ -125,14 +125,15 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
             priceInputLayout.setError(getString(R.string.maxninenumbers));
             checkIfEnableButton();
         }
-        if(Double.parseDouble(s.toString())<0){
-            priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
-            checkIfEnableButton();
-        }
         else if (".".equals(s.toString())){
             priceInputLayout.setError(getString(R.string.badpriceformat));
             checkIfEnableButton();
         }
+        else if(Double.parseDouble(s.toString())<=0){
+            priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
+            checkIfEnableButton();
+        }
+
         else if(s.toString().contains(".")) {
             int integerPlaces = s.toString().indexOf('.');
             int decimalPlaces = s.toString().length() - integerPlaces - 1;
@@ -152,7 +153,7 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
     }
 
     private void validateNameInput(Editable s) {
-        if (TextUtils.isEmpty(s)) {
+        if (TextUtils.isEmpty(s) || s.toString().trim().equals("")) {
             nameInputLayout.setError(getString(R.string.noshopitemerror));
             checkIfEnableButton();
         }
