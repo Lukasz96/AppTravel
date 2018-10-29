@@ -32,18 +32,14 @@ public class Przejazd {
     @NonNull
     @TypeConverters({DateTypeConverter.class})
     private Date dataOd;
-    @NonNull
-    @TypeConverters({DateTypeConverter.class})
-    private Date dataDo;
     private Double koszt;
 
-    public Przejazd(long id, long podrozId, long kategoriaPrzejazduId, @NonNull String nazwa, @NonNull Date dataOd, @NonNull Date dataDo, Double koszt) {
+    public Przejazd(long id, long podrozId, long kategoriaPrzejazduId, @NonNull String nazwa, @NonNull Date dataOd,  Double koszt) {
         this.id = id;
         this.podrozId = podrozId;
         this.kategoriaPrzejazduId = kategoriaPrzejazduId;
         this.nazwa = nazwa;
         this.dataOd = dataOd;
-        this.dataDo = dataDo;
         this.koszt = koszt;
     }
 
@@ -89,14 +85,7 @@ public class Przejazd {
         this.dataOd = dataOd;
     }
 
-    @NonNull
-    public Date getDataDo() {
-        return dataDo;
-    }
 
-    public void setDataDo(@NonNull Date dataDo) {
-        this.dataDo = dataDo;
-    }
 
     public Double getKoszt() {
         return koszt;

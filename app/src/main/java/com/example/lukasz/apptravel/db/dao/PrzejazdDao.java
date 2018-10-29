@@ -17,4 +17,7 @@ public interface PrzejazdDao {
     @Query("SELECT * FROM przejazd")
     List<Przejazd> getAllPrzejazdy();
 
+    @Query("SELECT * FROM przejazd WHERE podrozId=:travelId ORDER BY dataOd")
+    List<Przejazd> getPrzejazdyDlaPodrozy(long travelId);
+
 }

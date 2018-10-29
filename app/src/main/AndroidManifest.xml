@@ -33,7 +33,8 @@
             android:name=".activities.ShoppingListActivity"
             android:label="@string/title_activity_shopping_list" />
         <activity android:name=".activities.EditShoppingListItemActivity" />
-        <activity android:name=".activities.AddNewShopListItemActivity"></activity>
+        <activity android:name=".activities.AddNewShopListItemActivity" />
+        <activity android:name=".activities.PrzejazdyActivity"></activity>
     </application>
 
 </manifest>

@@ -80,5 +80,6 @@
     <string name="addshopitemlabel">Nowa rzecz</string>
     <string name="budgethigherzerooerror">Budżet mus być wyższy od 0</string>
     <string name="nopricetobouy">Musisz edytować rzecz i podać cenę by oznaczyć jako kupione</string>
+    <string name="ridesactivitylabel">Przejazdy</string>
 
 </resources>
