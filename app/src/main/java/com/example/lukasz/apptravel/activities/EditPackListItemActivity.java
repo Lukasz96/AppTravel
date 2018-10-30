@@ -62,7 +62,7 @@ public class EditPackListItemActivity extends AppCompatActivity {
 
         listaDoSpakowaniaId=elementListyDoSpakowania.getListaDoSpakowaniaId();
         nameInput.setText(elementListyDoSpakowania.getNazwa());
-        int ilosc=elementListyDoSpakowania.getIlosc();
+        int ilosc=elementListyDoSpakowania.getIloscDoSpakowania();
         double iloscDouble=(double)ilosc;
         horizontalCounter.setCurrentValue(iloscDouble);
         horizontalCounter.setDisplayingInteger(true);

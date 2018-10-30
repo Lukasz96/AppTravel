@@ -62,7 +62,7 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
         travelId=mDb.listaDoSpakowaniaDao().getPodrozIdFromListaDoSpakowaniaId(listaDoSpakowaniaId);
 
         nameInput.setText(elementListyDoSpakowania.getNazwa());
-        int ilosc=elementListyDoSpakowania.getIlosc();
+        int ilosc=elementListyDoSpakowania.getIloscDoZakupu();
         double iloscDouble=(double)ilosc;
         quantityInput.setCurrentValue(iloscDouble);
         quantityInput.setDisplayingInteger(true);

@@ -108,7 +108,7 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
 
                 mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(
                         new ElementListyDoSpakowania(0,listToPackId,nameInput.getText().toString().trim(),false,false,
-                                true,quantity,price,false,1));
+                                true,quantity,quantity,price,false,1));
 
                 Intent intent=new Intent(AddNewShopListItemActivity.this, ShoppingListActivity.class);
                 intent.putExtra("travelId",travelId);

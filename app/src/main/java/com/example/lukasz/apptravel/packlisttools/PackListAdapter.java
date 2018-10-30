@@ -61,14 +61,15 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
          boolean czySpakowane=getItem(position).isCzySpakowane();
          boolean czyDoSpakowania=getItem(position).isCzyDoSpakowania();
          boolean czyPrzekazanoDoZakupu=getItem(position).isCzyPrzekazanoDoZakupu();
-         int ilosc=getItem(position).getIlosc();
+         int iloscDoSpakowania=getItem(position).getIloscDoSpakowania();
+        int iloscDoZakupu=getItem(position).getIloscDoZakupu();
          double cena=getItem(position).getCena();
          boolean czyKupione=getItem(position).isCzyKupione();
          long idKategorii=getItem(position).getIdKategorii();
 
 
          ElementListyDoSpakowania elementListyDoSpakowania=new ElementListyDoSpakowania(id,listaDoSpakowaniaId,
-                 nazwa,czyDoSpakowania,czySpakowane,czyPrzekazanoDoZakupu,ilosc,cena,czyKupione,idKategorii);
+                 nazwa,czyDoSpakowania,czySpakowane,czyPrzekazanoDoZakupu,iloscDoSpakowania,iloscDoZakupu,cena,czyKupione,idKategorii);
 
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(mResource,parent,false);
@@ -84,7 +85,7 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
         menuItem=convertView.findViewById(R.id.packListItemtextViewOptions);
         menuItem.setTag(position);
         checkBox.setText(elementListyDoSpakowania.getNazwa());
-        circleCounter.setText(String.valueOf(elementListyDoSpakowania.getIlosc()));
+        circleCounter.setText(String.valueOf(elementListyDoSpakowania.getIloscDoSpakowania()));
 
         if(elementListyDoSpakowania.isCzySpakowane()){
             checkBox.setChecked(true);

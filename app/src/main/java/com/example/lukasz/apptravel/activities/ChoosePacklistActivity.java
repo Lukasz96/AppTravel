@@ -80,11 +80,12 @@ public class ChoosePacklistActivity extends AppCompatActivity {
            //     System.out.println("ILE SKOPPIOWAC ELEMENTOW ---------- "+elementListyDoSpakowaniaDoKopiowania.size());
                 for(ElementListyDoSpakowania element:elementListyDoSpakowaniaDoKopiowania){
                     String nazwa=element.getNazwa();
-                    int ilosc=element.getIlosc();
+                    int iloscDoSpakowania=element.getIloscDoSpakowania();
+
                     long idKategorii=element.getIdKategorii();
 
                     mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(
-                            new ElementListyDoSpakowania(0, newpackListId, nazwa,true,false,false, ilosc,
+                            new ElementListyDoSpakowania(0, newpackListId, nazwa,true,false,false, iloscDoSpakowania,iloscDoSpakowania,
                                     0, false, idKategorii));
                 }
                 Intent intent = new Intent(ChoosePacklistActivity.this, PackListActivity.class);
