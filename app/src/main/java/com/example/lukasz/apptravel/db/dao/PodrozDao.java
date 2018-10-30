@@ -42,7 +42,7 @@ public interface PodrozDao {
     @Query("SELECT dataOd FROM podroz WHERE id=:id")
     Date getDateOdByTravelId(long id);
 
-    @Query("SELECT dataOd FROM podroz WHERE id=:id")
+    @Query("SELECT dataDo FROM podroz WHERE id=:id")
     Date getDateDoByTravelId(long id);
 
     @Query("UPDATE Podroz SET nazwa=:nowaNazwa, dataOd=:from, dataDo=:to, budzet=:budget WHERE id=:id")

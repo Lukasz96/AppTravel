@@ -86,4 +86,12 @@
     <string name="providepricemessage">You have to add items price in order to mark it as bought.</string>
     <string name="submitpricelabel">Submit</string>
     <string name="cancellabel">Cancel</string>
+    <string name="addnewrideactivitylabel">New ride</string>
+    <string name="timehint">Time (HH MM, hours 00-23)</string>
+    <string name="maxsixtylettererror">Max 60 letters</string>
+    <string name="noridenameerror">Please type ride name</string>
+    <string name="noprzejazddateerror">Please give date of ride</string>
+    <string name="ridenotbetweentraveldateerror">The date must be within travel dates</string>
+    <string name="notimeerror">Please type time of ride</string>
+    <string name="badtimeformaterror">Bad time format</string>
 </resources>

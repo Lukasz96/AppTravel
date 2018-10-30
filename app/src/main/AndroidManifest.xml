@@ -34,7 +34,10 @@
             android:label="@string/title_activity_shopping_list" />
         <activity android:name=".activities.EditShoppingListItemActivity" />
         <activity android:name=".activities.AddNewShopListItemActivity" />
-        <activity android:name=".activities.PrzejazdyActivity"></activity>
+        <activity android:name=".activities.PrzejazdyActivity" />
+        <activity android:name=".activities.AddNewPrzejazdActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.EditPrzejazdItemActivity"></activity>
     </application>
 
 </manifest>

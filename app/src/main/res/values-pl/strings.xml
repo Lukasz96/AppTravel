@@ -85,5 +85,13 @@
     <string name="providepricemessage">Musisz podać cenę rzeczy aby oznaczyć jako kupione.</string>
     <string name="submitpricelabel">Zatwierdź</string>
     <string name="cancellabel">Anuluj</string>
+    <string name="addnewrideactivitylabel">Nowy przejazd</string>
+    <string name="timehint">Godzina (GG MM, godziny 00-23)</string>
+    <string name="maxsixtylettererror">Maksymalnie 60 liter</string>
+    <string name="noridenameerror">Proszę wprowadzić nazwę przejazdu</string>
+    <string name="noprzejazddateerror">Prosze podać datę przejazdu</string>
+    <string name="ridenotbetweentraveldateerror">Data przejazdu musi się zawierać w datach podróży</string>
+    <string name="notimeerror">Prosze podać czas rozpoczęcia przejazdu</string>
+    <string name="badtimeformaterror">Zły format godziny</string>
 
 </resources>

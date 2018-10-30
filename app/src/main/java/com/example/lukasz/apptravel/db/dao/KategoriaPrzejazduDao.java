@@ -20,4 +20,10 @@ public interface KategoriaPrzejazduDao {
 
     @Insert
     void insertKategoriePrzejazdu(KategoriaPrzejazdu[]kategoriePrzejazdu);
+
+    @Query("SELECT nazwaKategorii FROM kategoriaprzejazdu")
+    List<String> getAllNazwyKategoriiPrzejazdu();
+
+    @Query("SELECT id FROM kategoriaprzejazdu WHERE nazwaKategorii=:nazwaKategorii")
+    long getIdKategoriiPrzejazduOdNazwy(String nazwaKategorii);
 }

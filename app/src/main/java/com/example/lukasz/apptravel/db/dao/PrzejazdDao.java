@@ -20,4 +20,7 @@ public interface PrzejazdDao {
     @Query("SELECT * FROM przejazd WHERE podrozId=:travelId ORDER BY dataOd")
     List<Przejazd> getPrzejazdyDlaPodrozy(long travelId);
 
+    @Query("DELETE FROM przejazd WHERE id=:id")
+    void deletePrzejazdById(long id);
+
 }
