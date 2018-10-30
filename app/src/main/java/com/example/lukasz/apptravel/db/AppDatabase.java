@@ -51,7 +51,7 @@ public abstract class AppDatabase extends RoomDatabase {
     abstract public WydatekDao wydatekDao();
     abstract public KategoriaWydatkuDao kategoriaWydatkuDao();
 
-    private static final List<String> KATEGORIALIST = Arrays.asList("Odzież","Higiena","Dokumenty","Inne");
+
 
     public static AppDatabase getInstance(Context context) {
         if (INSTANCE == null) {

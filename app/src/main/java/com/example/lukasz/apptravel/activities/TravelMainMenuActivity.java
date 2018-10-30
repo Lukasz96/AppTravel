@@ -171,9 +171,9 @@ public class TravelMainMenuActivity extends AppCompatActivity {
    //     System.out.println("---------czy lista jest null   "+listaDoSpakowania.toString());
         if(listaDoSpakowania==null) return false;
     //    System.out.println("-------- czy lista jest pusta  "+mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty());
-        if(mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty()) return false;
+        if(mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty()) return true;
      //   System.out.println("-------- czy w liscie sa rzeczy do spakowania: "+mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(IdListyDoSpakowania, true).isEmpty());
-        if (!mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty() &&
+        if(!mDb.elementListyDoSpakowaniaDao().getElementyDoSpakowaniaZDanejListy(IdListyDoSpakowania).isEmpty() &&
                 mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(IdListyDoSpakowania, true).isEmpty()) return true;
 
         return areOnlyShopping;
