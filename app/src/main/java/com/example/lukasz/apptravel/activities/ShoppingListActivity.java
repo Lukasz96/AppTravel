@@ -54,7 +54,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         listView=findViewById(R.id.shoppingList);
         fab=findViewById(R.id.addshopItem);
 
-        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(getApplicationContext(),R.layout.shoppinglistitem,doKupieniaList);
+        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(ShoppingListActivity.this,R.layout.shoppinglistitem,doKupieniaList);
         listView.setAdapter(shoppingListAdapter);
 
         fab.setOnClickListener(new View.OnClickListener() {

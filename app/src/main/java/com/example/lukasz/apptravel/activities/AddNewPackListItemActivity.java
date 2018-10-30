@@ -114,7 +114,7 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
 
                 ElementListyDoSpakowania elementListyDoSpakowania =
                         new ElementListyDoSpakowania(0,packListId,packItemName,true, false,
-                                isToBuy,quantity,0,false,categoryId);
+                                isToBuy,quantity,quantity,0,false,categoryId);
 
                 mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(elementListyDoSpakowania);
                 Intent intent= new Intent(AddNewPackListItemActivity.this, PackListActivity.class);

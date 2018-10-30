@@ -26,7 +26,8 @@ public class ElementListyDoSpakowania {
     private boolean czySpakowane;
     @NonNull
     private boolean czyPrzekazanoDoZakupu;
-    private int ilosc;
+    private int iloscDoSpakowania;
+    private int iloscDoZakupu;
     private double cena;
     private boolean czyKupione;
     private long idKategorii;
@@ -34,7 +35,8 @@ public class ElementListyDoSpakowania {
 
     public ElementListyDoSpakowania(long id, long listaDoSpakowaniaId, @NonNull String nazwa, boolean czyDoSpakowania,
                                     boolean czySpakowane,
-                                    @NonNull boolean czyPrzekazanoDoZakupu, int ilosc, double cena, boolean czyKupione,
+                                    @NonNull boolean czyPrzekazanoDoZakupu, int iloscDoSpakowania, int iloscDoZakupu,
+                                    double cena, boolean czyKupione,
                                     long idKategorii) {
         this.id = id;
         this.listaDoSpakowaniaId = listaDoSpakowaniaId;
@@ -42,7 +44,8 @@ public class ElementListyDoSpakowania {
         this.czyDoSpakowania=czyDoSpakowania;
         this.czySpakowane = czySpakowane;
         this.czyPrzekazanoDoZakupu = czyPrzekazanoDoZakupu;
-        this.ilosc = ilosc;
+        this.iloscDoSpakowania = iloscDoSpakowania;
+        this.iloscDoZakupu=iloscDoZakupu;
         this.cena = cena;
         this.czyKupione = czyKupione;
         this.idKategorii = idKategorii;
@@ -97,12 +100,20 @@ public class ElementListyDoSpakowania {
         this.czySpakowane = czySpakowane;
     }
 
-    public int getIlosc() {
-        return ilosc;
+    public int getIloscDoSpakowania() {
+        return iloscDoSpakowania;
     }
 
-    public void setIlosc(int ilosc) {
-        this.ilosc = ilosc;
+    public void setIloscDoSpakowania(int iloscDoSpakowania) {
+        this.iloscDoSpakowania = iloscDoSpakowania;
+    }
+
+    public int getIloscDoZakupu() {
+        return iloscDoZakupu;
+    }
+
+    public void setIloscDoZakupu(int iloscDoZakupu) {
+        this.iloscDoZakupu = iloscDoZakupu;
     }
 
     public long getIdKategorii() {

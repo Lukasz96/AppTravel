@@ -25,12 +25,7 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId AND czyDoSpakowania=:czyDoSpakowania")
     List<ElementListyDoSpakowania> getElementyZDanejListyCzyDoSpakowania(long listaId, boolean czyDoSpakowania);
 
-    @Query("SELECT elementlistydospakowania.nazwa,ilosc,cena,czyKupione,kategoria.nazwaKategorii FROM elementlistydospakowania" +
-            " INNER JOIN kategoria ON kategoria.id=idKategorii" +
-            " INNER JOIN listadospakowania ON listadospakowania.id=listaDoSpakowaniaId" +
-            " INNER JOIN podroz ON podroz.id=listadospakowania.podrozId" +
-            " WHERE podroz.id=:idPodrozy")
-    List<ElementDoZakupu> getElementyDoZakupuDlaPodrozy(long idPodrozy);
+
 
     @Query("UPDATE elementlistydospakowania SET czyspakowane=:czySpakowane WHERE id=:id")
     void updateCzySpakowanyElementById(long id, boolean czySpakowane);
@@ -44,7 +39,7 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT * FROM elementlistydospakowania WHERE id=:id")
     ElementListyDoSpakowania getElementListyDoSpakowaniaById(long id);
 
-    @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, ilosc=:ilosc, czyprzekazanodozakupu=:czykupic, idkategorii=:idkategorii WHERE id=:id")
+    @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, iloscDoSpakowania=:ilosc, czyprzekazanodozakupu=:czykupic, idkategorii=:idkategorii WHERE id=:id")
     void updateEditItemToPack(long id, String nazwa, int ilosc, boolean czykupic, long idkategorii);
 
     @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:iDlistyDoSpakowania AND czyPrzekazanoDoZakupu=:czyPrzekazanoDoZakupu")
@@ -67,7 +62,10 @@ public interface ElementListyDoSpakowaniaDao {
             "WHERE listaDoSpakowaniaId=:listaId")
     void setCzyDoSpakowaniaForWholeListByListalId(long listaId, boolean czyDoSpakowania);
 
-    @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, ilosc=:ilosc, cena=:cena WHERE id=:id")
+    @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, iloscDoZakupu=:ilosc, cena=:cena WHERE id=:id")
     void updateElementListyDoZakupuById(long id, String nazwa, int ilosc, double cena );
+
+    @Query("UPDATE elementlistydospakowania SET cena=:cena WHERE id=:id")
+    void updateCenaElementZakupuById(long id, double cena);
 
 }

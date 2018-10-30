@@ -73,12 +73,16 @@
     <string name="choosepacklisttocopylabel">Wybór listy do skopiowania</string>
     <string name="shoppinglistlabel">Lista zakupów</string>
     <string name="pricelabel">Cena:</string>
-    <string name="pricetextviewlabel">Cena (może być podana potem)</string>
+    <string name="pricetextviewlabel">Cena (może być podana póżniej)</string>
     <string name="badpriceformat">Zły format liczby</string>
     <string name="noshopitemerror">Proszę podać nazwę rzeczy</string>
     <string name="pricemorethanzeroerror">Cena musi być wyższa niż 0</string>
     <string name="addshopitemlabel">Nowa rzecz</string>
     <string name="budgethigherzerooerror">Budżet mus być wyższy od 0</string>
     <string name="nopricetobouy">Musisz edytować rzecz i podać cenę by oznaczyć jako kupione</string>
+    <string name="providepricelabel">Proszę podać cenę</string>
+    <string name="providepricemessage">Musisz podać cenę rzeczy aby oznaczyć jako kupione.</string>
+    <string name="submitpricelabel">Zatwierdź</string>
+    <string name="cancellabel">Anuluj</string>
 
 </resources>
