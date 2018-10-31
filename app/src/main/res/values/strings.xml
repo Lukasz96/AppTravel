@@ -94,4 +94,5 @@
     <string name="ridenotbetweentraveldateerror">The date must be within travel dates</string>
     <string name="notimeerror">Please type time of ride</string>
     <string name="badtimeformaterror">Bad time format</string>
+    <string name="editridelabel">Edit ride</string>
 </resources>

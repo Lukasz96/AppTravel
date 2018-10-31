@@ -93,5 +93,6 @@
     <string name="ridenotbetweentraveldateerror">Data przejazdu musi się zawierać w datach podróży</string>
     <string name="notimeerror">Prosze podać czas rozpoczęcia przejazdu</string>
     <string name="badtimeformaterror">Zły format godziny</string>
+    <string name="editridelabel">Edycja przejazdu</string>
 
 </resources>
