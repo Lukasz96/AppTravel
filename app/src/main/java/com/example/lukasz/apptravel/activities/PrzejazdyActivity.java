@@ -1,6 +1,7 @@
 package com.example.lukasz.apptravel.activities;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,10 @@ public class PrzejazdyActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private AppDatabase mDb;
     private ListView listView;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,11 @@ public class PrzejazdyActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+
+
 
 
 

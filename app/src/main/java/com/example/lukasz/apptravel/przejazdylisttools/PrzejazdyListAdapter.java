@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.activities.EditPrzejazdItemActivity;
 import com.example.lukasz.apptravel.activities.EditShoppingListItemActivity;
+import com.example.lukasz.apptravel.activities.PrzejazdyActivity;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.example.lukasz.apptravel.db.entities.Przejazd;
@@ -24,6 +25,7 @@ import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,10 @@ public class PrzejazdyListAdapter extends ArrayAdapter<Przejazd> {
     private static final int FIRSTITEM=1;
     private static final int MIDDLEITEM=2;
     private static final int LASTITEM=3;
+    private static final int ONLYONEITEMEMPTY=4;
+    private static final int FIRSTITEMEMPTY=5;
+    private static final int MIDDLEITEMEMPTY=6;
+    private static final int LASTITEMEMPTY=7;
 
     private Context context;
     private int mResource;
@@ -43,6 +49,7 @@ public class PrzejazdyListAdapter extends ArrayAdapter<Przejazd> {
     private TextView cenaPrzejazdu;
     private TextView menuPrzejazdu;
     private AppDatabase mDb=AppDatabase.getInstance(context);
+
 
     public PrzejazdyListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Przejazd> objects) {
         super(context, resource, objects);
@@ -65,10 +72,25 @@ public class PrzejazdyListAdapter extends ArrayAdapter<Przejazd> {
             else if (getItemViewType(position)==LASTITEM){
                 convertView=LayoutInflater.from(context).inflate(R.layout.przejazdlastitem,parent,false);
             }
-            else {
+            else if(getItemViewType(position)==MIDDLEITEM) {
                 convertView=LayoutInflater.from(context).inflate(R.layout.przejazdmiddleitem,parent,false);
             }
+            else if(getItemViewType(position)==MIDDLEITEMEMPTY) {
+                convertView=LayoutInflater.from(context).inflate(R.layout.przejazdmiddleitemempty,parent,false);
+            }
+            else if(getItemViewType(position)==FIRSTITEMEMPTY) {
+                convertView=LayoutInflater.from(context).inflate(R.layout.przejazdfirstitemempty,parent,false);
+            }
+            else if(getItemViewType(position)==LASTITEMEMPTY) {
+                convertView=LayoutInflater.from(context).inflate(R.layout.przejazdlastitemempty,parent,false);
+            }
+            else {
+                convertView=LayoutInflater.from(context).inflate(R.layout.przejazdonlyoneitemempty,parent,false);
+            }
         }
+
+
+
 
 
 
@@ -166,20 +188,32 @@ public class PrzejazdyListAdapter extends ArrayAdapter<Przejazd> {
 
     @Override
     public int getViewTypeCount() {
-        return 4;
+        return 8;
     }
 
     @Override
     public int getItemViewType(int position) {
 
-        if(lista.size()==1){
+        if(lista.size()==1 && lista.get(position).getDataOd().after(new Date())){
+            return ONLYONEITEMEMPTY;
+        }
+        else if(lista.size()==1){
             return ONLYONEITEM;
+        }
+        else if(lista.size()==2 && lista.get(position).getDataOd().after(new Date())){
+            if (position==0) return FIRSTITEMEMPTY;
+            else return LASTITEMEMPTY;
         }
         else if(lista.size()==2){
             if (position==0) return FIRSTITEM;
             else return LASTITEM;
         }
-        else {
+        else if(lista.get(position).getDataOd().after(new Date())){
+            if (position==0) return FIRSTITEMEMPTY;
+            else if (position==lista.size()-1) return LASTITEMEMPTY;
+            else return MIDDLEITEMEMPTY;
+        }
+        else{
             if (position==0) return FIRSTITEM;
             else if (position==lista.size()-1) return LASTITEM;
             else return MIDDLEITEM;
@@ -191,4 +225,5 @@ public class PrzejazdyListAdapter extends ArrayAdapter<Przejazd> {
         lista.addAll(newlist);
         notifyDataSetChanged();
     }
+
 }

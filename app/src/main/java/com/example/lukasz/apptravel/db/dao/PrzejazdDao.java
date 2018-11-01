@@ -30,4 +30,7 @@ public interface PrzejazdDao {
     @Query("UPDATE przejazd SET kategoriaPrzejazduId=:kategoriaId, nazwa=:nazwa, dataOd=:data, koszt=:koszt WHERE id=:id")
     void updatePrzejazd(long id, long kategoriaId, String nazwa, Date data, double koszt);
 
+    @Query("SELECT SUM (koszt) FROM przejazd WHERE podrozId=:travelId")
+    double getSumOfPrzejazdyByTravelId(long travelId);
+
 }
