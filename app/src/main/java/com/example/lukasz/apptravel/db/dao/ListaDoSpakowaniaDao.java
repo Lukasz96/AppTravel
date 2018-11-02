@@ -18,8 +18,13 @@ public interface ListaDoSpakowaniaDao {
     @Query("SELECT * FROM listadospakowania")
     List<ListaDoSpakowania> getAllListyDoSpakowania();
 
+    @Query("SELECT * FROM listadospakowania WHERE id <> :idlisty")
+    List<ListaDoSpakowania> getAllListyDoSpakowaniaExceptCurrent(long idlisty);
+
     @Query("SELECT * FROM listadospakowania INNER JOIN podroz ON listadospakowania.podrozId=podroz.id ORDER BY podroz.dataOd")
     List<ListaDoSpakowania> getAllListyDoSpakowaniaOrderedByDate();
+
+
 
     @Query("SELECT * FROM listadospakowania WHERE podrozId=:id")
     ListaDoSpakowania getListaDoSpakowaniaByTravelId(long id);

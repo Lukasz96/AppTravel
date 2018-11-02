@@ -24,6 +24,7 @@ import com.example.lukasz.apptravel.db.entities.Podroz;
 import com.example.lukasz.apptravel.imageCalc.BackgroundImageCalc;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -73,14 +74,24 @@ public class TravelMainMenuActivity extends AppCompatActivity {
 
         toPackButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-          //      System.out.println("-------------Czy jest lista do spakowania: "+mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podroz.getId()));
-        //        System.out.println("-------------Czy są w niej tylko zakupy: "+areOnlyShoppingItemOnList(podroz.getId()));
+
 
                 if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podroz.getId())==null || areOnlyShoppingItemOnList(podroz.getId())){
-                    boolean areExistingPacklists;
+                    boolean areExistingPacklists=false;
 
                     if(mDb.listaDoSpakowaniaDao().getAllListyDoSpakowania().isEmpty()) areExistingPacklists=false;
-                    else areExistingPacklists=true;
+                    else {
+
+                        for(ListaDoSpakowania listaDoSpakowania:mDb.listaDoSpakowaniaDao().getAllListyDoSpakowania()){
+
+                            if(!mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(listaDoSpakowania.getId(),true).isEmpty()){
+                                areExistingPacklists=true;
+                                break;
+                            }
+                            //else areExistingPacklists=false;
+                        }
+                    }
+                    //else  areExistingPacklists=true;
                     Intent intent=new Intent(TravelMainMenuActivity.this, NoExistingPacklistChioceActivity.class);
                     intent.putExtra("travelId",podroz.getId());
                     intent.putExtra("areExistingPacklists",areExistingPacklists);

@@ -23,6 +23,8 @@ import com.example.lukasz.apptravel.imageCalc.BackgroundImageCalc;
 import com.example.lukasz.apptravel.packlisttools.ListOfPacklistsAdapter;
 import com.example.lukasz.apptravel.packlisttools.PackListAdapter;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ChoosePacklistActivity extends AppCompatActivity {
@@ -48,10 +50,18 @@ public class ChoosePacklistActivity extends AppCompatActivity {
         mDb=AppDatabase.getInstance(getApplicationContext());
 
         List<ListaDoSpakowania> doSpakowaniaList=mDb.listaDoSpakowaniaDao().getAllListyDoSpakowaniaOrderedByDate();
+        List<ListaDoSpakowania> ostateczaList= new ArrayList<>();
+        for(ListaDoSpakowania listaDoSpakowania:doSpakowaniaList){
+
+            System.out.println(listaDoSpakowania.getNazwa());
+            if(!mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(listaDoSpakowania.getId(),true).isEmpty()){
+                ostateczaList.add(listaDoSpakowania);
+            }
+        }
 
         listView=findViewById(R.id.listOfListToPack);
 
-        listOfPacklistsAdapter = new ListOfPacklistsAdapter(getApplicationContext(),R.layout.listofpacklistsitemlayout,doSpakowaniaList);
+        listOfPacklistsAdapter = new ListOfPacklistsAdapter(getApplicationContext(),R.layout.listofpacklistsitemlayout,ostateczaList);
 
 
         listView.setAdapter(listOfPacklistsAdapter);
@@ -59,14 +69,14 @@ public class ChoosePacklistActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-              //  Toast.makeText(getApplicationContext(),"CLICKED - "+position,Toast.LENGTH_LONG).show();
-                podrozWybrana=mDb.podrozDao().getPodrozById(doSpakowaniaList.get(position).getPodrozId());
+
+                podrozWybrana=mDb.podrozDao().getPodrozById(ostateczaList.get(position).getPodrozId());
                 podrozObecna=mDb.podrozDao().getPodrozById(podrozIdObecna);
-          //      System.out.println("wybrana pozdroz ---------(ma byc 20) "+podrozWybrana.getId());
+
                 ListaDoSpakowania listaDoSpakowaniaDoSkopiowania=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozWybrana.getId());
-           //     System.out.println("lista do skopiowania id (ma byc 11) - "+listaDoSpakowaniaDoSkopiowania.getId());
+
                 List<ElementListyDoSpakowania> elementListyDoSpakowaniaDoKopiowania=mDb.elementListyDoSpakowaniaDao().
-                        getElementyDoSpakowaniaZDanejListy(listaDoSpakowaniaDoSkopiowania.getId());
+                        getElementyZDanejListyCzyDoSpakowania(listaDoSpakowaniaDoSkopiowania.getId(),true);
                 long newpackListId;
                 if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozIdObecna)==null) {
                     newpackListId = mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
@@ -75,9 +85,7 @@ public class ChoosePacklistActivity extends AppCompatActivity {
                 else {
                     newpackListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozIdObecna).getId();
                 }
-               // long newpackListId=mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
-                //        new ListaDoSpakowania(0,podrozObecna.getNazwa(),podrozObecna.getId()));
-           //     System.out.println("ILE SKOPPIOWAC ELEMENTOW ---------- "+elementListyDoSpakowaniaDoKopiowania.size());
+
                 for(ElementListyDoSpakowania element:elementListyDoSpakowaniaDoKopiowania){
                     String nazwa=element.getNazwa();
                     int iloscDoSpakowania=element.getIloscDoSpakowania();
