@@ -95,4 +95,7 @@
     <string name="notimeerror">Please type time of ride</string>
     <string name="badtimeformaterror">Bad time format</string>
     <string name="editridelabel">Edit ride</string>
+    <string name="addexpenselabel">Add expense</string>
+    <string name="nopriceerror">You have to give price</string>
+    <string name="priceobligatorylabel">Cost</string>
 </resources>

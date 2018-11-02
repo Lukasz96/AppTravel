@@ -35,9 +35,12 @@
         <activity android:name=".activities.EditShoppingListItemActivity" />
         <activity android:name=".activities.AddNewShopListItemActivity" />
         <activity android:name=".activities.PrzejazdyActivity" />
-        <activity android:name=".activities.AddNewPrzejazdActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.EditPrzejazdItemActivity"></activity>
+        <activity
+            android:name=".activities.AddNewPrzejazdActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.EditPrzejazdItemActivity" />
+        <activity android:name=".activities.WydatkiActivity" />
+        <activity android:name=".activities.AddWydatekActivity"></activity>
     </application>
 
 </manifest>

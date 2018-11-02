@@ -94,5 +94,8 @@
     <string name="notimeerror">Prosze podać czas rozpoczęcia przejazdu</string>
     <string name="badtimeformaterror">Zły format godziny</string>
     <string name="editridelabel">Edycja przejazdu</string>
+    <string name="addexpenselabel">Dodawanie wydatku</string>
+    <string name="nopriceerror">Proszę podać cenę</string>
+    <string name="priceobligatorylabel">Koszt</string>
 
 </resources>
