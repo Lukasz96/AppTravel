@@ -38,7 +38,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="0dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="60"
+                app:counterMaxLength="40"
                 app:errorEnabled="true"
                 app:errorTextAppearance="@style/error_appearance"
                 app:layout_constraintEnd_toEndOf="parent"

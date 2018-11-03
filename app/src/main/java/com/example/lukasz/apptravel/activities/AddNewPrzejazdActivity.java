@@ -239,7 +239,7 @@ public class AddNewPrzejazdActivity extends AppCompatActivity {
             checkIfEnableButton();
         }
 
-        else if(s.toString().length()>60){
+        else if(s.toString().length()>40){
             nameLayout.setError(getString(R.string.maxsixtylettererror));
             checkIfEnableButton();
         }

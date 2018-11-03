@@ -87,7 +87,7 @@
     <string name="cancellabel">Anuluj</string>
     <string name="addnewrideactivitylabel">Nowy przejazd</string>
     <string name="timehint">Godzina (GG MM, godziny 00-23)</string>
-    <string name="maxsixtylettererror">Maksymalnie 60 liter</string>
+    <string name="maxsixtylettererror">Maksymalnie 40 liter</string>
     <string name="noridenameerror">Proszę wprowadzić nazwę przejazdu</string>
     <string name="noprzejazddateerror">Prosze podać datę przejazdu</string>
     <string name="ridenotbetweentraveldateerror">Data przejazdu musi się zawierać w datach podróży</string>
@@ -98,5 +98,6 @@
     <string name="nopriceerror">Proszę podać cenę</string>
     <string name="priceobligatorylabel">Koszt</string>
     <string name="editwydateklabel">Edycja wydatku</string>
+    <string name="costlabel">"Koszt: "</string>
 
 </resources>

@@ -71,7 +71,7 @@ public class WydatkiListAdapter extends ArrayAdapter<Wydatek> {
                 break;
         }
 
-        cenaWydatku.setText(getItem(position).getKoszt().toString());
+        cenaWydatku.append(getItem(position).getKoszt().toString());
         nazwaWydatku.setText(getItem(position).getNazwa());
 
         menuWydatku.setOnClickListener(new View.OnClickListener() {

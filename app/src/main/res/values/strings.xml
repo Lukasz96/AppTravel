@@ -88,7 +88,7 @@
     <string name="cancellabel">Cancel</string>
     <string name="addnewrideactivitylabel">New ride</string>
     <string name="timehint">Time (HH MM, hours 00-23)</string>
-    <string name="maxsixtylettererror">Max 60 letters</string>
+    <string name="maxsixtylettererror">Max 40 letters</string>
     <string name="noridenameerror">Please type ride name</string>
     <string name="noprzejazddateerror">Please give date of ride</string>
     <string name="ridenotbetweentraveldateerror">The date must be within travel dates</string>
@@ -99,4 +99,5 @@
     <string name="nopriceerror">You have to give price</string>
     <string name="priceobligatorylabel">Cost</string>
     <string name="editwydateklabel">Edit expense</string>
+    <string name="costlabel">Cost:</string>
 </resources>
