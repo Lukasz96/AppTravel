@@ -2,14 +2,18 @@ package com.example.lukasz.apptravel.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.lukasz.apptravel.R;
 
 import java.io.File;
@@ -18,7 +22,7 @@ import java.io.IOException;
 public class NotatkiActivity extends AppCompatActivity {
 
     private ImageView zdj;
-    private Button addphotobutton;
+    private FloatingActionButton addphotobutton;
     public static final int YOUR_IMAGE_CODE = 1;
     private Uri uri;
     private long travelId;
@@ -47,9 +51,7 @@ public class NotatkiActivity extends AppCompatActivity {
         zdj.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(NotatkiActivity.this, ZoomImageActivity.class);
-
                 intent.putExtra("path", uri.toString());
-
                 startActivity(intent);
             }
         });
@@ -65,9 +67,8 @@ public class NotatkiActivity extends AppCompatActivity {
                  uri=data.getData();
 
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                    zdj.setImageBitmap(bitmap);
-                }catch (IOException e){
+                    Glide.with(this).load(uri).into(zdj);
+                }catch (Exception e){
                     e.printStackTrace();
                 }
             }
@@ -81,6 +82,5 @@ public class NotatkiActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 
 }
