@@ -128,6 +128,13 @@ public class TravelMainMenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        notesButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent=new Intent(TravelMainMenuActivity.this, NotatkiActivity.class);
+                intent.putExtra("travelId",podroz.getId());
+                startActivity(intent);
+            }
+        });
     }
 
 
