@@ -40,7 +40,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activities.EditPrzejazdItemActivity" />
         <activity android:name=".activities.WydatkiActivity" />
-        <activity android:name=".activities.AddWydatekActivity"></activity>
+        <activity android:name=".activities.AddWydatekActivity" />
+        <activity android:name=".activities.EditWydatekActivity"></activity>
     </application>
 
 </manifest>

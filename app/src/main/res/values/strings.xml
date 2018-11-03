@@ -98,4 +98,5 @@
     <string name="addexpenselabel">Add expense</string>
     <string name="nopriceerror">You have to give price</string>
     <string name="priceobligatorylabel">Cost</string>
+    <string name="editwydateklabel">Edit expense</string>
 </resources>

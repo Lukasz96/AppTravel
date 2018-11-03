@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.activities.EditPrzejazdItemActivity;
+import com.example.lukasz.apptravel.activities.EditWydatekActivity;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Przejazd;
 import com.example.lukasz.apptravel.db.entities.Wydatek;
@@ -28,10 +29,6 @@ public class WydatkiListAdapter extends ArrayAdapter<Wydatek> {
     private int mResource;
     private ArrayList<Wydatek> lista;
     private AppDatabase mDb=AppDatabase.getInstance(context);
-    private static final int ACCOMODATION=0;
-    private static final int EATING=1;
-    private static final int SIGHTEEING=2;
-    private static final int OTHER=3;
     private ImageView ikonaWydatku;
     private TextView cenaWydatku;
     private TextView menuWydatku;
@@ -92,10 +89,10 @@ public class WydatkiListAdapter extends ArrayAdapter<Wydatek> {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.editpacklistitem:
-                              //  Intent intent = new Intent(context, EditPrzejazdItemActivity.class);
-                             //   intent.putExtra("przejazdId", przejazd.getId());
-                             //   intent.putExtra("travelId",travelId);
-                             //   context.startActivity(intent);
+                                Intent intent = new Intent(context, EditWydatekActivity.class);
+                                intent.putExtra("wydatekId", wydatek.getId());
+                                intent.putExtra("travelId",travelId);
+                                context.startActivity(intent);
                                 break;
                             case R.id.deletepacklistitem:
                                 mDb.wydatekDao().deleteWydatekById(wydatek.getId());

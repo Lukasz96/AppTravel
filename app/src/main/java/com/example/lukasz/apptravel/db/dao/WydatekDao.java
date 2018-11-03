@@ -23,4 +23,10 @@ public interface WydatekDao {
 
     @Query("DELETE FROM wydatek WHERE id=:id")
     void deleteWydatekById(long id);
+
+    @Query("SELECT * FROM wydatek WHERE id=:id")
+    Wydatek getWydatekById(long id);
+
+    @Query("UPDATE wydatek SET nazwa=:nazwa, koszt=:koszt, kategoriaWydatkuId=:kategoriaId WHERE id=:id")
+    void updateWydatekById(long id, String nazwa, double koszt, long kategoriaId);
 }

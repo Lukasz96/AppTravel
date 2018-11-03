@@ -97,5 +97,6 @@
     <string name="addexpenselabel">Dodawanie wydatku</string>
     <string name="nopriceerror">Proszę podać cenę</string>
     <string name="priceobligatorylabel">Koszt</string>
+    <string name="editwydateklabel">Edycja wydatku</string>
 
 </resources>
