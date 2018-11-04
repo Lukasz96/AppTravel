@@ -53,8 +53,12 @@ public class ChoosePacklistActivity extends AppCompatActivity {
         List<ListaDoSpakowania> ostateczaList= new ArrayList<>();
         for(ListaDoSpakowania listaDoSpakowania:doSpakowaniaList){
 
-            System.out.println(listaDoSpakowania.getNazwa());
-            if(!mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(listaDoSpakowania.getId(),true).isEmpty()){
+            System.out.println("nazwa "+ listaDoSpakowania.getNazwa());
+            System.out.println("id "+listaDoSpakowania.getId());
+            if(mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(listaDoSpakowania.getId(),true).size()==0){
+                System.out.println("NIE MA NIC DO SPAK");
+            }
+            else{
                 ostateczaList.add(listaDoSpakowania);
             }
         }
@@ -77,13 +81,18 @@ public class ChoosePacklistActivity extends AppCompatActivity {
 
                 List<ElementListyDoSpakowania> elementListyDoSpakowaniaDoKopiowania=mDb.elementListyDoSpakowaniaDao().
                         getElementyZDanejListyCzyDoSpakowania(listaDoSpakowaniaDoSkopiowania.getId(),true);
-                long newpackListId;
-                if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozIdObecna)==null) {
+                long newpackListId=0;
+                int i=0;
+                if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozIdObecna)==null && i<1) {
+                    i++;
                     newpackListId = mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
                             new ListaDoSpakowania(0, podrozObecna.getNazwa(), podrozObecna.getId()));
+
                 }
-                else {
+                else if(i<1) {
+                    i++;
                     newpackListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(podrozIdObecna).getId();
+
                 }
 
                 for(ElementListyDoSpakowania element:elementListyDoSpakowaniaDoKopiowania){

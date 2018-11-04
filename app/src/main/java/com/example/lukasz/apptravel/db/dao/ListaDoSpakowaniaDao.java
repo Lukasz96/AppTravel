@@ -21,7 +21,7 @@ public interface ListaDoSpakowaniaDao {
     @Query("SELECT * FROM listadospakowania WHERE id <> :idlisty")
     List<ListaDoSpakowania> getAllListyDoSpakowaniaExceptCurrent(long idlisty);
 
-    @Query("SELECT * FROM listadospakowania INNER JOIN podroz ON listadospakowania.podrozId=podroz.id ORDER BY podroz.dataOd")
+    @Query("SELECT listadospakowania.id,listadospakowania.nazwa,listadospakowania.podrozId FROM listadospakowania INNER JOIN podroz ON listadospakowania.podrozId=podroz.id ORDER BY podroz.dataOd")
     List<ListaDoSpakowania> getAllListyDoSpakowaniaOrderedByDate();
 
 
