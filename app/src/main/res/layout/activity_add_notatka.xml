@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.NotatkiActivity"
+    tools:context=".activities.AddNotatkaActivity"
     android:background="@android:color/background_light"
     android:orientation="vertical"
     android:fitsSystemWindows="true">
@@ -30,7 +30,7 @@
             >
 
             <ImageView
-                android:id="@+id/zdjecie"
+                android:id="@+id/addzdjecie"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -62,7 +62,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/edittytulnotatki"
+                android:id="@+id/addedittytulnotatki"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -72,7 +72,7 @@
                 android:padding="@dimen/activity_horizontal_margin"
                 />
             <EditText
-                android:id="@+id/edittrescnotatki"
+                android:id="@+id/addedittrescnotatki"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -90,9 +90,8 @@
         android:layout_width="wrap_content"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:src="@drawable/addimage2"
-        android:id="@+id/buttonAddPhoto"
+        android:id="@+id/addbuttonAddPhoto"
         app:layout_anchor="@id/main.appbar"
         app:layout_anchorGravity="bottom|right|end"
         />
-
 </android.support.design.widget.CoordinatorLayout>

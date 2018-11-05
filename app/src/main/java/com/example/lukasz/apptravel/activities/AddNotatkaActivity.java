@@ -1,17 +1,12 @@
 package com.example.lukasz.apptravel.activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,19 +16,16 @@ import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Notatka;
 
-import java.io.File;
-import java.io.IOException;
-
-public class NotatkiActivity extends AppCompatActivity {
+public class AddNotatkaActivity extends AppCompatActivity {
 
     private ImageView zdj;
     private AppDatabase mDb;
     private FloatingActionButton addphotobutton;
     public static final int YOUR_IMAGE_CODE = 1;
-    private Uri uri;
+    private Uri uri=null;
     private long notatkaId;
     private long travelId;
-    private Notatka notatka;
+
     private EditText tyul;
     private EditText tresc;
 
@@ -42,7 +34,7 @@ public class NotatkiActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notatki);
+        setContentView(R.layout.activity_add_notatka);
 
         mDb=AppDatabase.getInstance(this);
 
@@ -50,32 +42,26 @@ public class NotatkiActivity extends AppCompatActivity {
         notatkaId=intent.getLongExtra("notatkaId",0);
         travelId=intent.getLongExtra("travelId",0);
 
-        notatka=mDb.notatkaDao().getNotatkaById(notatkaId);
+        //notatka=mDb.notatkaDao().getNotatkaById(notatkaId);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(notatka.getTytul());
+        actionBar.setTitle(R.string.newnotelabel);
 
 
 
-        zdj=findViewById(R.id.zdjecie);
-        tyul=findViewById(R.id.edittytulnotatki);
-        tresc=findViewById(R.id.edittrescnotatki);
+        zdj=findViewById(R.id.addzdjecie);
+        tyul=findViewById(R.id.addedittytulnotatki);
+        tresc=findViewById(R.id.addedittrescnotatki);
 
-        tyul.setText(notatka.getTytul());
-        tresc.setText(notatka.getTresc());
 
-        if(notatka.getZdjecieUri()==null){
-            zdj.setImageResource(R.drawable.nophotoimage);
-            zdj.setEnabled(false);
-        }
-        else{
-            uri=Uri.parse(notatka.getZdjecieUri());
-            Glide.with(this).load(uri).into(zdj);
-            zdj.setEnabled(true);
-        }
 
-        addphotobutton=findViewById(R.id.buttonAddPhoto);
+
+        Glide.with(this).load(R.drawable.nophotoimage).into(zdj);
+        zdj.setEnabled(false);
+
+
+        addphotobutton=findViewById(R.id.addbuttonAddPhoto);
 
         addphotobutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -87,7 +73,7 @@ public class NotatkiActivity extends AppCompatActivity {
         });
         zdj.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(NotatkiActivity.this, ZoomImageActivity.class);
+                Intent intent = new Intent(AddNotatkaActivity.this, ZoomImageActivity.class);
                 intent.putExtra("path", uri.toString());
                 startActivity(intent);
             }
@@ -101,7 +87,7 @@ public class NotatkiActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == YOUR_IMAGE_CODE) {
             if(resultCode == RESULT_OK && data!=null && data.getData()!=null) {
-                 uri=data.getData();
+                uri=data.getData();
 
                 try {
                     Glide.with(this).load(uri).into(zdj);
@@ -121,12 +107,14 @@ public class NotatkiActivity extends AppCompatActivity {
             return;
         }
         else {
-            mDb.notatkaDao().updateNotatkaById(notatkaId, tyul.getText().toString(), tresc.getText().toString());
-            Intent intent = new Intent(NotatkiActivity.this, NotatkiListActivity.class);
+            if(uri==null){
+                mDb.notatkaDao().insertNotatka(new Notatka(0, null ,tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
+            }
+            else  mDb.notatkaDao().insertNotatka(new Notatka(0, uri.toString(),tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
+            Intent intent = new Intent(AddNotatkaActivity.this, NotatkiListActivity.class);
             intent.putExtra("travelId", travelId);
             startActivity(intent);
             finish();
         }
     }
-
 }

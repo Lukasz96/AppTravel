@@ -16,5 +16,17 @@ public interface NotatkaDao {
     @Query("SELECT * FROM Notatka")
     List<Notatka> getNotatki();
 
+    @Query("SELECT * FROM Notatka WHERE id=:id")
+    Notatka getNotatkaById(long id);
+
+    @Query("SELECT * FROM Notatka WHERE podrozId=:travelId")
+    List<Notatka> getNotatkiByTravelId(long travelId);
+
+    @Query("UPDATE Notatka SET  zdjecieUri=:zdjecieUri WHERE id=:id")
+    void updateZdjecieNotatkaById(long id, String zdjecieUri);
+
+    @Query("UPDATE Notatka SET tytul=:tytul, tresc=:tresc WHERE id=:id")
+    void updateNotatkaById(long id, String tytul, String tresc);
+
 
 }

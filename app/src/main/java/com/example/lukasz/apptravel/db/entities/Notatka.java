@@ -14,8 +14,10 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
         onDelete = CASCADE))
 public class Notatka implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
+    private String zdjecieUri;
+    private String tytul;
     private String tresc;
     private long podrozId;
 
@@ -25,6 +27,22 @@ public class Notatka implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getZdjecieUri() {
+        return zdjecieUri;
+    }
+
+    public void setZdjecieUri(String zdjecieUri) {
+        this.zdjecieUri = zdjecieUri;
+    }
+
+    public String getTytul() {
+        return tytul;
+    }
+
+    public void setTytul(String tytul) {
+        this.tytul = tytul;
     }
 
     public String getTresc() {
@@ -43,8 +61,10 @@ public class Notatka implements Serializable {
         this.podrozId = podrozId;
     }
 
-    public Notatka(long id, String tresc, long podrozId) {
+    public Notatka(long id, String zdjecieUri, String tytul, String tresc, long podrozId) {
         this.id = id;
+        this.zdjecieUri=zdjecieUri;
+        this.tytul=tytul;
         this.tresc = tresc;
         this.podrozId = podrozId;
     }

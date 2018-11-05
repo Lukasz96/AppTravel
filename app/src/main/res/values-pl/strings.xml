@@ -99,5 +99,9 @@
     <string name="priceobligatorylabel">Koszt</string>
     <string name="editwydateklabel">Edycja wydatku</string>
     <string name="costlabel">"Koszt: "</string>
+    <string name="notitleofnote">Prosze podac tytuł notatki</string>
+    <string name="titlenote">Tytuł</string>
+    <string name="contentnote">Treść</string>
+    <string name="newnotelabel">Nowa notatka</string>
 
 </resources>
