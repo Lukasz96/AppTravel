@@ -28,5 +28,8 @@ public interface NotatkaDao {
     @Query("UPDATE Notatka SET tytul=:tytul, tresc=:tresc WHERE id=:id")
     void updateNotatkaById(long id, String tytul, String tresc);
 
+    @Query("DELETE FROM Notatka WHERE id=:id")
+    void deleteNotatkaById(long id);
+
 
 }

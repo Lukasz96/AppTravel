@@ -1,17 +1,12 @@
 package com.example.lukasz.apptravel.activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,10 +16,7 @@ import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Notatka;
 
-import java.io.File;
-import java.io.IOException;
-
-public class NotatkiActivity extends AppCompatActivity {
+public class EditNotatkiActivity extends AppCompatActivity {
 
     private ImageView zdj;
     private AppDatabase mDb;
@@ -79,7 +71,7 @@ public class NotatkiActivity extends AppCompatActivity {
 
         addphotobutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "select a picture"), YOUR_IMAGE_CODE);
@@ -87,7 +79,7 @@ public class NotatkiActivity extends AppCompatActivity {
         });
         zdj.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(NotatkiActivity.this, ZoomImageActivity.class);
+                Intent intent = new Intent(EditNotatkiActivity.this, ZoomImageActivity.class);
                 intent.putExtra("path", uri.toString());
                 startActivity(intent);
             }
@@ -102,6 +94,7 @@ public class NotatkiActivity extends AppCompatActivity {
         if (requestCode == YOUR_IMAGE_CODE) {
             if(resultCode == RESULT_OK && data!=null && data.getData()!=null) {
                  uri=data.getData();
+                this.grantUriPermission(this.getPackageName(),uri,Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
                 try {
                     Glide.with(this).load(uri).into(zdj);
@@ -122,7 +115,7 @@ public class NotatkiActivity extends AppCompatActivity {
         }
         else {
             mDb.notatkaDao().updateNotatkaById(notatkaId, tyul.getText().toString(), tresc.getText().toString());
-            Intent intent = new Intent(NotatkiActivity.this, NotatkiListActivity.class);
+            Intent intent = new Intent(EditNotatkiActivity.this, NotatkiListActivity.class);
             intent.putExtra("travelId", travelId);
             startActivity(intent);
             finish();

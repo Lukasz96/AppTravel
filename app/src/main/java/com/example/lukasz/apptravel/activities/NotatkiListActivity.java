@@ -1,6 +1,7 @@
 package com.example.lukasz.apptravel.activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,14 +17,15 @@ import com.example.lukasz.apptravel.db.entities.Notatka;
 import com.example.lukasz.apptravel.notatkilisttools.NotatkiListAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NotatkiListActivity extends AppCompatActivity {
 
     private long travelId;
-    private List<Notatka> notatkaList;
+    protected ArrayList<Notatka> notatkaList;
+    protected RecyclerView recyclerView;
     private AppDatabase mDb;
     private FloatingActionButton fab;
+    WypelnijListe wypelnijListe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +43,17 @@ public class NotatkiListActivity extends AppCompatActivity {
         Intent intent=getIntent();
         travelId=intent.getLongExtra("travelId",0);
 
-        notatkaList=new ArrayList<>();
-        notatkaList=mDb.notatkaDao().getNotatkiByTravelId(travelId);
+     //   notatkaList=new ArrayList<>();
+     //   notatkaList=mDb.notatkaDao().getNotatkiByTravelId(travelId);
 
-        RecyclerView recyclerView=findViewById(R.id.listanotatek);
+        recyclerView=findViewById(R.id.listanotatek);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        NotatkiListAdapter notatkiListAdapter= new NotatkiListAdapter(this,notatkaList);
-        recyclerView.setAdapter(notatkiListAdapter);
+
+        wypelnijListe= new WypelnijListe();
+        wypelnijListe.execute();
+     //   NotatkiListAdapter notatkiListAdapter= new NotatkiListAdapter(this,notatkaList);
+     //   recyclerView.setAdapter(notatkiListAdapter);
 
 
 
@@ -79,5 +84,26 @@ public class NotatkiListActivity extends AppCompatActivity {
         intent.putExtra("travelId", travelId);
         startActivity(intent);
         finish();
+    }
+
+    public class WypelnijListe extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            notatkaList=new ArrayList<>(mDb.notatkaDao().getNotatkiByTravelId(travelId));
+            NotatkiListAdapter notatkiListAdapter= new NotatkiListAdapter(NotatkiListActivity.this,notatkaList);
+            recyclerView.setAdapter(notatkiListAdapter);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+        }
     }
 }

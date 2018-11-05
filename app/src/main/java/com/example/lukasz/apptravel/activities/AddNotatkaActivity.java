@@ -65,7 +65,7 @@ public class AddNotatkaActivity extends AppCompatActivity {
 
         addphotobutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "select a picture"), YOUR_IMAGE_CODE);
@@ -88,6 +88,8 @@ public class AddNotatkaActivity extends AppCompatActivity {
         if (requestCode == YOUR_IMAGE_CODE) {
             if(resultCode == RESULT_OK && data!=null && data.getData()!=null) {
                 uri=data.getData();
+                this.grantUriPermission(this.getPackageName(),uri,Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
 
                 try {
                     Glide.with(this).load(uri).into(zdj);

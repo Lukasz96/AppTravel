@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:cardview="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/notatkaitem"
     android:layout_height="200dp"
     android:layout_margin="8dp"
     cardview:cardCornerRadius="14dp">
@@ -47,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/notatkamenu"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
 
