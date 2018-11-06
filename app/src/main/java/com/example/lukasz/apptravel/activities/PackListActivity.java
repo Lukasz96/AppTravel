@@ -23,11 +23,14 @@ import android.widget.Toast;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
+import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.example.lukasz.apptravel.fragments.PackListClothesFragment;
 import com.example.lukasz.apptravel.fragments.PackListDocumentsFragment;
 import com.example.lukasz.apptravel.fragments.PackListHygieneFragment;
 import com.example.lukasz.apptravel.fragments.PackListOthersFragment;
 import com.example.lukasz.apptravel.packlisttools.CustomTabLayout;
+
+import java.util.List;
 
 public class PackListActivity extends AppCompatActivity {
 
@@ -115,6 +118,30 @@ public class PackListActivity extends AppCompatActivity {
         if(id==android.R.id.home){
             onBackPressed();
             return true;
+        }
+        if(id==R.id.sendviafacebook){
+            if(mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(packListId,true).isEmpty()){
+                Toast.makeText(this, R.string.emptypacklist, Toast.LENGTH_LONG).show();
+            }
+            else {
+
+                String output = getResources().getString(R.string.initlabelpacklist);
+                output+="\n";
+                List<ElementListyDoSpakowania> elementListyDoSpakowania = mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(packListId,true);
+                for (ElementListyDoSpakowania elementListyDoSpakowania1 : elementListyDoSpakowania) {
+                    output+=elementListyDoSpakowania1.getNazwa();
+                    output+=", ";
+                    output+=elementListyDoSpakowania1.getIloscDoSpakowania();
+                    output+=" "+getResources().getString(R.string.quantityshort);
+                    if(elementListyDoSpakowania.indexOf(elementListyDoSpakowania1) != (elementListyDoSpakowania.size() -1)) output+="\n";
+
+                }
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, output);
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
+            }
         }
         if (id == R.id.deletepacklistbutton) {
             new AlertDialog.Builder(this)

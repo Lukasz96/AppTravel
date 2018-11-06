@@ -107,5 +107,13 @@
     <string name="savelabel">Zapisz</string>
     <string name="choosetravellabel">Wybierz podróż</string>
     <string name="errorloadingimage">Błąd podczas ładowania obrazu. Wykorzystaj inny obraz.</string>
+    <string name="emptypacklist">Lista rzeczy jest pusta.</string>
+    <string name="initlabelpacklist">Rzeczy do spakowania:</string>
+    <string name="quantityshort">szt.</string>
+    <string name="shoppinglistempty">Lista zakupów jest pusta.</string>
+    <string name="shoppinglistinit">Lista zakupów:</string>
+    <string name="send_to">Wyślij do</string>
+    <string name="boughtlabel">Kupione</string>
+    <string name="nosaveinfo">Jeśli nie zapiszesz wprowadzonych danych, stracisz je. Czy na pewno chcesz wyjść bez zapisywania?</string>
 
 </resources>

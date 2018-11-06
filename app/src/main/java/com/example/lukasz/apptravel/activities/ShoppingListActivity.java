@@ -6,10 +6,12 @@ import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
@@ -41,7 +43,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         travelId=intent.getLongExtra("travelId",0);
         mDb=AppDatabase.getInstance(getApplicationContext());
         String travelName=mDb.podrozDao().getPodrozById(travelId).getNazwa();
-        long listaDoSpakowaniaId;
+
 
         if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId)==null){
             listaDoSpakowaniaId=mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(new ListaDoSpakowania(0,travelName,travelId));
@@ -69,10 +71,43 @@ public class ShoppingListActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menushoppinglist, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                return true;
+            case R.id.sendshopviafacebook:
+                if(mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoKupienia(listaDoSpakowaniaId,true).isEmpty()){
+                    Toast.makeText(this, R.string.shoppinglistempty, Toast.LENGTH_LONG).show();
+                }
+                else {
+
+                    String output = getResources().getString(R.string.shoppinglistinit);
+                    output+="\n";
+                    List<ElementListyDoSpakowania> elementListyDoSpakowania = mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoKupienia(listaDoSpakowaniaId,true);
+                    for (ElementListyDoSpakowania elementListyDoSpakowania1 : elementListyDoSpakowania) {
+                        if(elementListyDoSpakowania1.isCzyKupione()){
+                            output+="["+getResources().getString(R.string.boughtlabel)+"] ";
+                        }
+                        output+=elementListyDoSpakowania1.getNazwa();
+                        output+=", ";
+                        output+=elementListyDoSpakowania1.getIloscDoZakupu();
+                        output+=" "+getResources().getString(R.string.quantityshort);
+                        if(elementListyDoSpakowania.indexOf(elementListyDoSpakowania1) != (elementListyDoSpakowania.size() -1)) output+="\n";
+
+                    }
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, output);
+                    sendIntent.setType("text/plain");
+                    startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

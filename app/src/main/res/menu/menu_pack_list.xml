@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.lukasz.apptravel.activities.PackListActivity">
+
+    <item
+        android:id="@+id/sendviafacebook"
+        android:title="share"
+        android:icon="@drawable/shareicon"
+        app:showAsAction="always"
+        />
     <item
         android:id="@+id/deletepacklistbutton"
         android:orderInCategory="100"

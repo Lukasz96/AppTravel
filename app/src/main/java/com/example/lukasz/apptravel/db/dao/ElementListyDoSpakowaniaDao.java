@@ -25,7 +25,8 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId AND czyDoSpakowania=:czyDoSpakowania")
     List<ElementListyDoSpakowania> getElementyZDanejListyCzyDoSpakowania(long listaId, boolean czyDoSpakowania);
 
-
+    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId AND czyPrzekazanoDoZakupu=:czyDoKupienia")
+    List<ElementListyDoSpakowania> getElementyZDanejListyCzyDoKupienia(long listaId, boolean czyDoKupienia);
 
     @Query("UPDATE elementlistydospakowania SET czyspakowane=:czySpakowane WHERE id=:id")
     void updateCzySpakowanyElementById(long id, boolean czySpakowane);

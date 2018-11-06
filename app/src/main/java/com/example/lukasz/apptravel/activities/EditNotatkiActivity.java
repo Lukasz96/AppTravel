@@ -157,11 +157,11 @@ public class EditNotatkiActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.notatkimenu,menu);
         return super.onCreateOptionsMenu(menu);
-    }
+    } */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -170,9 +170,9 @@ public class EditNotatkiActivity extends AppCompatActivity {
 
                 onBackPressed();
                 return true;
-            case R.id.savenotatka:
+            /*case R.id.savenotatka:
                 if (tyul.getText().toString().trim() == "") {
-                    Toast.makeText(this, R.string.notitleofnote, Toast.LENGTH_LONG);
+                    Toast.makeText(this, R.string.notitleofnote, Toast.LENGTH_LONG).show();
                     return true;
                 } else {
                     mDb.notatkaDao().updateNotatkaById(notatkaId, tyul.getText().toString(), tresc.getText().toString());
@@ -181,7 +181,7 @@ public class EditNotatkiActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -193,10 +193,17 @@ public class EditNotatkiActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(EditNotatkiActivity.this, NotatkiListActivity.class);
-        intent.putExtra("travelId",travelId);
-        startActivity(intent);
-        finish();
+        if (tyul.getText().toString().trim().equals("") || tyul.getText().toString()==null) {
+            Toast.makeText(this, R.string.notitleofnote, Toast.LENGTH_LONG).show();
+            return;
+        } else {
+            mDb.notatkaDao().updateNotatkaById(notatkaId, tyul.getText().toString(), tresc.getText().toString());
+            Intent intent = new Intent(EditNotatkiActivity.this, NotatkiListActivity.class);
+            intent.putExtra("travelId", travelId);
+            startActivity(intent);
+            finish();
+        }
+
     }
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);

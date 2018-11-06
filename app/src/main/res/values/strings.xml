@@ -108,4 +108,12 @@
     <string name="savelabel">Save</string>
     <string name="choosetravellabel">Choose travel</string>
     <string name="errorloadingimage">Error ocupied while loading image. Try load another one.</string>
+    <string name="emptypacklist">List of things to pack is empty.</string>
+    <string name="initlabelpacklist">Things to pack:</string>
+    <string name="quantityshort">pc(s).</string>
+    <string name="shoppinglistempty">Shopping list is empty.</string>
+    <string name="shoppinglistinit">Shopping list:</string>
+    <string name="send_to">Send to</string>
+    <string name="boughtlabel">Bought</string>
+    <string name="nosaveinfo">If you do not save given data, you will lose it. Do you want to exit without saving?</string>
 </resources>

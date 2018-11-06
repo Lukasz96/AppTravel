@@ -1,6 +1,8 @@
 package com.example.lukasz.apptravel.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
@@ -176,10 +178,20 @@ public class AddNotatkaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(AddNotatkaActivity.this, NotatkiListActivity.class);
-        intent.putExtra("travelId",travelId);
-        startActivity(intent);
-        finish();
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle(R.string.cautionlabel);
+        alert.setMessage(R.string.nosaveinfo);
+        alert.setPositiveButton(R.string.yeslabel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Intent intent=new Intent(AddNotatkaActivity.this, NotatkiListActivity.class);
+                        intent.putExtra("travelId",travelId);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+        alert.setNegativeButton(R.string.nolabel, null);
+        alert.show();
+
     }
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
