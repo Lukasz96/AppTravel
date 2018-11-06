@@ -65,7 +65,7 @@ public class ChoosePacklistActivity extends AppCompatActivity {
 
         listView=findViewById(R.id.listOfListToPack);
 
-        listOfPacklistsAdapter = new ListOfPacklistsAdapter(getApplicationContext(),R.layout.listofpacklistsitemlayout,ostateczaList);
+        listOfPacklistsAdapter = new ListOfPacklistsAdapter(this,R.layout.listofpacklistsitemlayout,ostateczaList);
 
 
         listView.setAdapter(listOfPacklistsAdapter);

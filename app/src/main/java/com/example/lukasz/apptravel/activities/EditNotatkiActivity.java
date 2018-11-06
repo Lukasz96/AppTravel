@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.FileObserver;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -78,15 +79,10 @@ public class EditNotatkiActivity extends AppCompatActivity {
                 zdj.setEnabled(true);
             }
             else {
-                try {
+
                     Glide.with(this).load(uri).into(zdj);
                     zdj.setEnabled(true);
-                } catch (SecurityException e) {
-                    zdj.setImageResource(R.drawable.nophotoimage);
-                    uri = null;
-                    mDb.notatkaDao().updateZdjecieNotatkaById(notatkaId, null);
-                    zdj.setEnabled(false);
-                }
+
             }
 
 
@@ -130,7 +126,9 @@ public class EditNotatkiActivity extends AppCompatActivity {
         });
         zdj.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 Intent intent = new Intent(EditNotatkiActivity.this, ZoomImageActivity.class);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.putExtra("path", uri.toString());
                 startActivity(intent);
             }
@@ -153,6 +151,7 @@ public class EditNotatkiActivity extends AppCompatActivity {
                     mDb.notatkaDao().updateZdjecieNotatkaById(notatkaId, uri.toString());
                 }catch (Exception e){
                     e.printStackTrace();
+                    Toast.makeText(this,R.string.errorloadingimage,Toast.LENGTH_LONG).show();
                 }
             }
         }

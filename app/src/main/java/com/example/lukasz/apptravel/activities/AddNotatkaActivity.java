@@ -105,6 +105,7 @@ public class AddNotatkaActivity extends AppCompatActivity {
         zdj.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(AddNotatkaActivity.this, ZoomImageActivity.class);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 intent.putExtra("path", uri.toString());
                 startActivity(intent);
             }
@@ -128,6 +129,7 @@ public class AddNotatkaActivity extends AppCompatActivity {
                     mDb.notatkaDao().updateZdjecieNotatkaById(notatkaId, uri.toString());
                 }catch (Exception e){
                     e.printStackTrace();
+                    Toast.makeText(this,R.string.errorloadingimage,Toast.LENGTH_LONG).show();
                 }
             }
         }

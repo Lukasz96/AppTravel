@@ -6,16 +6,20 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.lukasz.apptravel.R;
+
+import java.io.File;
 import java.io.IOException;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class ZoomImageActivity extends Activity
 {
-
+    private Uri uri;
 
     /** Called when the activity is first created. */
     @Override
@@ -25,19 +29,23 @@ public class ZoomImageActivity extends Activity
         setContentView(R.layout.activity_zoom_image);
         Intent intent=getIntent();
         String uriString=intent.getStringExtra("path");
-        Uri uri = Uri.parse(uriString);
-        
+        //Uri uri = Uri.parse(uriString);
+
         ImageView view = (ImageView) findViewById(R.id.zoomimage);
 
-        try {
 
-            Glide.with(this).load(uri).into(view);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+
+        uri=Uri.parse(uriString);
+
+
+
+         Glide.with(this).load(uri).into(view);
+
 
         PhotoViewAttacher pAttacher;
+
         pAttacher = new PhotoViewAttacher(view);
+
         pAttacher.update();
     }
 

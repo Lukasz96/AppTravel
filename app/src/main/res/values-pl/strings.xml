@@ -105,5 +105,7 @@
     <string name="newnotelabel">Nowa notatka</string>
     <string name="editnotelabel">Edycja notatki</string>
     <string name="savelabel">Zapisz</string>
+    <string name="choosetravellabel">Wybierz podróż</string>
+    <string name="errorloadingimage">Błąd podczas ładowania obrazu. Wykorzystaj inny obraz.</string>
 
 </resources>

@@ -76,7 +76,8 @@
                 />
             <EditText
                 android:id="@+id/addedittrescnotatki"
-                android:inputType="textCapSentences"
+                android:inputType="textCapSentences|textMultiLine"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"

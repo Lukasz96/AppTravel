@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -26,6 +27,7 @@ import com.example.lukasz.apptravel.db.entities.Przejazd;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.util.List;
 
 public class NotatkiListAdapter extends RecyclerView.Adapter<NotatkiListAdapter.MyViewHolder> {
@@ -58,16 +60,16 @@ public class NotatkiListAdapter extends RecyclerView.Adapter<NotatkiListAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
+        //context.grantUriPermission(context.getPackageName(),uri,Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
         myViewHolder.notatkaName.setText(mData.get(i).getTytul());
         if (mData.get(i).getZdjecieUri()==null){
             myViewHolder.notatkaImage.setImageResource(R.drawable.nophotoimage);
         }
         else{
-            uri=Uri.parse(mData.get(i).getZdjecieUri());
-         //   context.grantUriPermission(context.getPackageName(),uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
-         //   final int takeFlags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION);
-         //   context.getContentResolver().takePersistableUriPermission(uri, takeFlags);
-            Glide.with(context).load(uri).apply(new RequestOptions().override(300, 200)).into(myViewHolder.notatkaImage);
+                uri=Uri.parse(mData.get(i).getZdjecieUri());
+                Glide.with(context).load(uri).apply(new RequestOptions().override(300, 200)).into(myViewHolder.notatkaImage);
+
         }
 
         myViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
