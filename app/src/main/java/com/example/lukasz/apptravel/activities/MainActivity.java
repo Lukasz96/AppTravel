@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                Intent intent=new Intent(MainActivity.this, ChooseTravelActivity.class);
+                startActivity(intent);
             }
         });
 

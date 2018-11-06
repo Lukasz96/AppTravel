@@ -8,7 +8,9 @@
     tools:context=".activities.AddNotatkaActivity"
     android:background="@android:color/background_light"
     android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/main.appbar"
@@ -63,6 +65,7 @@
 
             <EditText
                 android:id="@+id/addedittytulnotatki"
+                android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -73,6 +76,7 @@
                 />
             <EditText
                 android:id="@+id/addedittrescnotatki"
+                android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -94,4 +98,20 @@
         app:layout_anchor="@id/main.appbar"
         app:layout_anchorGravity="bottom|right|end"
         />
+    <View
+        android:id="@+id/dummy"
+        android:layout_width="1dp"
+        android:layout_height="16dp"
+        app:layout_anchor="@id/addbuttonAddPhoto"
+        app:layout_anchorGravity="top|right|end" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/deletephotobutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:layout_margin="16dp"
+        android:src="@drawable/binicon"
+        app:layout_anchor="@id/dummy"
+        app:layout_anchorGravity="top|right|end" />
 </android.support.design.widget.CoordinatorLayout>

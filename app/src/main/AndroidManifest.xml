@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lukasz.apptravel">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -45,13 +44,17 @@
         <activity android:name=".activities.WydatkiActivity" />
         <activity android:name=".activities.AddWydatekActivity" />
         <activity android:name=".activities.EditWydatekActivity" />
-        <activity android:name=".activities.EditNotatkiActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.EditNotatkiActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".activities.ZoomImageActivity" />
-        <activity android:name=".activities.NotatkiListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.AddNotatkaActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activities.NotatkiListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.AddNotatkaActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.ChooseTravelActivity"></activity>
     </application>
 
 </manifest>

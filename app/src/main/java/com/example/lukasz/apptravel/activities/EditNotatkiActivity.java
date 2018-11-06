@@ -1,12 +1,17 @@
 package com.example.lukasz.apptravel.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.FileObserver;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,11 +21,14 @@ import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Notatka;
 
+import java.io.File;
+
 public class EditNotatkiActivity extends AppCompatActivity {
 
     private ImageView zdj;
     private AppDatabase mDb;
     private FloatingActionButton addphotobutton;
+    private FloatingActionButton deletephotobutton;
     public static final int YOUR_IMAGE_CODE = 1;
     private Uri uri;
     private long notatkaId;
@@ -46,7 +54,7 @@ public class EditNotatkiActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle(notatka.getTytul());
+        actionBar.setTitle(R.string.editnotelabel);
 
 
 
@@ -61,13 +69,48 @@ public class EditNotatkiActivity extends AppCompatActivity {
             zdj.setImageResource(R.drawable.nophotoimage);
             zdj.setEnabled(false);
         }
+
         else{
             uri=Uri.parse(notatka.getZdjecieUri());
-            Glide.with(this).load(uri).into(zdj);
-            zdj.setEnabled(true);
+            File file= new File(uri.getPath());
+            if(file.exists()){
+                Glide.with(this).load(uri).into(zdj);
+                zdj.setEnabled(true);
+            }
+            else {
+                try {
+                    Glide.with(this).load(uri).into(zdj);
+                    zdj.setEnabled(true);
+                } catch (SecurityException e) {
+                    zdj.setImageResource(R.drawable.nophotoimage);
+                    uri = null;
+                    mDb.notatkaDao().updateZdjecieNotatkaById(notatkaId, null);
+                    zdj.setEnabled(false);
+                }
+            }
+
+
         }
 
-        addphotobutton=findViewById(R.id.buttonAddPhoto);
+        addphotobutton=findViewById(R.id.editbuttonAddPhoto);
+        deletephotobutton=findViewById(R.id.editdeletephotobutton);
+
+        tyul.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        tresc.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
 
         addphotobutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -75,6 +118,14 @@ public class EditNotatkiActivity extends AppCompatActivity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "select a picture"), YOUR_IMAGE_CODE);
+            }
+        });
+        deletephotobutton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                zdj.setImageResource(R.drawable.nophotoimage);
+                zdj.setEnabled(false);
+                uri=null;
+                mDb.notatkaDao().updateZdjecieNotatkaById(notatkaId, null);
             }
         });
         zdj.setOnClickListener(new View.OnClickListener() {
@@ -108,18 +159,49 @@ public class EditNotatkiActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.notatkimenu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                onBackPressed();
+                return true;
+            case R.id.savenotatka:
+                if (tyul.getText().toString().trim() == "") {
+                    Toast.makeText(this, R.string.notitleofnote, Toast.LENGTH_LONG);
+                    return true;
+                } else {
+                    mDb.notatkaDao().updateNotatkaById(notatkaId, tyul.getText().toString(), tresc.getText().toString());
+                    Intent intent = new Intent(EditNotatkiActivity.this, NotatkiListActivity.class);
+                    intent.putExtra("travelId", travelId);
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+
+
+
+    @Override
     public void onBackPressed() {
-        if(tyul.getText().toString().trim()==""){
-            Toast.makeText(this,R.string.notitleofnote,Toast.LENGTH_LONG);
-            return;
-        }
-        else {
-            mDb.notatkaDao().updateNotatkaById(notatkaId, tyul.getText().toString(), tresc.getText().toString());
-            Intent intent = new Intent(EditNotatkiActivity.this, NotatkiListActivity.class);
-            intent.putExtra("travelId", travelId);
-            startActivity(intent);
-            finish();
-        }
+        Intent intent=new Intent(EditNotatkiActivity.this, NotatkiListActivity.class);
+        intent.putExtra("travelId",travelId);
+        startActivity(intent);
+        finish();
+    }
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 }

@@ -108,7 +108,6 @@ public class NotatkiListAdapter extends RecyclerView.Adapter<NotatkiListAdapter.
                 popupMenu.show();
             }
         });
-
     }
 
     @Override
@@ -135,9 +134,6 @@ public class NotatkiListAdapter extends RecyclerView.Adapter<NotatkiListAdapter.
             notatkaName=view.findViewById(R.id.notatkaitemname);
             notatkaMenu=view.findViewById(R.id.notatkamenu);
             cardView=view.findViewById(R.id.notatkaitem);
-
         }
     }
-
-
 }

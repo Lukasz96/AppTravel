@@ -89,9 +89,9 @@
     <string name="timehint">Godzina (GG MM, godziny 00-23)</string>
     <string name="maxsixtylettererror">Maksymalnie 40 liter</string>
     <string name="noridenameerror">Proszę wprowadzić nazwę przejazdu</string>
-    <string name="noprzejazddateerror">Prosze podać datę przejazdu</string>
+    <string name="noprzejazddateerror">Proszę podać datę przejazdu</string>
     <string name="ridenotbetweentraveldateerror">Data przejazdu musi się zawierać w datach podróży</string>
-    <string name="notimeerror">Prosze podać czas rozpoczęcia przejazdu</string>
+    <string name="notimeerror">Proszę podać czas rozpoczęcia przejazdu</string>
     <string name="badtimeformaterror">Zły format godziny</string>
     <string name="editridelabel">Edycja przejazdu</string>
     <string name="addexpenselabel">Dodawanie wydatku</string>
@@ -99,9 +99,11 @@
     <string name="priceobligatorylabel">Koszt</string>
     <string name="editwydateklabel">Edycja wydatku</string>
     <string name="costlabel">"Koszt: "</string>
-    <string name="notitleofnote">Prosze podac tytuł notatki</string>
+    <string name="notitleofnote">Proszę podać tytuł notatki</string>
     <string name="titlenote">Tytuł</string>
     <string name="contentnote">Treść</string>
     <string name="newnotelabel">Nowa notatka</string>
+    <string name="editnotelabel">Edycja notatki</string>
+    <string name="savelabel">Zapisz</string>
 
 </resources>

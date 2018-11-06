@@ -26,7 +26,9 @@ public class ZoomImageActivity extends Activity
         Intent intent=getIntent();
         String uriString=intent.getStringExtra("path");
         Uri uri = Uri.parse(uriString);
+        
         ImageView view = (ImageView) findViewById(R.id.zoomimage);
+
         try {
 
             Glide.with(this).load(uri).into(view);

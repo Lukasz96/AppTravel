@@ -104,4 +104,6 @@
     <string name="titlenote">Title</string>
     <string name="contentnote">Content</string>
     <string name="newnotelabel">New note</string>
+    <string name="editnotelabel">Edition of note</string>
+    <string name="savelabel">Save</string>
 </resources>

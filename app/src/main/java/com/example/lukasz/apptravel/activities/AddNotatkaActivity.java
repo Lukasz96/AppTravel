@@ -1,12 +1,16 @@
 package com.example.lukasz.apptravel.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,6 +25,7 @@ public class AddNotatkaActivity extends AppCompatActivity {
     private ImageView zdj;
     private AppDatabase mDb;
     private FloatingActionButton addphotobutton;
+    private FloatingActionButton deletephotobutton;
     public static final int YOUR_IMAGE_CODE = 1;
     private Uri uri=null;
     private long notatkaId;
@@ -62,6 +67,24 @@ public class AddNotatkaActivity extends AppCompatActivity {
 
 
         addphotobutton=findViewById(R.id.addbuttonAddPhoto);
+        deletephotobutton=findViewById(R.id.deletephotobutton);
+
+        tyul.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+        tresc.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
 
         addphotobutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -69,6 +92,14 @@ public class AddNotatkaActivity extends AppCompatActivity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "select a picture"), YOUR_IMAGE_CODE);
+            }
+        });
+        deletephotobutton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                zdj.setImageResource(R.drawable.nophotoimage);
+                zdj.setEnabled(false);
+                uri=null;
+              //  mDb.notatkaDao().updateZdjecieNotatkaById(notatkaId, null);
             }
         });
         zdj.setOnClickListener(new View.OnClickListener() {
@@ -103,20 +134,55 @@ public class AddNotatkaActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if(tyul.getText().toString().trim()==""){
-            Toast.makeText(this,R.string.notitleofnote,Toast.LENGTH_LONG);
-            return;
-        }
-        else {
-            if(uri==null){
-                mDb.notatkaDao().insertNotatka(new Notatka(0, null ,tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
-            }
-            else  mDb.notatkaDao().insertNotatka(new Notatka(0, uri.toString(),tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
-            Intent intent = new Intent(AddNotatkaActivity.this, NotatkiListActivity.class);
-            intent.putExtra("travelId", travelId);
-            startActivity(intent);
-            finish();
-        }
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.notatkimenu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+
+                onBackPressed();
+                return true;
+            case R.id.savenotatka:
+                System.out.println("tytul" +tyul.getText().toString());
+                if (tyul.getText().toString().trim().equals("") || tyul.getText().toString()==null) {
+                    Toast.makeText(this, R.string.notitleofnote, Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                else {
+                    if(uri==null){
+                        mDb.notatkaDao().insertNotatka(new Notatka(0, null ,tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
+                    }
+                    else  mDb.notatkaDao().insertNotatka(new Notatka(0, uri.toString(),tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
+                    Intent intent = new Intent(AddNotatkaActivity.this, NotatkiListActivity.class);
+                    intent.putExtra("travelId", travelId);
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(AddNotatkaActivity.this, NotatkiListActivity.class);
+        intent.putExtra("travelId",travelId);
+        startActivity(intent);
+        finish();
+    }
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+
 }
