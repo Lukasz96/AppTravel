@@ -1,4 +1,4 @@
-package com.example.lukasz.apptravel.StatsTools;
+package com.example.lukasz.apptravel.statsTools;
 
 import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.github.mikephil.charting.data.Entry;

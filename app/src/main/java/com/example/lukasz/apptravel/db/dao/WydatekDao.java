@@ -29,4 +29,7 @@ public interface WydatekDao {
 
     @Query("UPDATE wydatek SET nazwa=:nazwa, koszt=:koszt, kategoriaWydatkuId=:kategoriaId WHERE id=:id")
     void updateWydatekById(long id, String nazwa, double koszt, long kategoriaId);
+
+    @Query("SELECT SUM(koszt) FROM wydatek WHERE podrozId=:travelid")
+    double getSumOfWydatkiByTravelId(long travelid);
 }

@@ -7,19 +7,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.lukasz.apptravel.R;
-import com.example.lukasz.apptravel.StatsTools.LinechartTools;
 import com.example.lukasz.apptravel.db.AppDatabase;
-import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
-import com.example.lukasz.apptravel.db.entities.ListaDoSpakowania;
-import com.github.mikephil.charting.charts.LineChart;
-
-import java.util.List;
+import com.example.lukasz.apptravel.statsTools.WykresProcentowyBudzetu;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 
 public class LocalStatsActivity extends AppCompatActivity {
 
     private long travelId;
     private AppDatabase mDb;
-    private LineChart lineChart;
+    private HorizontalBarChart wykresProcentBudzetu;
     private long packListId;
 
     @Override
@@ -35,16 +31,12 @@ public class LocalStatsActivity extends AppCompatActivity {
         travelId=intent.getLongExtra("travelId",0);
         mDb=AppDatabase.getInstance(this);
 
-        lineChart = (LineChart) findViewById(R.id.chart);
+        wykresProcentBudzetu = findViewById(R.id.wykresprocentbudzetu);
 
-        ListaDoSpakowania listaDoSpakowania=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId);
-        packListId=listaDoSpakowania.getId();
-
-       List<ElementListyDoSpakowania> elementListyDoSpakowania=mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoKupienia(packListId, true);
-
-        LinechartTools linechartTools= new LinechartTools();
-        lineChart.setData(linechartTools.getLineData(elementListyDoSpakowania));
-     //   lineChart.setExtraBottomOffset(-450);
+        WykresProcentowyBudzetu wykresProcentowyBudzetu=new WykresProcentowyBudzetu(this, travelId);
+        wykresProcentBudzetu=wykresProcentowyBudzetu.getWykresProcentowyBudzetu(wykresProcentBudzetu);
+        wykresProcentBudzetu.animateXY(1500,1500);
+        wykresProcentBudzetu.invalidate();
 
     }
 

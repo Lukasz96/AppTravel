@@ -69,4 +69,7 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("UPDATE elementlistydospakowania SET cena=:cena WHERE id=:id")
     void updateCenaElementZakupuById(long id, double cena);
 
+    @Query("SELECT SUM(cena) FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaid AND czyKupione=:czykupione")
+    double getSumOfShoppingList(long listaid, boolean czykupione);
+
 }
