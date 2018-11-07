@@ -116,5 +116,6 @@
     <string name="boughtlabel">Kupione</string>
     <string name="nosaveinfo">Jeśli nie zapiszesz wprowadzonych danych, stracisz je. Czy na pewno chcesz wyjść bez zapisywania?</string>
     <string name="statslabel">Statystyki podróży</string>
+    <string name="imageerrormessage">Błąd podczas ładowania zdjęcia. Być może zostało ono usunięte z galerii. Spróbuj wgrać inne zdjęcie.</string>
 
 </resources>

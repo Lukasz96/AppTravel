@@ -117,4 +117,5 @@
     <string name="boughtlabel">Bought</string>
     <string name="nosaveinfo">If you do not save given data, you will lose it. Do you want to exit without saving?</string>
     <string name="statslabel">Travel stats</string>
+    <string name="imageerrormessage">Error during loading image.  Maybe it was deleted from gallery. Go back and choose another photo.</string>
 </resources>

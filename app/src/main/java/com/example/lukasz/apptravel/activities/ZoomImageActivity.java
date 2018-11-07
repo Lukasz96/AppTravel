@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.widget.ImageView;
@@ -42,11 +43,23 @@ public class ZoomImageActivity extends Activity
          Glide.with(this).load(uri).into(view);
 
 
+
+
         PhotoViewAttacher pAttacher;
 
         pAttacher = new PhotoViewAttacher(view);
 
         pAttacher.update();
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (view.getDrawable() == null){
+                    Toast.makeText(ZoomImageActivity.this,R.string.imageerrormessage,Toast.LENGTH_LONG).show();
+                }
+            }
+        }, 1200);
     }
 
 

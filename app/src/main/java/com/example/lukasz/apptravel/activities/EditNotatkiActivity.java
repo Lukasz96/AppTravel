@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.FileObserver;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
@@ -73,20 +74,32 @@ public class EditNotatkiActivity extends AppCompatActivity {
 
         else{
             uri=Uri.parse(notatka.getZdjecieUri());
-            File file= new File(uri.getPath());
-            if(file.exists()){
+
                 Glide.with(this).load(uri).into(zdj);
                 zdj.setEnabled(true);
-            }
-            else {
 
-                    Glide.with(this).load(uri).into(zdj);
-                    zdj.setEnabled(true);
 
-            }
+
 
 
         }
+
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (zdj.getDrawable() == null){
+                    Toast.makeText(EditNotatkiActivity.this,R.string.imageerrormessage,Toast.LENGTH_LONG).show();
+                    zdj.setImageResource(R.drawable.nophotoimage);
+                    zdj.setEnabled(false);
+                    uri=null;
+                    mDb.notatkaDao().updateZdjecieNotatkaById(notatkaId, null);
+                }
+            }
+        }, 1200);
+
+
 
         addphotobutton=findViewById(R.id.editbuttonAddPhoto);
         deletephotobutton=findViewById(R.id.editdeletephotobutton);
