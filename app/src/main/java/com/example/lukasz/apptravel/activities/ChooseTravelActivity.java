@@ -52,6 +52,7 @@ public class ChooseTravelActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
                 travelId=podrozList.get(position).getId();
                 Intent intent= new Intent(ChooseTravelActivity.this, TravelMainMenuActivity.class);
                 intent.putExtra("travelId",travelId);
