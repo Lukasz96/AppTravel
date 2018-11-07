@@ -54,7 +54,8 @@
         <activity
             android:name=".activities.AddNotatkaActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.ChooseTravelActivity"></activity>
+        <activity android:name=".activities.ChooseTravelActivity" />
+        <activity android:name=".activities.LocalStatsActivity"></activity>
     </application>
 
 </manifest>

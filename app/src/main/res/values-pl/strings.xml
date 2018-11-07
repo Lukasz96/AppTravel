@@ -115,5 +115,6 @@
     <string name="send_to">Wyślij do</string>
     <string name="boughtlabel">Kupione</string>
     <string name="nosaveinfo">Jeśli nie zapiszesz wprowadzonych danych, stracisz je. Czy na pewno chcesz wyjść bez zapisywania?</string>
+    <string name="statslabel">Statystyki podróży</string>
 
 </resources>
