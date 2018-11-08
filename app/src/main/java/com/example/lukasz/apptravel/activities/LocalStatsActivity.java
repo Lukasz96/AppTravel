@@ -74,7 +74,7 @@ public class LocalStatsActivity extends AppCompatActivity {
         daneLiczbowe.append(getResources().getString(R.string.averagecostlabel));
 
 
-        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true);
+        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true,true);
         double sumaPrzejazdow=mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId);
         double sumaWydatkow=mDb.wydatekDao().getSumOfWydatkiByTravelId(travelId);
 
@@ -99,7 +99,7 @@ public class LocalStatsActivity extends AppCompatActivity {
 
 
         daneLiczbowe.append(getResources().getString(R.string.youpackedlabel)+" ");
-        int spakowane = mDb.elementListyDoSpakowaniaDao().getSpakowaneElementy(packListId,true).size();
+        int spakowane = mDb.elementListyDoSpakowaniaDao().getSpakowaneElementy(packListId,true,true).size();
         daneLiczbowe.append(String.valueOf(spakowane));
 
 
@@ -175,7 +175,7 @@ public class LocalStatsActivity extends AppCompatActivity {
 
         //////////// ILE PIENIĘDZY NA JAKIE WYDATKI /////////////////////////////////
         wykresWszystkieWydatki=findViewById(R.id.wykreswydatki);
-        float wydatkiNaZakupy=(float)Math.round(mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId,true));
+        float wydatkiNaZakupy=(float)Math.round(mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId,true,true));
         float wydatkiNaNocleg=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,1));
         float wydatkiNaJedzenie=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,2));
         float wydatkiNaZwiedzanie=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,3));
@@ -265,7 +265,7 @@ public class LocalStatsActivity extends AppCompatActivity {
     private float getBudgetRatio(){
 
         double budzetPodrozy=mDb.podrozDao().getPodrozById(travelId).getBudzet();
-        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true);
+        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true, true);
         double sumaPrzejazdow=mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId);
         double sumaWydatkow=mDb.wydatekDao().getSumOfWydatkiByTravelId(travelId);
 
