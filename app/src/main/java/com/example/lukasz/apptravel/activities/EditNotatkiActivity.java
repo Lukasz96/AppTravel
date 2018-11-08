@@ -90,14 +90,14 @@ public class EditNotatkiActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (zdj.getDrawable() == null){
-                    Toast.makeText(EditNotatkiActivity.this,R.string.imageerrormessage,Toast.LENGTH_LONG).show();
+                //    Toast.makeText(EditNotatkiActivity.this,R.string.imageerrormessage,Toast.LENGTH_LONG).show();
                     zdj.setImageResource(R.drawable.nophotoimage);
                     zdj.setEnabled(false);
                     uri=null;
                     mDb.notatkaDao().updateZdjecieNotatkaById(notatkaId, null);
                 }
             }
-        }, 1200);
+        }, 1000);
 
 
 

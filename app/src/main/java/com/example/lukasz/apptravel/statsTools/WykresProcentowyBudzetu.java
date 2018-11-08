@@ -44,9 +44,10 @@ public class WykresProcentowyBudzetu {
 
         if(budzetPodrozy>0)  procentWydany=(float) (sumaWszystkichWydatkow/budzetPodrozy)*100;
         List<BarEntry> yVals=new ArrayList<>();
-        BarEntry entry=new BarEntry(1,procentWydany);
+        BarEntry entry=new BarEntry(procentWydany,0f);
 
         yVals.add(entry);
+        yVals.add(new BarEntry(0.5f,1f));
         BarDataSet set= new BarDataSet(yVals,"");
         set.setColor(R.color.white);
 
@@ -57,8 +58,8 @@ public class WykresProcentowyBudzetu {
         horizontalBarChart.getXAxis().setEnabled(false);
         horizontalBarChart.getDescription().setEnabled(false);
         horizontalBarChart.getAxisRight().setTextSize(17);
-        horizontalBarChart.getAxisRight().setAxisMinimum(0);
-        horizontalBarChart.getAxisRight().setAxisMaximum(150);
+     //   horizontalBarChart.getAxisRight().setAxisMinimum(0);
+     //   horizontalBarChart.getAxisRight().setAxisMaximum(150);
         //horizontalBarChart.getLegend().setEnabled(false);
 
         LimitLine limitLine=new LimitLine(100f,"100%");
@@ -67,7 +68,7 @@ public class WykresProcentowyBudzetu {
         limitLine.setTextColor(R.color.red);
         limitLine.setLineColor(R.color.red);
         horizontalBarChart.getAxisRight().addLimitLine(limitLine);
-
+        horizontalBarChart.invalidate();
 
         return horizontalBarChart;
 
