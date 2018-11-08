@@ -15,6 +15,31 @@
 
         tools:context=".activities.LocalStatsActivity">
 
+        <TextView
+            android:id="@+id/numericaldatatv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:text="@string/numericaldata"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:id="@+id/numericaldane"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:layout_below="@id/numericaldatatv"
+            />
+
 
         <TextView
             android:id="@+id/textView3"
@@ -24,6 +49,7 @@
             android:layout_marginStart="25dp"
             android:ellipsize="end"
             android:maxLines="3"
+            android:layout_below="@id/numericaldane"
             android:layout_marginTop="25dp"
             android:text="@string/pokryciebudzetulabel"
             android:textColor="@color/colorPrimary"
@@ -65,6 +91,29 @@
             android:layout_marginEnd="25dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/labelwydatki"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/wykresrodzajetransportu"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@string/spentmoeneylabel"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_below="@id/labelwydatki"
+            android:id="@+id/wykreswydatki"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="35dp"
+            android:layout_marginStart="15dp"/>
 
 
 

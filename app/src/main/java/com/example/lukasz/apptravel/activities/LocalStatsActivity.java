@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
@@ -15,6 +16,7 @@ import com.example.lukasz.apptravel.statsTools.PercentValueFormatter;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -25,6 +27,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,8 +37,10 @@ public class LocalStatsActivity extends AppCompatActivity {
 
     private long travelId;
     private AppDatabase mDb;
+    private TextView daneLiczbowe;
     private HorizontalBarChart wykresProcentBudzetu;
     private PieChart wykresRodzajeTransportu;
+    private BarChart wykresWszystkieWydatki;
     private long packListId;
 
     @Override
@@ -51,6 +56,56 @@ public class LocalStatsActivity extends AppCompatActivity {
         mDb=AppDatabase.getInstance(this);
         travelId=intent.getLongExtra("travelId",0);
         packListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
+
+
+        //////////// DANE LICZBOWE ///////////////////////////////////////////
+
+        daneLiczbowe=findViewById(R.id.numericaldane);
+
+        daneLiczbowe.append(getResources().getString(R.string.traveldurationlabel)+" ");
+        int iloscDni=getDifferenceDays(mDb.podrozDao().getDateOdByTravelId(travelId),mDb.podrozDao().getDateDoByTravelId(travelId));
+
+        daneLiczbowe.append(String.valueOf(iloscDni)+" ");
+
+        if (iloscDni>1) daneLiczbowe.append(getResources().getString(R.string.dayslabel));
+        else daneLiczbowe.append(getResources().getString(R.string.daylabel));
+
+        daneLiczbowe.append("\n\n");
+        daneLiczbowe.append(getResources().getString(R.string.averagecostlabel));
+
+
+        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true);
+        double sumaPrzejazdow=mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId);
+        double sumaWydatkow=mDb.wydatekDao().getSumOfWydatkiByTravelId(travelId);
+
+        double sumaWszystkichWydatkow=sumaWydatkow+sumaPrzejazdow+sumaZakupow;
+        double averageCost=sumaWszystkichWydatkow/iloscDni;
+        String average = String.format("%.2f", averageCost);
+        daneLiczbowe.append(average);
+        daneLiczbowe.append("\n\n");
+        daneLiczbowe.append(getResources().getString(R.string.numberofrideslabel)+" ");
+        int przejazdy= mDb.przejazdDao().getPrzejazdyDlPodrozy(travelId).size();
+        daneLiczbowe.append(String.valueOf(przejazdy)+" ");
+        if(przejazdy>1) daneLiczbowe.append(getResources().getString(R.string.ridesmanylabel));
+        else daneLiczbowe.append(getResources().getString(R.string.ridelabel));
+        daneLiczbowe.append("\n\n");
+        daneLiczbowe.append(getResources().getString(R.string.listtopacklabel)+ " ");
+
+        int packListItems=mDb.elementListyDoSpakowaniaDao().getElementyZDanejListyCzyDoSpakowania(packListId,true).size();
+        daneLiczbowe.append(String.valueOf(packListItems)+" ");
+
+        if (packListItems>0) daneLiczbowe.append(getResources().getString(R.string.thingslabel));
+        else daneLiczbowe.append(getResources().getString(R.string.thinglabel));
+
+
+        daneLiczbowe.append(getResources().getString(R.string.youpackedlabel)+" ");
+        int spakowane = mDb.elementListyDoSpakowaniaDao().getSpakowaneElementy(packListId,true).size();
+        daneLiczbowe.append(String.valueOf(spakowane));
+
+
+
+
+        //////////// DANE LICZBOWE ///////////////////////////////////////////
 
         ///////////  WYKRES BUDZETU ////////////////////////////////////////
 
@@ -119,8 +174,65 @@ public class LocalStatsActivity extends AppCompatActivity {
         //////////// ILE PIENIĘDZY NA DANY RODZAJ TRANSPOTU ////////////////////////////////
 
         //////////// ILE PIENIĘDZY NA JAKIE WYDATKI /////////////////////////////////
+        wykresWszystkieWydatki=findViewById(R.id.wykreswydatki);
+        float wydatkiNaZakupy=(float)Math.round(mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId,true));
+        float wydatkiNaNocleg=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,1));
+        float wydatkiNaJedzenie=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,2));
+        float wydatkiNaZwiedzanie=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,3));
+        float wydatkiInne=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,4));
+        float wydatkiTransport=(float)Math.round(mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId));
 
+        ArrayList<BarEntry> entryArrayList= new ArrayList<>();
+          entryArrayList.add(new BarEntry(0,wydatkiNaZakupy));
+          entryArrayList.add(new BarEntry(1,wydatkiNaNocleg));
+          entryArrayList.add(new BarEntry(2,wydatkiNaJedzenie));
+          entryArrayList.add(new BarEntry(3,wydatkiNaZwiedzanie));
+          entryArrayList.add(new BarEntry(4,wydatkiTransport));
+          entryArrayList.add(new BarEntry(5,wydatkiInne));
 
+        BarDataSet set1= new BarDataSet(entryArrayList,"");
+
+        set1.setColors(new int[]{Color.parseColor("#ffcc66"), Color.parseColor("#ccccff")
+                , Color.parseColor("#66ff99"),Color.parseColor("#cccc00"), Color.parseColor("#e67300"),
+                Color.parseColor("#cc6699")});
+
+        set1.setDrawValues(true);
+        set1.setValueTextSize(16);
+        BarData barData= new BarData(set1);
+
+        LegendEntry zakupy = new LegendEntry();
+        zakupy.label = getResources().getString(R.string.shoppinglistlabel);
+        zakupy.formColor = Color.parseColor("#ffcc66");
+
+        LegendEntry noclegi = new LegendEntry();
+        noclegi.label = getResources().getString(R.string.accomodationlabel);
+        noclegi.formColor = Color.parseColor("#ccccff");
+
+        LegendEntry jedzenie = new LegendEntry();
+        jedzenie.label = getResources().getString(R.string.foodlabel);
+        jedzenie.formColor = Color.parseColor("#66ff99");
+
+        LegendEntry zwiedzanie = new LegendEntry();
+        zwiedzanie.label = getResources().getString(R.string.sightseeinglabel);
+        zwiedzanie.formColor = Color.parseColor("#cccc00");
+
+        LegendEntry transport = new LegendEntry();
+        transport.label = getResources().getString(R.string.ridesbuttonlabel);
+        transport.formColor = Color.parseColor("#e67300");
+
+        LegendEntry inne = new LegendEntry();
+        inne.label = getResources().getString(R.string.otherlabel);
+        inne.formColor = Color.parseColor("#cc6699");
+
+        wykresWszystkieWydatki.getAxisRight().setEnabled(false);
+        wykresWszystkieWydatki.getLegend().setCustom(Arrays.asList(zakupy,noclegi,jedzenie,zwiedzanie,transport,inne));
+        wykresWszystkieWydatki.getLegend().setWordWrapEnabled(true);
+        wykresWszystkieWydatki.getDescription().setEnabled(false);
+        wykresWszystkieWydatki.getXAxis().setDrawLabels(false);
+        wykresWszystkieWydatki.getLegend().setTextSize(19);
+        wykresWszystkieWydatki.getAxisLeft().setTextSize(16);
+        wykresWszystkieWydatki.animateXY(650,650);
+        wykresWszystkieWydatki.setData(barData);
 
 
     }
@@ -163,6 +275,11 @@ public class LocalStatsActivity extends AppCompatActivity {
 
         if(budzetPodrozy>0)  procentWydany=(float) (sumaWszystkichWydatkow/budzetPodrozy)*100;
         return Math.round(procentWydany);
+    }
+
+    public static int getDifferenceDays(Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        return (int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)+1;
     }
 
 

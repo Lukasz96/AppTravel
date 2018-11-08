@@ -32,4 +32,7 @@ public interface WydatekDao {
 
     @Query("SELECT SUM(koszt) FROM wydatek WHERE podrozId=:travelid")
     double getSumOfWydatkiByTravelId(long travelid);
+
+    @Query("SELECT SUM(koszt) FROM wydatek WHERE podrozId=:travelid AND kategoriaWydatkuId=:kategoriaId")
+    double getSumOfWydatkiByTravelIdAndCategory(long travelid, long kategoriaId);
 }

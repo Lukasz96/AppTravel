@@ -120,6 +120,19 @@
     <string name="pokryciebudzetulabel">Procentowe pokrycie budżetu</string>
     <string name="procentvaluelabel">Wartość procentowa</string>
     <string name="wykresrodzajetransportulabel">Procentowy podział pieniędzy wydanych na transport</string>
+    <string name="spentmoeneylabel">Wydane pieniądze według kategorii</string>
+    <string name="numericaldata">Dane liczbowe</string>
+    <string name="traveldurationlabel">Podróż trwa</string>
+    <string name="daylabel">dzień</string>
+    <string name="dayslabel">dni</string>
+    <string name="averagecostlabel">"Średni koszt jednego dnia wynosi: "</string>
+    <string name="numberofrideslabel">Podczas podróży odbyto</string>
+    <string name="ridelabel">przejazd</string>
+    <string name="ridesmanylabel">przejazdy(ów)</string>
+    <string name="listtopacklabel">Zapisano w liście do spakowania</string>
+    <string name="thinglabel">rzecz</string>
+    <string name="thingslabel">rzeczy</string>
+    <string name="youpackedlabel">, spakowano</string>
 
 
 </resources>

@@ -36,4 +36,7 @@ public interface PrzejazdDao {
     @Query("SELECT SUM(koszt) FROM przejazd WHERE podrozId=:travelId AND kategoriaPrzejazduId=:kategoriaId")
     double getSumKosztuPrzejazduByTravelAndCategory(long travelId, long kategoriaId);
 
+    @Query("SELECT * FROM przejazd WHERE podrozId=:travelId")
+    List<Przejazd> getPrzejazdyDlPodrozy(long travelId);
+
 }

@@ -72,4 +72,7 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT SUM(cena) FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaid AND czyKupione=:czykupione")
     double getSumOfShoppingList(long listaid, boolean czykupione);
 
+    @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:iDlistyDoSpakowania AND czySpakowane=:czySpakowane")
+    List<ElementListyDoSpakowania>getSpakowaneElementy(long iDlistyDoSpakowania, boolean czySpakowane);
+
 }

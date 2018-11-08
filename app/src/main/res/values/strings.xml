@@ -121,5 +121,18 @@
     <string name="pokryciebudzetulabel">Budget covarage in percents</string>
     <string name="procentvaluelabel">Percentage</string>
     <string name="wykresrodzajetransportulabel">Percentage of money spent on transport</string>
+    <string name="spentmoeneylabel">Spent money by categories</string>
+    <string name="numericaldata">Numerical data</string>
+    <string name="traveldurationlabel">The travel lasts</string>
+    <string name="daylabel">day</string>
+    <string name="dayslabel">days</string>
+    <string name="averagecostlabel">Average cost of one day is:</string>
+    <string name="numberofrideslabel">During your travel you take</string>
+    <string name="ridelabel">ride</string>
+    <string name="ridesmanylabel">rides</string>
+    <string name="listtopacklabel">You listed to pack</string>
+    <string name="thinglabel">thing</string>
+    <string name="thingslabel">things</string>
+    <string name="youpackedlabel">, you packed</string>
 
 </resources>
