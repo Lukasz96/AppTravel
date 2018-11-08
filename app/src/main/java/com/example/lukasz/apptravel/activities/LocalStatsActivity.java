@@ -9,7 +9,10 @@ import android.view.MenuItem;
 
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
-import com.example.lukasz.apptravel.statsTools.WykresProcentowyBudzetu;
+import com.example.lukasz.apptravel.db.entities.Przejazd;
+import com.example.lukasz.apptravel.statsTools.PercentAxisValueFormatter;
+import com.example.lukasz.apptravel.statsTools.PercentValueFormatter;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.data.BarData;
@@ -17,12 +20,17 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class LocalStatsActivity extends AppCompatActivity {
 
     private long travelId;
     private AppDatabase mDb;
     private HorizontalBarChart wykresProcentBudzetu;
+    private BarChart wykresPrzejazdynaDzien;
     private long packListId;
 
     @Override
@@ -39,41 +47,56 @@ public class LocalStatsActivity extends AppCompatActivity {
         travelId=intent.getLongExtra("travelId",0);
         packListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
 
+        ///////////  WYKRES BUDZETU ////////////////////////////////////////
+
         LimitLine limitLine=new LimitLine(100f,"100%");
         limitLine.setLineWidth(2f);
         limitLine.setTextSize(14);
         limitLine.setTextColor(Color.rgb(204,0,0));
         limitLine.setLineColor(Color.rgb(204,0,0));
 
-
         wykresProcentBudzetu = findViewById(R.id.wykresprocentbudzetu);
 
         wykresProcentBudzetu.getAxisLeft().setAxisMinimum(0); /// musi byc bo inaczej sie psuje
         wykresProcentBudzetu.getAxisLeft().setAxisMaximum(150);
         wykresProcentBudzetu.getAxisLeft().setTextColor(255255255);
-
         wykresProcentBudzetu.getXAxis().setEnabled(false);
-
         wykresProcentBudzetu.getAxisRight().setAxisMinimum(0);
         wykresProcentBudzetu.getAxisRight().setAxisMaximum(150);
         wykresProcentBudzetu.getAxisRight().addLimitLine(limitLine);
         wykresProcentBudzetu.getAxisRight().setTextSize(16);
+        wykresProcentBudzetu.getAxisRight().setValueFormatter(new PercentAxisValueFormatter());
         wykresProcentBudzetu.getDescription().setEnabled(false);
 
         ArrayList<BarEntry> yVals =new ArrayList<>();
         yVals.add(new BarEntry(0f, getBudgetRatio()));
 
-        BarDataSet set=new BarDataSet(yVals,"Procent pokrycia budżetu");
+        BarDataSet set=new BarDataSet(yVals,getResources().getString(R.string.procentvaluelabel));
         set.setValueTextSize(16);
+        set.setColor(Color.rgb(255, 227, 0));
+        set.setValueFormatter(new PercentValueFormatter());
         wykresProcentBudzetu.getLegend().setTextSize(16);
+
         BarData data= new BarData(set);
         data.setBarWidth(0.45f);
-        wykresProcentBudzetu.animateXY(900,900);
+        wykresProcentBudzetu.animateXY(700,700);
         wykresProcentBudzetu.setData(data);
 
+        ///////////  WYKRES BUDZETU ////////////////////////////////////////
 
-      //  wykresProcentBudzetu.animateXY(1500,1500);
-       // wykresProcentBudzetu.invalidate();
+        //////////// PRZEJAZDY DANEGO DNIA ////////////////////////////////
+        wykresPrzejazdynaDzien=findViewById(R.id.riderperdaybarchart);
+        int iloscDniPOdrozy=getIloscDniPodrozy(mDb.podrozDao().getDateOdByTravelId(travelId),mDb.podrozDao().getDateDoByTravelId(travelId));
+        int ilePodrozy=mDb.przejazdDao().getPrzejazdyDlaPodrozy(travelId).size();
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(mDb.podrozDao().getDateOdByTravelId(travelId));
+
+        List<Przejazd> przejazdList=mDb.przejazdDao().getPrzejazdyDlaPodrozy(travelId);
+        for(int i=0; i<iloscDniPOdrozy;i++){
+
+            
+
+        }
 
     }
 
@@ -89,7 +112,15 @@ public class LocalStatsActivity extends AppCompatActivity {
         float procentWydany=0;
 
         if(budzetPodrozy>0)  procentWydany=(float) (sumaWszystkichWydatkow/budzetPodrozy)*100;
-        return procentWydany;
+        return Math.round(procentWydany);
+    }
+
+
+    public static int getIloscDniPodrozy(Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        long dni=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)+1;
+        System.out.println("DNIIIII "+dni);
+        return (int)dni;
     }
 
     @Override

@@ -7,13 +7,48 @@
     tools:context=".activities.LocalStatsActivity">
 
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/pokryciebudzetulabel"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
     <com.github.mikephil.charting.charts.HorizontalBarChart
         android:id="@+id/wykresprocentbudzetu"
         android:layout_width="match_parent"
-        android:layout_height="183dp">
+        android:layout_height="183dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="15dp">
 
 
     </com.github.mikephil.charting.charts.HorizontalBarChart>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/wykresprocentbudzetu"
+        android:layout_below="@+id/wykresprocentbudzetu"
+        android:layout_marginTop="30dp"
+        android:text="@string/rideseachdaylabel"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/riderperdaybarchart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/textView4"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="15dp" />
+
+
 
 
 </RelativeLayout>

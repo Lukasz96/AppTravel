@@ -118,4 +118,7 @@
     <string name="nosaveinfo">If you do not save given data, you will lose it. Do you want to exit without saving?</string>
     <string name="statslabel">Travel stats</string>
     <string name="imageerrormessage">Error during loading image.  Maybe it was deleted from gallery. Go back and choose another photo.</string>
+    <string name="pokryciebudzetulabel">Budget covarage in percents</string>
+    <string name="procentvaluelabel">Percentage</string>
+    <string name="rideseachdaylabel">Quantity of rides per day</string>
 </resources>
