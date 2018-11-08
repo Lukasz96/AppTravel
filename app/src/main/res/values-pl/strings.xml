@@ -119,6 +119,7 @@
     <string name="imageerrormessage">Błąd podczas ładowania zdjęcia. Być może zostało ono usunięte z galerii. Spróbuj wgrać inne zdjęcie.</string>
     <string name="pokryciebudzetulabel">Procentowe pokrycie budżetu</string>
     <string name="procentvaluelabel">Wartość procentowa</string>
-    <string name="rideseachdaylabel">Ilość przejazdów danego dnia</string>
+    <string name="wykresrodzajetransportulabel">Procentowy podział pieniędzy wydanych na transport</string>
+
 
 </resources>

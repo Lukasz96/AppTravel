@@ -120,5 +120,6 @@
     <string name="imageerrormessage">Error during loading image.  Maybe it was deleted from gallery. Go back and choose another photo.</string>
     <string name="pokryciebudzetulabel">Budget covarage in percents</string>
     <string name="procentvaluelabel">Percentage</string>
-    <string name="rideseachdaylabel">Quantity of rides per day</string>
+    <string name="wykresrodzajetransportulabel">Percentage of money spent on transport</string>
+
 </resources>

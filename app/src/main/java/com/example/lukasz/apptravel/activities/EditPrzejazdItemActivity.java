@@ -86,7 +86,7 @@ public class EditPrzejazdItemActivity extends AppCompatActivity {
         przejazd = mDb.przejazdDao().getPrzejazdById(przejazdId);
 
         nameInput.setText(przejazd.getNazwa());
-        if(przejazd.getKoszt().toString()=="0.0") priceInput.setText(przejazd.getKoszt().toString());
+        if(przejazd.getKoszt().toString()!="0.0") priceInput.setText(przejazd.getKoszt().toString());
 
         Date data=przejazd.getDataOd();
         SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy , HH:mm:ss");

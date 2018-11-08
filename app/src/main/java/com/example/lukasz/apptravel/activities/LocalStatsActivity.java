@@ -14,10 +14,15 @@ import com.example.lukasz.apptravel.statsTools.PercentAxisValueFormatter;
 import com.example.lukasz.apptravel.statsTools.PercentValueFormatter;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,7 +35,7 @@ public class LocalStatsActivity extends AppCompatActivity {
     private long travelId;
     private AppDatabase mDb;
     private HorizontalBarChart wykresProcentBudzetu;
-    private BarChart wykresPrzejazdynaDzien;
+    private PieChart wykresRodzajeTransportu;
     private long packListId;
 
     @Override
@@ -84,19 +89,64 @@ public class LocalStatsActivity extends AppCompatActivity {
 
         ///////////  WYKRES BUDZETU ////////////////////////////////////////
 
-        //////////// PRZEJAZDY DANEGO DNIA ////////////////////////////////
-        wykresPrzejazdynaDzien=findViewById(R.id.riderperdaybarchart);
-        int iloscDniPOdrozy=getIloscDniPodrozy(mDb.podrozDao().getDateOdByTravelId(travelId),mDb.podrozDao().getDateDoByTravelId(travelId));
-        int ilePodrozy=mDb.przejazdDao().getPrzejazdyDlaPodrozy(travelId).size();
-        Calendar calendar=Calendar.getInstance();
-        calendar.setTime(mDb.podrozDao().getDateOdByTravelId(travelId));
+        //////////// ILE PIENIĘDZY NA DANY RODZAJ TRANSPOTU ////////////////////////////////
+        wykresRodzajeTransportu=findViewById(R.id.wykresrodzajetransportu);
+        wykresRodzajeTransportu.setUsePercentValues(true);
+        wykresRodzajeTransportu.setDrawHoleEnabled(true);
+        wykresRodzajeTransportu.getDescription().setEnabled(false);
+       // wykresRodzajeTransportu.setHoleColor(255255255);
+        wykresRodzajeTransportu.setTransparentCircleRadius(55f);
+        wykresRodzajeTransportu.setDragDecelerationFrictionCoef(0.95f);
+        wykresRodzajeTransportu.getLegend().setTextSize(19);
+        //wykresRodzajeTransportu.setExtraOffsets(5,10,5,5);
 
-        List<Przejazd> przejazdList=mDb.przejazdDao().getPrzejazdyDlaPodrozy(travelId);
-        for(int i=0; i<iloscDniPOdrozy;i++){
+        ArrayList<PieEntry> yValues = new ArrayList<>();
+        yValues=getTransportData();
+        PieDataSet dataSet = new PieDataSet(yValues,"");
 
-            
 
-        }
+        dataSet.setColors(new int[]{Color.parseColor("#248f24"), Color.parseColor("#0099ff")
+        , Color.parseColor("#cc3300"),Color.parseColor("#e68a00"), Color.parseColor("#669999")});
+        dataSet.setValueFormatter(new PercentValueFormatter());
+        dataSet.setValueTextColor(Color.rgb(255, 255, 255));
+        dataSet.setValueTextSize(16);
+        PieData data1=new PieData(dataSet);
+        data1.setValueTextSize(16f);
+
+        wykresRodzajeTransportu.setData(data1);
+        wykresRodzajeTransportu.animateX(800);
+
+        //////////// ILE PIENIĘDZY NA DANY RODZAJ TRANSPOTU ////////////////////////////////
+
+        //////////// ILE PIENIĘDZY NA JAKIE WYDATKI /////////////////////////////////
+
+
+
+
+    }
+
+    private ArrayList<PieEntry> getTransportData(){
+
+        ArrayList<PieEntry> values = new ArrayList<>();
+
+        float cenyAut=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,1);
+        float cenySamolotow=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,2);
+        float cenyPociagu=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,3);
+        float cenyStatku=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,4);
+        float cenyRoweru=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,5);
+        float cenyPieszo=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,6);
+        float cenyInne=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,7);
+
+        if(cenyAut>0) values.add(new PieEntry(cenyAut,getResources().getString(R.string.carlabel)));
+        if(cenySamolotow>0) values.add(new PieEntry(cenySamolotow,getResources().getString(R.string.planelabel)));
+        if(cenyPociagu>0) values.add(new PieEntry(cenyPociagu,getResources().getString(R.string.trainlabel)));
+        if(cenyStatku>0) values.add(new PieEntry(cenyStatku,getResources().getString(R.string.shiplabel)));
+        if(cenyRoweru>0) values.add(new PieEntry(cenyRoweru,getResources().getString(R.string.bikelabel)));
+        if(cenyPieszo>0) values.add(new PieEntry(cenyPieszo,getResources().getString(R.string.onfootlabel)));
+        if(cenyInne>0) values.add(new PieEntry(cenyInne,getResources().getString(R.string.otherlabel)));
+
+        return values;
+
 
     }
 
@@ -116,12 +166,7 @@ public class LocalStatsActivity extends AppCompatActivity {
     }
 
 
-    public static int getIloscDniPodrozy(Date d1, Date d2) {
-        long diff = d2.getTime() - d1.getTime();
-        long dni=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)+1;
-        System.out.println("DNIIIII "+dni);
-        return (int)dni;
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
