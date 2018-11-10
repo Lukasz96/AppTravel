@@ -162,10 +162,11 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 Editable s = input.getText();
 
-                                if (s.toString().length() > 9) {
-                                    //     priceInputLayout.setError(getString(R.string.maxninenumbers));
-                                    Toast.makeText(context, R.string.maxninenumbers, Toast.LENGTH_LONG).show();
-                                } else if (".".equals(s.toString())) {
+                                if (s.toString().length() > 9)Toast.makeText(context, R.string.maxninenumbers, Toast.LENGTH_LONG).show();
+                                else if("".equals(s.toString().trim()) || s.toString()==null){
+                                    Toast.makeText(context, R.string.badpriceformat, Toast.LENGTH_LONG).show();
+                                    }
+                                else if (".".equals(s.toString())) {
                                     // priceInputLayout.setError(getString(R.string.badpriceformat));
                                     Toast.makeText(context, R.string.badpriceformat, Toast.LENGTH_LONG).show();
                                 } else if (s.toString().contains(".")) {
@@ -217,7 +218,11 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
                                 if (s.toString().length() > 9) {
                                     //     priceInputLayout.setError(getString(R.string.maxninenumbers));
                                     Toast.makeText(context, R.string.maxninenumbers, Toast.LENGTH_LONG).show();
-                                } else if (".".equals(s.toString())) {
+                                }
+                                else if("".equals(s.toString().trim()) || s.toString()==null){
+                                    Toast.makeText(context, R.string.badpriceformat, Toast.LENGTH_LONG).show();
+                                }
+                                else if (".".equals(s.toString())) {
                                     // priceInputLayout.setError(getString(R.string.badpriceformat));
                                     Toast.makeText(context, R.string.badpriceformat, Toast.LENGTH_LONG).show();
                                 } else if (s.toString().contains(".")) {

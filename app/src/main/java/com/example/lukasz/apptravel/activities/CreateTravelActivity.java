@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
 
 import com.example.lukasz.apptravel.R;
@@ -30,6 +32,8 @@ import com.example.lukasz.apptravel.db.entities.Podroz;
 import com.example.lukasz.apptravel.imageCalc.BackgroundImageCalc;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,6 +54,7 @@ public class CreateTravelActivity extends AppCompatActivity {
     private EditText dateToInput;
     private EditText editName;
     private EditText budgetInput;
+    private EditText waluta;
     private DateInputValidator dateInputValidator;
     private AppDatabase mDb;
     Calendar calendarFrom = Calendar.getInstance();
@@ -78,15 +83,57 @@ public class CreateTravelActivity extends AppCompatActivity {
         dateFromInput=findViewById(R.id.datefrominput);
         dateToButton=findViewById(R.id.imageButton2);
         dateToInput=findViewById(R.id.datetoinput);
+        waluta=findViewById(R.id.walutainput);
+        waluta.setShowSoftInputOnFocus(false);
 
-        ConstraintLayout constraintLayout= findViewById(R.id.createtravelactivity);
+        ScrollView scrollView= findViewById(R.id.createtravelactivity);
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            constraintLayout.setBackgroundResource(R.drawable.main_menu_background);
+            scrollView.setBackgroundResource(R.drawable.main_menu_background);
         }
         else {
-            constraintLayout.setBackgroundResource(R.drawable.main_menu_background_landscape);
+            scrollView.setBackgroundResource(R.drawable.main_menu_background_landscape);
         }
+
+        waluta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                picker.setListener(new CurrencyPickerListener() {
+                    @Override
+                    public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                        waluta.setText(code);
+                        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                        picker.dismiss();
+
+                    }
+                });
+            }
+
+        });
+
+        waluta.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                    picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                    picker.setListener(new CurrencyPickerListener() {
+                        @Override
+                        public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                            waluta.setText(code);
+                            InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                            picker.dismiss();
+                        }
+                    });
+                }
+            }
+        });
 
         editName.addTextChangedListener(new TextWatcher() {
             @Override

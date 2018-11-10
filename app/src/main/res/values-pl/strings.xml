@@ -133,6 +133,7 @@
     <string name="thinglabel">rzecz</string>
     <string name="thingslabel">rzeczy</string>
     <string name="youpackedlabel">, spakowano</string>
+    <string name="currencylabel">Domyślna waluta</string>
 
 
 </resources>
