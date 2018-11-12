@@ -61,6 +61,28 @@ public class AddNotatkaActivity extends AppCompatActivity {
         tyul=findViewById(R.id.addedittytulnotatki);
         tresc=findViewById(R.id.addedittrescnotatki);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addnotatka);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (tyul.getText().toString().trim().equals("") || tyul.getText().toString()==null) {
+                    Toast.makeText(getApplicationContext(), R.string.notitleofnote, Toast.LENGTH_LONG).show();
+                    return;
+                }
+                else {
+                    if(uri==null){
+                        mDb.notatkaDao().insertNotatka(new Notatka(0, null ,tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
+                    }
+                    else  mDb.notatkaDao().insertNotatka(new Notatka(0, uri.toString(),tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
+                    Intent intent = new Intent(AddNotatkaActivity.this, NotatkiListActivity.class);
+                    intent.putExtra("travelId", travelId);
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+        });
+
 
 
 
@@ -137,11 +159,7 @@ public class AddNotatkaActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.notatkimenu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -149,23 +167,6 @@ public class AddNotatkaActivity extends AppCompatActivity {
             case android.R.id.home:
 
                 onBackPressed();
-                return true;
-            case R.id.savenotatka:
-                System.out.println("tytul" +tyul.getText().toString());
-                if (tyul.getText().toString().trim().equals("") || tyul.getText().toString()==null) {
-                    Toast.makeText(this, R.string.notitleofnote, Toast.LENGTH_LONG).show();
-                    return true;
-                }
-                else {
-                    if(uri==null){
-                        mDb.notatkaDao().insertNotatka(new Notatka(0, null ,tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
-                    }
-                    else  mDb.notatkaDao().insertNotatka(new Notatka(0, uri.toString(),tyul.getText().toString().trim(),tresc.getText().toString(),travelId));
-                    Intent intent = new Intent(AddNotatkaActivity.this, NotatkiListActivity.class);
-                    intent.putExtra("travelId", travelId);
-                    startActivity(intent);
-                    finish();
-                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
