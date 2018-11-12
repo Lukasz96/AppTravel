@@ -74,9 +74,9 @@ public class LocalStatsActivity extends AppCompatActivity {
         daneLiczbowe.append(getResources().getString(R.string.averagecostlabel));
 
 
-        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true,true);
-        double sumaPrzejazdow=mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId);
-        double sumaWydatkow=mDb.wydatekDao().getSumOfWydatkiByTravelId(travelId);
+        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true,true,"PLN");
+        double sumaPrzejazdow=mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId,"PLN");
+        double sumaWydatkow=mDb.wydatekDao().getSumOfWydatkiByTravelId(travelId,"PLN");
 
         double sumaWszystkichWydatkow=sumaWydatkow+sumaPrzejazdow+sumaZakupow;
         double averageCost=sumaWszystkichWydatkow/iloscDni;
@@ -175,12 +175,12 @@ public class LocalStatsActivity extends AppCompatActivity {
 
         //////////// ILE PIENIĘDZY NA JAKIE WYDATKI /////////////////////////////////
         wykresWszystkieWydatki=findViewById(R.id.wykreswydatki);
-        float wydatkiNaZakupy=(float)Math.round(mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId,true,true));
-        float wydatkiNaNocleg=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,1));
-        float wydatkiNaJedzenie=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,2));
-        float wydatkiNaZwiedzanie=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,3));
-        float wydatkiInne=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,4));
-        float wydatkiTransport=(float)Math.round(mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId));
+        float wydatkiNaZakupy=(float)Math.round(mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId,true,true,"PLN"));
+        float wydatkiNaNocleg=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,1,"PLN"));
+        float wydatkiNaJedzenie=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,2,"PLN"));
+        float wydatkiNaZwiedzanie=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,3,"PLN"));
+        float wydatkiInne=(float)Math.round(mDb.wydatekDao().getSumOfWydatkiByTravelIdAndCategory(travelId,4,"PLN"));
+        float wydatkiTransport=(float)Math.round(mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId,"PLN"));
 
         ArrayList<BarEntry> entryArrayList= new ArrayList<>();
           entryArrayList.add(new BarEntry(0,wydatkiNaZakupy));
@@ -241,13 +241,13 @@ public class LocalStatsActivity extends AppCompatActivity {
 
         ArrayList<PieEntry> values = new ArrayList<>();
 
-        float cenyAut=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,1);
-        float cenySamolotow=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,2);
-        float cenyPociagu=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,3);
-        float cenyStatku=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,4);
-        float cenyRoweru=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,5);
-        float cenyPieszo=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,6);
-        float cenyInne=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,7);
+        float cenyAut=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,1,"PLN");
+        float cenySamolotow=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,2,"PLN");
+        float cenyPociagu=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,3,"PLN");
+        float cenyStatku=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,4,"PLN");
+        float cenyRoweru=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,5,"PLN");
+        float cenyPieszo=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,6,"PLN");
+        float cenyInne=(float)mDb.przejazdDao().getSumKosztuPrzejazduByTravelAndCategory(travelId,7,"PLN");
 
         if(cenyAut>0) values.add(new PieEntry(cenyAut,getResources().getString(R.string.carlabel)));
         if(cenySamolotow>0) values.add(new PieEntry(cenySamolotow,getResources().getString(R.string.planelabel)));
@@ -265,9 +265,9 @@ public class LocalStatsActivity extends AppCompatActivity {
     private float getBudgetRatio(){
 
         double budzetPodrozy=mDb.podrozDao().getPodrozById(travelId).getBudzet();
-        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true, true);
-        double sumaPrzejazdow=mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId);
-        double sumaWydatkow=mDb.wydatekDao().getSumOfWydatkiByTravelId(travelId);
+        double sumaZakupow=mDb.elementListyDoSpakowaniaDao().getSumOfShoppingList(packListId, true, true,"PLN");
+        double sumaPrzejazdow=mDb.przejazdDao().getSumOfPrzejazdyByTravelId(travelId,"PLN");
+        double sumaWydatkow=mDb.wydatekDao().getSumOfWydatkiByTravelId(travelId,"PLN");
 
         double sumaWszystkichWydatkow=sumaWydatkow+sumaPrzejazdow+sumaZakupow;
 

@@ -20,6 +20,8 @@ import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.example.lukasz.apptravel.db.entities.Podroz;
 import com.gildaswise.horizontalcounter.HorizontalCounter;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,6 +37,9 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
     private TextInputLayout priceInputLayout;
     private Button buttonSubmit;
     private AppDatabase mDb;
+    private TextInputLayout walutaLayout;
+    private EditText walutaInput;
+    private String waluta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,8 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getString(R.string.addshopitemlabel));
 
+        mDb= AppDatabase.getInstance(this);
+
         Intent intent=getIntent();
         travelId=intent.getLongExtra("travelId",0);
         buttonSubmit=findViewById(R.id.buttonAddShopItem);
@@ -54,6 +61,52 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
         quantityInput=findViewById(R.id.counterShopitem);
         priceInput=findViewById(R.id.priceshopiteminput);
         priceInputLayout=findViewById(R.id.shopitempricelayout);
+        walutaLayout=findViewById(R.id.addshopwalutalayout);
+        walutaInput=findViewById(R.id.addshopwalutainput);
+        waluta=mDb.podrozDao().getPodrozById(travelId).getWaluta();
+        walutaInput.setText(waluta);
+
+        walutaInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                picker.setListener(new CurrencyPickerListener() {
+                    @Override
+                    public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                        walutaInput.setText(code);
+                        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                        waluta=code;
+                        picker.dismiss();
+
+                    }
+                });
+            }
+
+        });
+
+        walutaInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                    picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                    picker.setListener(new CurrencyPickerListener() {
+                        @Override
+                        public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                            walutaInput.setText(code);
+                            InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                            waluta=code;
+                            picker.dismiss();
+                        }
+                    });
+                }
+            }
+        });
 
         nameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,7 +148,7 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
         });
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mDb= AppDatabase.getInstance(getApplicationContext());
+
                 long listToPackId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
 
                 double dquantity=(double)quantityInput.getCurrentValue();
@@ -108,7 +161,7 @@ public class AddNewShopListItemActivity extends AppCompatActivity {
 
                 mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(
                         new ElementListyDoSpakowania(0,listToPackId,nameInput.getText().toString().trim(),false,false,
-                                true,quantity,quantity,price,false,1));
+                                true,quantity,quantity,price,waluta,false,1));
 
                 Intent intent=new Intent(AddNewShopListItemActivity.this, ShoppingListActivity.class);
                 intent.putExtra("travelId",travelId);

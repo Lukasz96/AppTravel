@@ -27,12 +27,12 @@ public interface WydatekDao {
     @Query("SELECT * FROM wydatek WHERE id=:id")
     Wydatek getWydatekById(long id);
 
-    @Query("UPDATE wydatek SET nazwa=:nazwa, koszt=:koszt, kategoriaWydatkuId=:kategoriaId WHERE id=:id")
-    void updateWydatekById(long id, String nazwa, double koszt, long kategoriaId);
+    @Query("UPDATE wydatek SET nazwa=:nazwa, koszt=:koszt,waluta=:waluta, kategoriaWydatkuId=:kategoriaId WHERE id=:id")
+    void updateWydatekById(long id, String nazwa, double koszt, String waluta, long kategoriaId);
 
-    @Query("SELECT SUM(koszt) FROM wydatek WHERE podrozId=:travelid")
-    double getSumOfWydatkiByTravelId(long travelid);
+    @Query("SELECT SUM(koszt) FROM wydatek WHERE podrozId=:travelid AND waluta=:waluta")
+    double getSumOfWydatkiByTravelId(long travelid, String waluta);
 
-    @Query("SELECT SUM(koszt) FROM wydatek WHERE podrozId=:travelid AND kategoriaWydatkuId=:kategoriaId")
-    double getSumOfWydatkiByTravelIdAndCategory(long travelid, long kategoriaId);
+    @Query("SELECT SUM(koszt) FROM wydatek WHERE podrozId=:travelid AND kategoriaWydatkuId=:kategoriaId AND waluta=:waluta")
+    double getSumOfWydatkiByTravelIdAndCategory(long travelid, long kategoriaId, String waluta);
 }

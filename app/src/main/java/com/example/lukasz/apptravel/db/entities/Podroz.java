@@ -24,6 +24,7 @@ public class Podroz implements Serializable {
     @TypeConverters({DateTypeConverter.class})
     private Date dataDo;
     private Double budzet;
+    private String waluta;
 
     public long getId() {
         return id;
@@ -68,11 +69,20 @@ public class Podroz implements Serializable {
         this.budzet = budzet;
     }
 
-    public Podroz(long id, @NonNull String nazwa, @NonNull Date dataOd, @NonNull Date dataDo, Double budzet) {
+    public String getWaluta() {
+        return waluta;
+    }
+
+    public void setWaluta(String waluta) {
+        this.waluta = waluta;
+    }
+
+    public Podroz(long id, @NonNull String nazwa, @NonNull Date dataOd, @NonNull Date dataDo, Double budzet, String waluta) {
         this.id = id;
         this.nazwa = nazwa;
         this.dataOd = dataOd;
         this.dataDo = dataDo;
         this.budzet = budzet;
+        this.waluta=waluta;
     }
 }

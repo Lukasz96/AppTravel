@@ -120,7 +120,9 @@ public class PrzejazdyListAdapter extends ArrayAdapter<Przejazd> {
         else {
             cenaPrzejazdu.setText(R.string.pricelabel);
             cenaPrzejazdu.append(" ");
-            cenaPrzejazdu.append(przejazd.getKoszt().toString());
+            cenaPrzejazdu.append(String.format("%.2f",przejazd.getKoszt()));
+            cenaPrzejazdu.append(" ");
+            cenaPrzejazdu.append(przejazd.getWaluta());
         }
 
         switch ((int)przejazd.getKategoriaPrzejazduId()){

@@ -19,6 +19,8 @@ import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.gildaswise.horizontalcounter.HorizontalCounter;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 public class EditShoppingListItemActivity extends AppCompatActivity {
 
@@ -32,6 +34,9 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
     private TextInputLayout priceInputLayout;
     private Button buttonSubmit;
     private long listaDoSpakowaniaId;
+    private TextInputLayout walutaLayout;
+    private EditText walutaInput;
+    private String waluta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +45,15 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.edititemtopack);
+        mDb= AppDatabase.getInstance(this);
+        Intent intent = getIntent();
+        itemId=intent.getLongExtra("itemId",0);
 
-        mDb= AppDatabase.getInstance(getApplicationContext());
+        travelId=mDb.listaDoSpakowaniaDao().getPodrozIdFromListaDoSpakowaniaId(listaDoSpakowaniaId);
+        ElementListyDoSpakowania elementListyDoSpakowania=mDb.elementListyDoSpakowaniaDao().getElementListyDoSpakowaniaById(itemId);
+        listaDoSpakowaniaId=elementListyDoSpakowania.getListaDoSpakowaniaId();
+
+
         buttonSubmit=findViewById(R.id.buttonUpdateShopItem);
         buttonSubmit.setEnabled(true);
         nameInput=findViewById(R.id.editshopnameinput);
@@ -49,17 +61,12 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
         quantityInput=findViewById(R.id.editcounterShopitem);
         priceInput=findViewById(R.id.editpriceshopiteminput);
         priceInputLayout=findViewById(R.id.editshopitempricelayout);
+        walutaLayout=findViewById(R.id.editshopwalutalayout);
+        walutaInput=findViewById(R.id.editshopwalutainput);
+        waluta=mDb.elementListyDoSpakowaniaDao().getElementListyDoSpakowaniaById(elementListyDoSpakowania.getId()).getWaluta();
+        walutaInput.setText(waluta);
 
 
-
-
-        Intent intent = getIntent();
-        itemId=intent.getLongExtra("itemId",0);
-
-
-        ElementListyDoSpakowania elementListyDoSpakowania=mDb.elementListyDoSpakowaniaDao().getElementListyDoSpakowaniaById(itemId);
-        listaDoSpakowaniaId=elementListyDoSpakowania.getListaDoSpakowaniaId();
-        travelId=mDb.listaDoSpakowaniaDao().getPodrozIdFromListaDoSpakowaniaId(listaDoSpakowaniaId);
 
         nameInput.setText(elementListyDoSpakowania.getNazwa());
         int ilosc=elementListyDoSpakowania.getIloscDoZakupu();
@@ -70,6 +77,48 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
             priceInput.setText("");
         }
         else priceInput.setText(String.valueOf(elementListyDoSpakowania.getCena()));
+
+        walutaInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                picker.setListener(new CurrencyPickerListener() {
+                    @Override
+                    public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                        walutaInput.setText(code);
+                        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                        waluta=code;
+                        picker.dismiss();
+
+                    }
+                });
+            }
+
+        });
+
+        walutaInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                    picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                    picker.setListener(new CurrencyPickerListener() {
+                        @Override
+                        public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                            walutaInput.setText(code);
+                            InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                            waluta=code;
+                            picker.dismiss();
+                        }
+                    });
+                }
+            }
+        });
 
         nameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -122,7 +171,7 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
                 }
                 else price=Double.parseDouble(priceInput.getText().toString());
 
-                mDb.elementListyDoSpakowaniaDao().updateElementListyDoZakupuById(itemId, nameInput.getText().toString().trim(), quantity,price);
+                mDb.elementListyDoSpakowaniaDao().updateElementListyDoZakupuById(itemId, nameInput.getText().toString().trim(), quantity,price,waluta);
 
 
                 Intent intent=new Intent(EditShoppingListItemActivity.this, ShoppingListActivity.class);

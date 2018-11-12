@@ -84,7 +84,11 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
         if(Double.toString(elementListyDoSpakowania.getCena()).equals("0.0")){
             price.append("?");
         }
-        else price.append(Double.toString(elementListyDoSpakowania.getCena()));
+        else {
+            price.append(String.format("%.2f",elementListyDoSpakowania.getCena()));
+            price.append(" ");
+            price.append(elementListyDoSpakowania.getWaluta());
+        }
 
 
 
@@ -179,7 +183,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
                                         //   priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
                                         Toast.makeText(context, R.string.pricemorethanzeroerror, Toast.LENGTH_LONG).show();
                                     } else {
-                                        mDb.elementListyDoSpakowaniaDao().updateCenaElementZakupuById(elementListyDoSpakowania.getId(), Double.parseDouble(s.toString()));
+                                        mDb.elementListyDoSpakowaniaDao().updateCenaElementZakupuById(elementListyDoSpakowania.getId(), Double.parseDouble(s.toString()),elementListyDoSpakowania.getWaluta());
                                         buttonView.setChecked(true);
                                  //       elementListyDoSpakowania.setCena(Double.parseDouble(s.toString()));
                                         mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), true);
@@ -191,7 +195,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
                                     //  priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
                                     Toast.makeText(context, R.string.pricemorethanzeroerror, Toast.LENGTH_LONG).show();
                                 } else {
-                                    mDb.elementListyDoSpakowaniaDao().updateCenaElementZakupuById(elementListyDoSpakowania.getId(), Double.parseDouble(s.toString()));
+                                    mDb.elementListyDoSpakowaniaDao().updateCenaElementZakupuById(elementListyDoSpakowania.getId(), Double.parseDouble(s.toString()),elementListyDoSpakowania.getWaluta());
                                     buttonView.setChecked(true);
                               //      elementListyDoSpakowania.setCena(Double.parseDouble(s.toString()));
                                     mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), true);
@@ -235,7 +239,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
                                         //   priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
                                         Toast.makeText(context, R.string.pricemorethanzeroerror, Toast.LENGTH_LONG).show();
                                     } else {
-                                        mDb.elementListyDoSpakowaniaDao().updateCenaElementZakupuById(elementListyDoSpakowania.getId(), Double.parseDouble(s.toString()));
+                                        mDb.elementListyDoSpakowaniaDao().updateCenaElementZakupuById(elementListyDoSpakowania.getId(), Double.parseDouble(s.toString()),elementListyDoSpakowania.getWaluta());
                                         buttonView.setChecked(true);
                                         mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), true);
                                         updateReceiptsList(mDb.elementListyDoSpakowaniaDao().getAllElementyDoZakupu(elementListyDoSpakowania.getListaDoSpakowaniaId(), true));
@@ -246,7 +250,7 @@ public class ShoppingListAdapter extends ArrayAdapter<ElementListyDoSpakowania> 
                                     //  priceInputLayout.setError(getString(R.string.pricemorethanzeroerror));
                                     Toast.makeText(context, R.string.pricemorethanzeroerror, Toast.LENGTH_LONG).show();
                                 } else {
-                                    mDb.elementListyDoSpakowaniaDao().updateCenaElementZakupuById(elementListyDoSpakowania.getId(), Double.parseDouble(s.toString()));
+                                    mDb.elementListyDoSpakowaniaDao().updateCenaElementZakupuById(elementListyDoSpakowania.getId(), Double.parseDouble(s.toString()),elementListyDoSpakowania.getWaluta());
                                     buttonView.setChecked(true);
                                     mDb.elementListyDoSpakowaniaDao().setCzyKupione(elementListyDoSpakowania.getId(), true);
                                     updateReceiptsList(mDb.elementListyDoSpakowaniaDao().getAllElementyDoZakupu(elementListyDoSpakowania.getListaDoSpakowaniaId(), true));

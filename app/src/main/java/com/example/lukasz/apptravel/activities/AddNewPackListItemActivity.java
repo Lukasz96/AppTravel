@@ -111,10 +111,11 @@ public class AddNewPackListItemActivity extends AppCompatActivity {
                 long categoryId=mDb.kategoriaDao().getIdKategoriiOdNazwy(kategoriaSpinner.getSelectedItem().toString());
 
                 boolean isToBuy=isToBuyCheckbox.isChecked();
+                String waluta= mDb.podrozDao().getWalutaByTravelId(travelId);
 
                 ElementListyDoSpakowania elementListyDoSpakowania =
                         new ElementListyDoSpakowania(0,packListId,packItemName,true, false,
-                                isToBuy,quantity,quantity,0,false,categoryId);
+                                isToBuy,quantity,quantity,0,waluta,false,categoryId);
 
                 mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(elementListyDoSpakowania);
                 Intent intent= new Intent(AddNewPackListItemActivity.this, PackListActivity.class);

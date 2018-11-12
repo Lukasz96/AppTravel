@@ -55,6 +55,7 @@ public class CreateTravelActivity extends AppCompatActivity {
     private EditText editName;
     private EditText budgetInput;
     private EditText waluta;
+    private String walutaInput;
     private DateInputValidator dateInputValidator;
     private AppDatabase mDb;
     Calendar calendarFrom = Calendar.getInstance();
@@ -85,6 +86,7 @@ public class CreateTravelActivity extends AppCompatActivity {
         dateToInput=findViewById(R.id.datetoinput);
         waluta=findViewById(R.id.walutainput);
         waluta.setShowSoftInputOnFocus(false);
+        walutaInput=waluta.getText().toString();
 
         ScrollView scrollView= findViewById(R.id.createtravelactivity);
 
@@ -107,6 +109,7 @@ public class CreateTravelActivity extends AppCompatActivity {
                         waluta.setText(code);
                         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
                         inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                        walutaInput=code;
                         picker.dismiss();
 
                     }
@@ -128,6 +131,7 @@ public class CreateTravelActivity extends AppCompatActivity {
                             waluta.setText(code);
                             InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
                             inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                            walutaInput=code;
                             picker.dismiss();
                         }
                     });
@@ -208,7 +212,8 @@ public class CreateTravelActivity extends AppCompatActivity {
                 }
                 double budget=Double.parseDouble(budgetInput.getText().toString());
 
-                long travelId=mDb.podrozDao().insertPodroz(new Podroz(0,travelName,date1,date2,budget));
+
+                long travelId=mDb.podrozDao().insertPodroz(new Podroz(0,travelName,date1,date2,budget,walutaInput));
                 Intent intent=new Intent(CreateTravelActivity.this, TravelMainMenuActivity.class);
                 intent.putExtra("travelId",travelId);
                 startActivity(intent);

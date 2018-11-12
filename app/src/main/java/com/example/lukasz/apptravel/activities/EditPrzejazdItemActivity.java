@@ -26,6 +26,8 @@ import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Przejazd;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,6 +54,9 @@ public class EditPrzejazdItemActivity extends AppCompatActivity {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private Date dateOdPodrozy;
     private Date dateDoPodrozy;
+    private TextInputLayout walutaLayout;
+    private EditText walutaInput;
+    private String waluta;
     DatePickerDialog.OnDateSetListener dateFrom;
     Calendar calendarFrom = Calendar.getInstance();
     private Przejazd przejazd;
@@ -82,6 +87,10 @@ public class EditPrzejazdItemActivity extends AppCompatActivity {
         priceInput=findViewById(R.id.editprzejazdpriceinput);
         buttonSubmit=findViewById(R.id.editaddprzejazdbutton);
         buttonSubmit.setEnabled(true);
+        walutaLayout=findViewById(R.id.editprzejazdwalutalayout);
+        walutaInput=findViewById(R.id.editprzejazdwalutainput);
+        waluta=mDb.przejazdDao().getPrzejazdById(przejazdId).getWaluta();
+        walutaInput.setText(waluta);
 
         przejazd = mDb.przejazdDao().getPrzejazdById(przejazdId);
 
@@ -110,6 +119,48 @@ public class EditPrzejazdItemActivity extends AppCompatActivity {
         categorySpinner.setAdapter(adapter);
         categorySpinner.setSelection((int)przejazd.getKategoriaPrzejazduId()-1);
 
+
+        walutaInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                picker.setListener(new CurrencyPickerListener() {
+                    @Override
+                    public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                        walutaInput.setText(code);
+                        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                        waluta=code;
+                        picker.dismiss();
+
+                    }
+                });
+            }
+
+        });
+
+        walutaInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                    picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                    picker.setListener(new CurrencyPickerListener() {
+                        @Override
+                        public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                            walutaInput.setText(code);
+                            InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                            waluta=code;
+                            picker.dismiss();
+                        }
+                    });
+                }
+            }
+        });
 
 
         nameInput.addTextChangedListener(new TextWatcher() {
@@ -231,7 +282,7 @@ public class EditPrzejazdItemActivity extends AppCompatActivity {
                 }
                 else price=Double.parseDouble(priceInput.getText().toString());
 
-                mDb.przejazdDao().updatePrzejazd(przejazdId,categoryId,nazwa,date1,price);
+                mDb.przejazdDao().updatePrzejazd(przejazdId,categoryId,nazwa,date1,price,waluta);
 
                 Intent intent=new Intent(EditPrzejazdItemActivity.this, PrzejazdyActivity.class);
                 intent.putExtra("travelId",travelId);

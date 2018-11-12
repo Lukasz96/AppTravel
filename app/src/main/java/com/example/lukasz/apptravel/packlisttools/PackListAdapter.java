@@ -64,12 +64,13 @@ public class PackListAdapter extends ArrayAdapter<ElementListyDoSpakowania> {
          int iloscDoSpakowania=getItem(position).getIloscDoSpakowania();
         int iloscDoZakupu=getItem(position).getIloscDoZakupu();
          double cena=getItem(position).getCena();
+         String waluta= getItem(position).getWaluta();
          boolean czyKupione=getItem(position).isCzyKupione();
          long idKategorii=getItem(position).getIdKategorii();
 
 
          ElementListyDoSpakowania elementListyDoSpakowania=new ElementListyDoSpakowania(id,listaDoSpakowaniaId,
-                 nazwa,czyDoSpakowania,czySpakowane,czyPrzekazanoDoZakupu,iloscDoSpakowania,iloscDoZakupu,cena,czyKupione,idKategorii);
+                 nazwa,czyDoSpakowania,czySpakowane,czyPrzekazanoDoZakupu,iloscDoSpakowania,iloscDoZakupu,cena,waluta,czyKupione,idKategorii);
 
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(mResource,parent,false);

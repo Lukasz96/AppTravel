@@ -98,12 +98,13 @@ public class ChoosePacklistActivity extends AppCompatActivity {
                 for(ElementListyDoSpakowania element:elementListyDoSpakowaniaDoKopiowania){
                     String nazwa=element.getNazwa();
                     int iloscDoSpakowania=element.getIloscDoSpakowania();
+                    String waluta=element.getWaluta();
 
                     long idKategorii=element.getIdKategorii();
 
                     mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(
                             new ElementListyDoSpakowania(0, newpackListId, nazwa,true,false,false, iloscDoSpakowania,iloscDoSpakowania,
-                                    0, false, idKategorii));
+                                    0,waluta, false, idKategorii));
                 }
                 Intent intent = new Intent(ChoosePacklistActivity.this, PackListActivity.class);
                 intent.putExtra("travelId", podrozIdObecna);

@@ -134,6 +134,7 @@
     <string name="thinglabel">thing</string>
     <string name="thingslabel">things</string>
     <string name="youpackedlabel">, you packed</string>
-    <string name="currencylabel">Currency</string>
+    <string name="currencylabel">Currency (tap to change)</string>
+    <string name="defaultcurrency">USD</string>
 
 </resources>

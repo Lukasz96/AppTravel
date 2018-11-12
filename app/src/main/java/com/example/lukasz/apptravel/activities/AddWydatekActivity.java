@@ -21,6 +21,8 @@ import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Przejazd;
 import com.example.lukasz.apptravel.db.entities.Wydatek;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 import java.util.List;
 
@@ -34,6 +36,9 @@ public class AddWydatekActivity extends AppCompatActivity {
     private EditText priceInput;
     private AppDatabase mDb;
     private Button buttonSubmit;
+    private TextInputLayout walutaLayout;
+    private EditText walutaInput;
+    private String waluta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class AddWydatekActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(R.string.addexpenselabel);
         mDb= AppDatabase.getInstance(getApplicationContext());
+        Intent intent=getIntent();
+        travelId=intent.getLongExtra("travelId",0);
 
         nameLayout=findViewById(R.id.wydateknamelayout);
         nameInput=findViewById(R.id.wydatekdnameinput);
@@ -52,9 +59,12 @@ public class AddWydatekActivity extends AppCompatActivity {
         priceInput=findViewById(R.id.wydatekpriceinput);
         buttonSubmit=findViewById(R.id.addwydatekbutton);
         buttonSubmit.setEnabled(false);
+        walutaLayout=findViewById(R.id.addwydatekwalutalayout);
+        walutaInput=findViewById(R.id.addwydatekwalutainput);
+        waluta=mDb.podrozDao().getWalutaByTravelId(travelId);
+        walutaInput.setText(waluta);
 
-        Intent intent=getIntent();
-        travelId=intent.getLongExtra("travelId",0);
+
 
         List<String> listaKategorii;
         listaKategorii=mDb.kategoriaWydatkuDao().getAllNazwyKategoriiWydatku();
@@ -63,6 +73,48 @@ public class AddWydatekActivity extends AppCompatActivity {
                 R.layout.spinner_item, listaKategorii);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
+
+        walutaInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                picker.setListener(new CurrencyPickerListener() {
+                    @Override
+                    public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                        walutaInput.setText(code);
+                        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                        waluta=code;
+                        picker.dismiss();
+
+                    }
+                });
+            }
+
+        });
+
+        walutaInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                    picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                    picker.setListener(new CurrencyPickerListener() {
+                        @Override
+                        public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                            walutaInput.setText(code);
+                            InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                            waluta=code;
+                            picker.dismiss();
+                        }
+                    });
+                }
+            }
+        });
 
         nameInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -113,7 +165,7 @@ public class AddWydatekActivity extends AppCompatActivity {
                     price=0;
                 }
                 else price=Double.parseDouble(priceInput.getText().toString());
-                mDb.wydatekDao().insertWydatek(new Wydatek(0,travelId,categoryId,nazwa,price));
+                mDb.wydatekDao().insertWydatek(new Wydatek(0,travelId,categoryId,nazwa,price,waluta));
 
                 Intent intent=new Intent(AddWydatekActivity.this, WydatkiActivity.class);
                 intent.putExtra("travelId",travelId);

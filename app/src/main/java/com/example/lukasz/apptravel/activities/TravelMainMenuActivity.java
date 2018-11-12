@@ -188,6 +188,7 @@ public class TravelMainMenuActivity extends AppCompatActivity {
                 intent.putExtra("dataOd", dateFormat.format(dateFrom).toString());
                 intent.putExtra("dataDo", dateFormat.format(dateTo).toString());
                 intent.putExtra("budzet",podroz.getBudzet());
+                intent.putExtra("waluta", podroz.getWaluta());
                 startActivity(intent);
 
           //      Toast.makeText(TravelMainMenuActivity.this, "Edit", Toast.LENGTH_LONG).show();

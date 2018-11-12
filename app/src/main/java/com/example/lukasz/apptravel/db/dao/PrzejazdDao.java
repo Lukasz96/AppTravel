@@ -27,14 +27,14 @@ public interface PrzejazdDao {
     @Query("SELECT * FROM przejazd WHERE id=:id")
     Przejazd getPrzejazdById(long id);
 
-    @Query("UPDATE przejazd SET kategoriaPrzejazduId=:kategoriaId, nazwa=:nazwa, dataOd=:data, koszt=:koszt WHERE id=:id")
-    void updatePrzejazd(long id, long kategoriaId, String nazwa, Date data, double koszt);
+    @Query("UPDATE przejazd SET kategoriaPrzejazduId=:kategoriaId, nazwa=:nazwa, dataOd=:data, koszt=:koszt, waluta=:waluta WHERE id=:id")
+    void updatePrzejazd(long id, long kategoriaId, String nazwa, Date data, double koszt, String waluta);
 
-    @Query("SELECT SUM (koszt) FROM przejazd WHERE podrozId=:travelId")
-    double getSumOfPrzejazdyByTravelId(long travelId);
+    @Query("SELECT SUM (koszt) FROM przejazd WHERE podrozId=:travelId AND waluta=:waluta")
+    double getSumOfPrzejazdyByTravelId(long travelId, String waluta);
 
-    @Query("SELECT SUM(koszt) FROM przejazd WHERE podrozId=:travelId AND kategoriaPrzejazduId=:kategoriaId")
-    double getSumKosztuPrzejazduByTravelAndCategory(long travelId, long kategoriaId);
+    @Query("SELECT SUM(koszt) FROM przejazd WHERE podrozId=:travelId AND kategoriaPrzejazduId=:kategoriaId AND waluta=:waluta")
+    double getSumKosztuPrzejazduByTravelAndCategory(long travelId, long kategoriaId, String waluta);
 
     @Query("SELECT * FROM przejazd WHERE podrozId=:travelId")
     List<Przejazd> getPrzejazdyDlPodrozy(long travelId);

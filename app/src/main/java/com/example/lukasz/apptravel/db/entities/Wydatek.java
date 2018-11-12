@@ -25,13 +25,15 @@ public class Wydatek {
     private String nazwa;
     @NonNull
     private Double koszt;
+    private String waluta;
 
-    public Wydatek(long id, long podrozId, long kategoriaWydatkuId, @NonNull String nazwa, @NonNull Double koszt) {
+    public Wydatek(long id, long podrozId, long kategoriaWydatkuId, @NonNull String nazwa, @NonNull Double koszt, String waluta) {
         this.id = id;
         this.podrozId = podrozId;
         this.kategoriaWydatkuId = kategoriaWydatkuId;
         this.nazwa = nazwa;
         this.koszt = koszt;
+        this.waluta = waluta;
     }
 
     public long getId() {
@@ -74,5 +76,13 @@ public class Wydatek {
 
     public void setKoszt(@NonNull Double koszt) {
         this.koszt = koszt;
+    }
+
+    public String getWaluta() {
+        return waluta;
+    }
+
+    public void setWaluta(String waluta) {
+        this.waluta = waluta;
     }
 }

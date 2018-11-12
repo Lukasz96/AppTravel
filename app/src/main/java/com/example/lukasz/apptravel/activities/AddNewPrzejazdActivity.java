@@ -26,6 +26,8 @@ import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Przejazd;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.mynameismidori.currencypicker.CurrencyPicker;
+import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,6 +54,9 @@ public class AddNewPrzejazdActivity extends AppCompatActivity {
     private Date dateOdPodrozy;
     private Date dateDoPodrozy;
     DatePickerDialog.OnDateSetListener dateFrom;
+    private TextInputLayout walutaLayout;
+    private EditText walutaInput;
+    private String waluta;
     Calendar calendarFrom = Calendar.getInstance();
 
 
@@ -79,6 +84,10 @@ public class AddNewPrzejazdActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         travelId=intent.getLongExtra("travelId",0);
+        walutaLayout=findViewById(R.id.addprzejazdwalutalayout);
+        walutaInput=findViewById(R.id.addprzejazdwalutainput);
+        waluta=mDb.podrozDao().getWalutaByTravelId(travelId);
+        walutaInput.setText(waluta);
 
         dateOdPodrozy=mDb.podrozDao().getDateOdByTravelId(travelId);
         dateDoPodrozy=mDb.podrozDao().getDateDoByTravelId(travelId);
@@ -90,6 +99,48 @@ public class AddNewPrzejazdActivity extends AppCompatActivity {
                 R.layout.spinner_item, listaKategorii);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
+
+        walutaInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                picker.setListener(new CurrencyPickerListener() {
+                    @Override
+                    public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                        walutaInput.setText(code);
+                        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                        waluta=code;
+                        picker.dismiss();
+
+                    }
+                });
+            }
+
+        });
+
+        walutaInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    CurrencyPicker picker = CurrencyPicker.newInstance("Select Currency");
+                    picker.show(getSupportFragmentManager(), "CURRENCY_PICKER");
+
+                    picker.setListener(new CurrencyPickerListener() {
+                        @Override
+                        public void onSelectCurrency(String name, String code, String dialCode, int flagDrawableResID) {
+                            walutaInput.setText(code);
+                            InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(picker.getView().getWindowToken(), 0);
+                            waluta=code;
+                            picker.dismiss();
+                        }
+                    });
+                }
+            }
+        });
 
 
         nameInput.addTextChangedListener(new TextWatcher() {
@@ -211,7 +262,7 @@ public class AddNewPrzejazdActivity extends AppCompatActivity {
                 }
                 else price=Double.parseDouble(priceInput.getText().toString());
 
-                mDb.przejazdDao().insertPrzejazd(new Przejazd(0,travelId,categoryId,nazwa,date1,price));
+                mDb.przejazdDao().insertPrzejazd(new Przejazd(0,travelId,categoryId,nazwa,date1,price,waluta));
 
                 Intent intent=new Intent(AddNewPrzejazdActivity.this, PrzejazdyActivity.class);
                 intent.putExtra("travelId",travelId);

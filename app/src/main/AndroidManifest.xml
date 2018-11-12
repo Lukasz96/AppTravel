@@ -22,7 +22,8 @@
             android:screenOrientation="portrait"
         />
         <activity android:name=".activities.TravelMainMenuActivity" />
-        <activity android:name=".activities.UpdateTravelActivity" />
+        <activity android:name=".activities.UpdateTravelActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activities.NoExistingPacklistChioceActivity" />
         <activity android:name=".activities.ChoosePacklistActivity" />
         <activity
@@ -34,16 +35,21 @@
         <activity
             android:name=".activities.ShoppingListActivity"
             android:label="@string/title_activity_shopping_list" />
-        <activity android:name=".activities.EditShoppingListItemActivity" />
-        <activity android:name=".activities.AddNewShopListItemActivity" />
+        <activity android:name=".activities.EditShoppingListItemActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.AddNewShopListItemActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activities.PrzejazdyActivity" />
         <activity
             android:name=".activities.AddNewPrzejazdActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.EditPrzejazdItemActivity" />
+        <activity android:name=".activities.EditPrzejazdItemActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activities.WydatkiActivity" />
-        <activity android:name=".activities.AddWydatekActivity" />
-        <activity android:name=".activities.EditWydatekActivity" />
+        <activity android:name=".activities.AddWydatekActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.EditWydatekActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.EditNotatkiActivity"
             android:screenOrientation="portrait" />

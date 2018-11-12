@@ -63,14 +63,14 @@ public interface ElementListyDoSpakowaniaDao {
             "WHERE listaDoSpakowaniaId=:listaId")
     void setCzyDoSpakowaniaForWholeListByListalId(long listaId, boolean czyDoSpakowania);
 
-    @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, iloscDoZakupu=:ilosc, cena=:cena WHERE id=:id")
-    void updateElementListyDoZakupuById(long id, String nazwa, int ilosc, double cena );
+    @Query("UPDATE elementlistydospakowania SET nazwa=:nazwa, iloscDoZakupu=:ilosc, cena=:cena, waluta=:waluta WHERE id=:id")
+    void updateElementListyDoZakupuById(long id, String nazwa, int ilosc, double cena, String waluta);
 
-    @Query("UPDATE elementlistydospakowania SET cena=:cena WHERE id=:id")
-    void updateCenaElementZakupuById(long id, double cena);
+    @Query("UPDATE elementlistydospakowania SET cena=:cena, waluta=:waluta WHERE id=:id")
+    void updateCenaElementZakupuById(long id, double cena, String waluta);
 
-    @Query("SELECT SUM(cena) FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaid AND czyKupione=:czykupione AND czyPrzekazanoDoZakupu=:czyDoZakupu")
-    double getSumOfShoppingList(long listaid, boolean czykupione, boolean czyDoZakupu);
+    @Query("SELECT SUM(cena) FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaid AND czyKupione=:czykupione AND czyPrzekazanoDoZakupu=:czyDoZakupu AND waluta=:waluta")
+    double getSumOfShoppingList(long listaid, boolean czykupione, boolean czyDoZakupu, String waluta);
 
     @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:iDlistyDoSpakowania AND czyDoSpakowania=:czyDoSpakowania AND czySpakowane=:czySpakowane")
     List<ElementListyDoSpakowania>getSpakowaneElementy(long iDlistyDoSpakowania, boolean czySpakowane, boolean czyDoSpakowania);

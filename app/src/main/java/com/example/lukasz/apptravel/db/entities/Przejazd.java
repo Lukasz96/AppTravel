@@ -33,14 +33,16 @@ public class Przejazd {
     @TypeConverters({DateTypeConverter.class})
     private Date dataOd;
     private Double koszt;
+    private String waluta;
 
-    public Przejazd(long id, long podrozId, long kategoriaPrzejazduId, @NonNull String nazwa, @NonNull Date dataOd,  Double koszt) {
+    public Przejazd(long id, long podrozId, long kategoriaPrzejazduId, @NonNull String nazwa, @NonNull Date dataOd,  Double koszt, String waluta) {
         this.id = id;
         this.podrozId = podrozId;
         this.kategoriaPrzejazduId = kategoriaPrzejazduId;
         this.nazwa = nazwa;
         this.dataOd = dataOd;
         this.koszt = koszt;
+        this.waluta = waluta;
     }
 
     public long getId() {
@@ -93,5 +95,13 @@ public class Przejazd {
 
     public void setKoszt(Double koszt) {
         this.koszt = koszt;
+    }
+
+    public String getWaluta() {
+        return waluta;
+    }
+
+    public void setWaluta(String waluta) {
+        this.waluta = waluta;
     }
 }
