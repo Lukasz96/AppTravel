@@ -48,10 +48,11 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
         mDb= AppDatabase.getInstance(this);
         Intent intent = getIntent();
         itemId=intent.getLongExtra("itemId",0);
-
-        travelId=mDb.listaDoSpakowaniaDao().getPodrozIdFromListaDoSpakowaniaId(listaDoSpakowaniaId);
         ElementListyDoSpakowania elementListyDoSpakowania=mDb.elementListyDoSpakowaniaDao().getElementListyDoSpakowaniaById(itemId);
         listaDoSpakowaniaId=elementListyDoSpakowania.getListaDoSpakowaniaId();
+        travelId=mDb.listaDoSpakowaniaDao().getPodrozIdFromListaDoSpakowaniaId(listaDoSpakowaniaId);
+
+
 
 
         buttonSubmit=findViewById(R.id.buttonUpdateShopItem);
@@ -160,8 +161,8 @@ public class EditShoppingListItemActivity extends AppCompatActivity {
         });
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mDb= AppDatabase.getInstance(getApplicationContext());
-                long listToPackId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
+
+//                long listToPackId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
 
                 double dquantity=quantityInput.getCurrentValue();
                 int quantity=(int)dquantity;
