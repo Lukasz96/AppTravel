@@ -7,4 +7,5 @@
     <color name="fontColor">#804132</color>
     <color name="greyChecked">#9d9998</color>
     <color name="red">#b50808</color>
+    <color name="black">#000000</color>
 </resources>
