@@ -138,4 +138,9 @@
     <string name="bycategory">według kategorii</string>
     <string name="expensespaidin">Wydatki opłacone w</string>
     <string name="totalcostlabel">Całkowity koszt podróży wynosi:</string>
+    <string name="statsgloballabel">Statystyki</string>
+    <string name="daneIlePodrozy">- tyle już odbyto podróży</string>
+    <string name="daneiledni">- dni w podróży</string>
+    <string name="daneilewalut">- tyloma różnymi walutami płacono</string>
+    <string name="daneileprzejazdów">- ilość przejazdów w trakcie wszystkich podróży</string>
 </resources>

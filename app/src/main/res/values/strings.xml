@@ -139,5 +139,10 @@
     <string name="expensespaidin">Expenses paid in</string>
     <string name="bycategory">by category</string>
     <string name="totalcostlabel">Total cost of travel is:</string>
+    <string name="statsgloballabel">Stats</string>
+    <string name="daneIlePodrozy">- that\'s how many travels you\'ve already had</string>
+    <string name="daneiledni">- days you were travelling</string>
+    <string name="daneilewalut">- amount of different currencies you have used</string>
+    <string name="daneileprzejazdów">- that\'s how many rides you had during all travels</string>
 
 </resources>
