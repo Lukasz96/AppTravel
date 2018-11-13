@@ -39,4 +39,10 @@ public interface PrzejazdDao {
     @Query("SELECT * FROM przejazd WHERE podrozId=:travelId")
     List<Przejazd> getPrzejazdyDlPodrozy(long travelId);
 
+    @Query("SELECT DISTINCT waluta FROM przejazd WHERE podrozId=:travelId")
+    List<String> getWalutyPrzejazdy(long travelId);
+
+    @Query("SELECT * FROM przejazd WHERE podrozId=:podrozId AND kategoriaPrzejazduId=:kategoriaId")
+    List<Przejazd> getPrzejazdyByTravelAndCategory(long podrozId, long kategoriaId);
+
 }

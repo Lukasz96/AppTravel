@@ -35,4 +35,7 @@ public interface WydatekDao {
 
     @Query("SELECT SUM(koszt) FROM wydatek WHERE podrozId=:travelid AND kategoriaWydatkuId=:kategoriaId AND waluta=:waluta")
     double getSumOfWydatkiByTravelIdAndCategory(long travelid, long kategoriaId, String waluta);
+
+    @Query("SELECT DISTINCT waluta FROM wydatek WHERE podrozId=:travelId")
+    List<String> getWalutyWydatki(long travelId);
 }

@@ -118,9 +118,9 @@
     <string name="nosaveinfo">If you do not save given data, you will lose it. Do you want to exit without saving?</string>
     <string name="statslabel">Travel stats</string>
     <string name="imageerrormessage">Error during loading image.  Maybe it was deleted from gallery. Go back and choose another photo.</string>
-    <string name="pokryciebudzetulabel">Budget covarage in percents</string>
+    <string name="pokryciebudzetulabel">Budget covarage in percents (contains only expenses in </string>
     <string name="procentvaluelabel">Percentage</string>
-    <string name="wykresrodzajetransportulabel">Percentage of money spent on transport</string>
+    <string name="wykresrodzajetransportulabel">Which means of transport did you use:</string>
     <string name="spentmoeneylabel">Spent money by categories</string>
     <string name="numericaldata">Numerical data</string>
     <string name="traveldurationlabel">The travel lasts</string>
@@ -136,5 +136,8 @@
     <string name="youpackedlabel">, you packed</string>
     <string name="currencylabel">Currency (tap to change)</string>
     <string name="defaultcurrency">USD</string>
+    <string name="expensespaidin">Expenses paid in</string>
+    <string name="bycategory">by category</string>
+    <string name="totalcostlabel">Total cost of travel is:</string>
 
 </resources>

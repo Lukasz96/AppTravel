@@ -117,9 +117,9 @@
     <string name="nosaveinfo">Jeśli nie zapiszesz wprowadzonych danych, stracisz je. Czy na pewno chcesz wyjść bez zapisywania?</string>
     <string name="statslabel">Statystyki podróży</string>
     <string name="imageerrormessage">Błąd podczas ładowania zdjęcia. Być może zostało ono usunięte z galerii. Spróbuj wgrać inne zdjęcie.</string>
-    <string name="pokryciebudzetulabel">Procentowe pokrycie budżetu</string>
+    <string name="pokryciebudzetulabel">Procentowe pokrycie budżetu (zawiera tylko wydatki w</string>
     <string name="procentvaluelabel">Wartość procentowa</string>
-    <string name="wykresrodzajetransportulabel">Procentowy podział pieniędzy wydanych na transport</string>
+    <string name="wykresrodzajetransportulabel">Jakich środków transportu używano:</string>
     <string name="spentmoeneylabel">Wydane pieniądze według kategorii</string>
     <string name="numericaldata">Dane liczbowe</string>
     <string name="traveldurationlabel">Podróż trwa</string>
@@ -135,6 +135,7 @@
     <string name="youpackedlabel">, spakowano</string>
     <string name="currencylabel">Waluta (kliknij by zmienić)</string>
     <string name="defaultcurrency">PLN</string>
-
-
+    <string name="bycategory">według kategorii</string>
+    <string name="expensespaidin">Wydatki opłacone w</string>
+    <string name="totalcostlabel">Całkowity koszt podróży wynosi:</string>
 </resources>

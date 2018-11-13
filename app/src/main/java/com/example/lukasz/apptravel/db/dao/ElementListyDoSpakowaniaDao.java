@@ -75,4 +75,7 @@ public interface ElementListyDoSpakowaniaDao {
     @Query("SELECT * FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:iDlistyDoSpakowania AND czyDoSpakowania=:czyDoSpakowania AND czySpakowane=:czySpakowane")
     List<ElementListyDoSpakowania>getSpakowaneElementy(long iDlistyDoSpakowania, boolean czySpakowane, boolean czyDoSpakowania);
 
+    @Query("SELECT DISTINCT waluta FROM elementlistydospakowania WHERE listaDoSpakowaniaId=:listaId  AND czyKupione=:czykupione AND czyPrzekazanoDoZakupu=:czyDoZakupu")
+    List<String> getWalutySpakowaneKupione(long listaId, boolean czykupione, boolean czyDoZakupu);
+
 }
