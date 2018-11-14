@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Przejazd;
+import com.example.lukasz.apptravel.statsTools.MoneyIntValueFormatter;
 import com.example.lukasz.apptravel.statsTools.PercentAxisValueFormatter;
 import com.example.lukasz.apptravel.statsTools.PercentValueFormatter;
 import com.github.mikephil.charting.charts.BarChart;
@@ -286,6 +287,7 @@ public class LocalStatsActivity extends AppCompatActivity {
 
         set1.setDrawValues(true);
         set1.setValueTextSize(16);
+        set1.setValueFormatter(new MoneyIntValueFormatter());
         BarData barData= new BarData(set1);
 
         LegendEntry zakupy = new LegendEntry();
@@ -363,6 +365,7 @@ public class LocalStatsActivity extends AppCompatActivity {
                         , Color.parseColor("#66ff99"),Color.parseColor("#cccc00"), Color.parseColor("#e67300"),
                         Color.parseColor("#cc6699")});
                 set1InnaWaluta.setDrawValues(true);
+                set1InnaWaluta.setValueFormatter(new MoneyIntValueFormatter());
                 set1InnaWaluta.setValueTextSize(16);
                 BarData barDataInnaWaluta= new BarData(set1InnaWaluta);
 
