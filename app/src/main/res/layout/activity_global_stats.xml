@@ -189,6 +189,30 @@
             android:layout_marginBottom="35dp"
             />
 
+        <TextView
+            android:id="@+id/labeltransporty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/wykresileRazyWMies"
+            android:layout_marginBottom="15dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@string/usedmeans"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/wykresrodzajetransportu"
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:layout_below="@id/labeltransporty"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="15dp" />
+
+
+
 
 
     </RelativeLayout>

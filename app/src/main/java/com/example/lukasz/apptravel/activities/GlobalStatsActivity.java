@@ -15,6 +15,7 @@ import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Podroz;
 import com.example.lukasz.apptravel.statsTools.AxisMonthFormatter;
 import com.example.lukasz.apptravel.statsTools.PercentAxisValueFormatter;
+import com.example.lukasz.apptravel.statsTools.PercentValueFormatter;
 import com.example.lukasz.apptravel.statsTools.ToIntAxisFormatter;
 import com.example.lukasz.apptravel.statsTools.ToIntValueFormatter;
 import com.github.mikephil.charting.charts.BarChart;
@@ -23,6 +24,7 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
@@ -50,6 +52,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
     private TextView numberileprzejazdow;
     private TextView numberilewlaut;
     private BarChart ileRazywMiesWykres;
+    private PieChart jakieTransportyWykres;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
         numberileprzejazdow=findViewById(R.id.numberileprzejazdow);
         numberilewlaut=findViewById(R.id.numberilewlaut);
         ileRazywMiesWykres=findViewById(R.id.wykresileRazyWMies);
+        jakieTransportyWykres=findViewById(R.id.wykresrodzajetransportu);
 
 
 
@@ -179,6 +183,36 @@ public class GlobalStatsActivity extends AppCompatActivity {
         ileRazywMiesWykres.animateXY(650,650);
         ileRazywMiesWykres.setData(barData);
 
+
+        //////////////////////////////////////////////////
+        //////////// WYKRES JAKIE ŚRODKI TRANSPORTU ///////////////
+
+        jakieTransportyWykres=findViewById(R.id.wykresrodzajetransportu);
+        jakieTransportyWykres.setUsePercentValues(true);
+        jakieTransportyWykres.setDrawHoleEnabled(true);
+        jakieTransportyWykres.getDescription().setEnabled(false);
+        jakieTransportyWykres.setTransparentCircleRadius(55f);
+        jakieTransportyWykres.setDragDecelerationFrictionCoef(0.95f);
+        jakieTransportyWykres.getLegend().setTextSize(19);
+
+        ArrayList<PieEntry> yValues = new ArrayList<>();
+        yValues=getTransportData();
+        PieDataSet dataSet = new PieDataSet(yValues,"");
+
+
+        dataSet.setColors(new int[]{Color.parseColor("#248f24"), Color.parseColor("#0099ff")
+                , Color.parseColor("#cc3300"),Color.parseColor("#e68a00"), Color.parseColor("#669999")});
+        dataSet.setValueFormatter(new PercentValueFormatter());
+        dataSet.setValueTextColor(Color.rgb(255, 255, 255));
+        dataSet.setValueTextSize(16);
+        PieData data1=new PieData(dataSet);
+        data1.setValueTextSize(16f);
+
+        jakieTransportyWykres.setData(data1);
+        jakieTransportyWykres.animateX(800);
+
+
+
     }
 
     LocalDate convertToLocalDate(Date date) {
@@ -189,6 +223,31 @@ public class GlobalStatsActivity extends AppCompatActivity {
     public static int getDifferenceDays(Date d1, Date d2) {
         long diff = d2.getTime() - d1.getTime();
         return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)+1;
+    }
+
+    private ArrayList<PieEntry> getTransportData(){
+
+        ArrayList<PieEntry> values = new ArrayList<>();
+
+        float cenyAut=(float)mDb.przejazdDao().getPrzejazdyByCategory(1);
+        float cenySamolotow=(float)mDb.przejazdDao().getPrzejazdyByCategory(2);
+        float cenyPociagu=(float)mDb.przejazdDao().getPrzejazdyByCategory(3);
+        float cenyStatku=(float)mDb.przejazdDao().getPrzejazdyByCategory(4);
+        float cenyRoweru=(float)mDb.przejazdDao().getPrzejazdyByCategory(5);
+        float cenyPieszo=(float)mDb.przejazdDao().getPrzejazdyByCategory(6);
+        float cenyInne=(float)mDb.przejazdDao().getPrzejazdyByCategory(7);
+
+        if(cenyAut>0) values.add(new PieEntry(cenyAut,getResources().getString(R.string.carlabel)));
+        if(cenySamolotow>0) values.add(new PieEntry(cenySamolotow,getResources().getString(R.string.planelabel)));
+        if(cenyPociagu>0) values.add(new PieEntry(cenyPociagu,getResources().getString(R.string.trainlabel)));
+        if(cenyStatku>0) values.add(new PieEntry(cenyStatku,getResources().getString(R.string.shiplabel)));
+        if(cenyRoweru>0) values.add(new PieEntry(cenyRoweru,getResources().getString(R.string.bikelabel)));
+        if(cenyPieszo>0) values.add(new PieEntry(cenyPieszo,getResources().getString(R.string.onfootlabel)));
+        if(cenyInne>0) values.add(new PieEntry(cenyInne,getResources().getString(R.string.otherlabel)));
+
+        return values;
+
+
     }
 
     @Override

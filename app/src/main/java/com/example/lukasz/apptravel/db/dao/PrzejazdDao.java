@@ -48,4 +48,7 @@ public interface PrzejazdDao {
     @Query("SELECT * FROM przejazd WHERE podrozId=:podrozId AND kategoriaPrzejazduId=:kategoriaId")
     List<Przejazd> getPrzejazdyByTravelAndCategory(long podrozId, long kategoriaId);
 
+    @Query("SELECT COUNT (id) FROM przejazd WHERE kategoriaPrzejazduId=:kategoriaId")
+    int getPrzejazdyByCategory( long kategoriaId);
+
 }

@@ -157,5 +157,6 @@
     <string name="October">Oct</string>
     <string name="November">Nov</string>
     <string name="Decmber">Dec</string>
+    <string name="usedmeans">Used means of transport in percent</string>
 
 </resources>

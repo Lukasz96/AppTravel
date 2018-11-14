@@ -17,7 +17,7 @@
     <string name="baddateformaterror">Proszę podac poprawną datę</string>
     <string name="datetosmallererror">Druga data nie może być wcześniejsza</string>
     <string name="decimalplaceserror">Maksymalnie 2 miejsca po przecinku</string>
-    <string name="submittext">Stwórz</string>
+    <string name="submittext">Dodaj</string>
     <string name="maxninenumbers">Maksymalnie 9 znaków</string>
     <string name="maxthirtyletters">Maksymalnie 30 liter</string>
     <string name="shoppinglistbuttonlabel">Lista zakupów</string>
@@ -42,9 +42,9 @@
     <string name="closelabel">Zamknij</string>
     <string name="creditsinfo">Zdjęcie w tle: Jake Blucker z Unsplash.</string>
     <string name="creditsinfotwo">Ikony: Freepik i Pause08 z www.flaticon.com</string>
-    <string name="makenewpacklistlabel">Stwórz nową listę</string>
+    <string name="makenewpacklistlabel">Ułóż nową listę</string>
     <string name="copyexistingpacklistlabel">Skopiuj i modyfikuj istniejącą listę</string>
-    <string name="noexistinglistlabel">Nie istnieje jeszcze żadna stworzona lista.</string>
+    <string name="noexistinglistlabel">Nie istnieje jeszcze żadna ułożona lista.</string>
     <string name="createingnewpacklistlabel">Tworzenie nowej listy</string>
     <string name="title_activity_pack_list">Lista do spakowania</string>
     <string name="tabclotheslabel">Ubrania</string>
@@ -156,4 +156,5 @@
     <string name="October">Paź</string>
     <string name="November">Lis</string>
     <string name="Decmber">Gru</string>
+    <string name="usedmeans">Ilość przejazdów danym środkiem transportu w procentach</string>
 </resources>
