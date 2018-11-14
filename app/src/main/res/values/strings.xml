@@ -145,5 +145,17 @@
     <string name="daneilewalut">- amount of different currencies you have used</string>
     <string name="daneileprzejazdów">- that\'s how many rides you had during all travels</string>
     <string name="howmanytimesintravel">How many times in particular month you were on trip?</string>
+    <string name="january">Jan</string>
+    <string name="february">Feb</string>
+    <string name="march">Mar</string>
+    <string name="april">Apr</string>
+    <string name="may">May</string>
+    <string name="June">Jun</string>
+    <string name="July">Jul</string>
+    <string name="August">Aug</string>
+    <string name="September">Sep</string>
+    <string name="October">Oct</string>
+    <string name="November">Nov</string>
+    <string name="Decmber">Dec</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.lukasz.apptravel.activities;
 
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,8 +13,15 @@ import android.widget.TextView;
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Podroz;
+import com.example.lukasz.apptravel.statsTools.AxisMonthFormatter;
+import com.example.lukasz.apptravel.statsTools.PercentAxisValueFormatter;
+import com.example.lukasz.apptravel.statsTools.ToIntAxisFormatter;
+import com.example.lukasz.apptravel.statsTools.ToIntValueFormatter;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -22,6 +30,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.Period;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -112,10 +121,12 @@ public class GlobalStatsActivity extends AppCompatActivity {
         List<String>miesiace=new ArrayList<>();
 
         for(long id:podrozeIds){
-
+            System.out.println("ILE PODROZ  "+podrozeIds.size());
             LocalDate date1 = convertToLocalDate(mDb.podrozDao().getDateOdByTravelId(id));
             LocalDate date2 = convertToLocalDate(mDb.podrozDao().getDateDoByTravelId(id));
-            while(date1.isBefore(date2)){
+            while(date1.isBefore(date2) || date1.isEqual(date2)){
+                System.out.print("MIES : ");
+                System.out.println(date1.toString("MM"));
                 miesiace.add(date1.toString("MM"));
                 date1 = date1.plus(Period.months(1));
             }
@@ -138,8 +149,35 @@ public class GlobalStatsActivity extends AppCompatActivity {
         entryArrayListInnaWaluta.add(new BarEntry(10, Collections.frequency(miesiace, "11")));
         entryArrayListInnaWaluta.add(new BarEntry(11, Collections.frequency(miesiace, "12")));
 
+        BarDataSet set1= new BarDataSet(entryArrayListInnaWaluta,"");
+        set1.setColors(new int[]{Color.parseColor("#ffcc66"), Color.parseColor("#23a00c")
+                , Color.parseColor("#117ddb"),Color.parseColor("#cccc00"), Color.parseColor("#e67300"),
+                Color.parseColor("#cc6699"),Color.parseColor("#96d8dc")});
+        set1.setDrawValues(true);
+        set1.setValueTextSize(16);
+        set1.setValueFormatter(new ToIntValueFormatter());
+        BarData barData= new BarData(set1);
+
+        ileRazywMiesWykres.getAxisRight().setEnabled(false);
+        //ileRazywMiesWykres.getLegend().setCustom(Arrays.asList(zakupy,noclegi,jedzenie,zwiedzanie,transport,inne));
+
+        ileRazywMiesWykres.getLegend().setEnabled(false);
+        ileRazywMiesWykres.getDescription().setEnabled(false);
+        ileRazywMiesWykres.getAxisLeft().setTextSize(16);
 
 
+        ileRazywMiesWykres.getXAxis().setValueFormatter(new AxisMonthFormatter(this));
+        ileRazywMiesWykres.getXAxis().setLabelRotationAngle(-45);
+        ileRazywMiesWykres.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        ileRazywMiesWykres.getAxisLeft().setValueFormatter(new ToIntAxisFormatter());
+        ileRazywMiesWykres.getAxisLeft().setGranularity(1f);
+
+        ileRazywMiesWykres.getXAxis().setLabelCount(12);
+        ileRazywMiesWykres.getXAxis().setTextSize(12);
+        ileRazywMiesWykres.getXAxis().setDrawAxisLine(false);
+        ileRazywMiesWykres.getXAxis().setDrawGridLines(false);
+        ileRazywMiesWykres.animateXY(650,650);
+        ileRazywMiesWykres.setData(barData);
 
     }
 

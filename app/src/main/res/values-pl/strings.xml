@@ -144,4 +144,16 @@
     <string name="daneilewalut">- tyloma różnymi walutami płacono</string>
     <string name="daneileprzejazdów">- ilość przejazdów w trakcie wszystkich podróży</string>
     <string name="howmanytimesintravel">Ile razy danego miesiąca byłeś(byłaś) w podróży?</string>
+    <string name="january">Sty</string>
+    <string name="february">Lut</string>
+    <string name="march">Mar</string>
+    <string name="april">Kwi</string>
+    <string name="may">Maj</string>
+    <string name="June">Cze</string>
+    <string name="July">Lip</string>
+    <string name="August">Sie</string>
+    <string name="September">Wrz</string>
+    <string name="October">Paź</string>
+    <string name="November">Lis</string>
+    <string name="Decmber">Gru</string>
 </resources>
