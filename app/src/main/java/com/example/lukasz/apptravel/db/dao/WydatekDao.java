@@ -38,4 +38,7 @@ public interface WydatekDao {
 
     @Query("SELECT DISTINCT waluta FROM wydatek WHERE podrozId=:travelId")
     List<String> getWalutyWydatki(long travelId);
+
+    @Query("SELECT DISTINCT waluta FROM wydatek")
+    List<String> getWalutyWydatkiWszystkiePodroze();
 }

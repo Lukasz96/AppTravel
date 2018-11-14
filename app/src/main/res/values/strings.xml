@@ -144,5 +144,6 @@
     <string name="daneiledni">- days you were travelling</string>
     <string name="daneilewalut">- amount of different currencies you have used</string>
     <string name="daneileprzejazdów">- that\'s how many rides you had during all travels</string>
+    <string name="howmanytimesintravel">How many times in particular month you were on trip?</string>
 
 </resources>

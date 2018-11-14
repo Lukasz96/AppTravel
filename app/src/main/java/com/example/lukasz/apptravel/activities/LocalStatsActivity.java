@@ -230,7 +230,7 @@ public class LocalStatsActivity extends AppCompatActivity {
 
         ///////////  WYKRES BUDZETU ////////////////////////////////////////
 
-        //////////// ILE PIENIĘDZY NA DANY RODZAJ TRANSPOTU ////////////////////////////////
+        //////////// ILE DANEGO RODZAJ TRANSPOTU ////////////////////////////////
         wykresRodzajeTransportu=findViewById(R.id.wykresrodzajetransportu);
         wykresRodzajeTransportu.setUsePercentValues(true);
         wykresRodzajeTransportu.setDrawHoleEnabled(true);

@@ -54,6 +54,9 @@ public interface PodrozDao {
     @Query("SELECT * FROM Podroz ORDER BY dataOd")
     List<Podroz> getPodrozeOrderedByDate();
 
+    @Query("SELECT id FROM podroz")
+    List<Long> getAllPodrozeId();
+
 
 
 }

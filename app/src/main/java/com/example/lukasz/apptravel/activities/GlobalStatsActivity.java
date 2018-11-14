@@ -12,10 +12,21 @@ import android.widget.TextView;
 import com.example.lukasz.apptravel.R;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.Podroz;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class GlobalStatsActivity extends AppCompatActivity {
@@ -24,8 +35,12 @@ public class GlobalStatsActivity extends AppCompatActivity {
     private TextView numberdaysTv;
     private TextView numberridesTv;
     private TextView numbercurrenciesTv;
+    private TextView numberIlePodrozy;
     private AppDatabase mDb;
-
+    private TextView numberIleDni;
+    private TextView numberileprzejazdow;
+    private TextView numberilewlaut;
+    private BarChart ileRazywMiesWykres;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +56,13 @@ public class GlobalStatsActivity extends AppCompatActivity {
         numberdaysTv=findViewById(R.id.travelsdays);
         numberridesTv=findViewById(R.id.travelsrideslabel);
         numbercurrenciesTv=findViewById(R.id.travelscurrencies);
+        numberIlePodrozy=findViewById(R.id.numberilepodrozy);
+        numberIleDni=findViewById(R.id.numberiledni);
+        numberileprzejazdow=findViewById(R.id.numberileprzejazdow);
+        numberilewlaut=findViewById(R.id.numberilewlaut);
+        ileRazywMiesWykres=findViewById(R.id.wykresileRazyWMies);
+
+
 
         int howMuchTravels=mDb.podrozDao().getPodroze().size();
         int howMuchRides=mDb.przejazdDao().getAllPrzejazdy().size();
@@ -72,29 +94,58 @@ public class GlobalStatsActivity extends AppCompatActivity {
         }
 
         int howMuchCurrencies=waluty.size();
+        numberIlePodrozy.append(howMuchTravels+" ");
+        numberTravelsTv.append(getResources().getString(R.string.daneIlePodrozy));
+        numberIleDni.append(howMuchDays+" ");
+        numberdaysTv.append(getResources().getString(R.string.daneiledni));
+        numberilewlaut.append(howMuchCurrencies+" ");
+        numbercurrenciesTv.append(getResources().getString(R.string.daneilewalut));
+        numberileprzejazdow.append(howMuchRides+" ");
+        numberridesTv.append(getResources().getString(R.string.daneileprzejazdów));
 
-        numberTravelsTv.append(howMuchTravels+" "+getResources().getString(R.string.daneIlePodrozy));
-        numberdaysTv.append(howMuchDays+" "+getResources().getString(R.string.daneiledni));
-        numbercurrenciesTv.append(howMuchCurrencies+" "+getResources().getString(R.string.daneilewalut));
-        numberridesTv.append(howMuchRides+" "+getResources().getString(R.string.daneileprzejazdów));
 
-        Spannable span = new SpannableString(numberTravelsTv.getText());
-        span.setSpan(new RelativeSizeSpan(2f), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        //////////////// WYKRES ILE RAZY W JAKIM MIES ////////////////////////////////////////////
 
-        numberTravelsTv.setText(span);
+        List<Long> podrozeIds=new ArrayList<>();
+        podrozeIds=mDb.podrozDao().getAllPodrozeId();
 
-        Spannable span2 = new SpannableString(numberridesTv.getText());
-        span2.setSpan(new RelativeSizeSpan(2f), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        numberridesTv.setText(span2);
+        List<String>miesiace=new ArrayList<>();
 
-        Spannable span3 = new SpannableString(numbercurrenciesTv.getText());
-        span3.setSpan(new RelativeSizeSpan(2f), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        numbercurrenciesTv.setText(span3);
+        for(long id:podrozeIds){
 
-        Spannable span4 = new SpannableString(numberdaysTv.getText());
-        span4.setSpan(new RelativeSizeSpan(2f), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        numberdaysTv.setText(span4);
+            LocalDate date1 = convertToLocalDate(mDb.podrozDao().getDateOdByTravelId(id));
+            LocalDate date2 = convertToLocalDate(mDb.podrozDao().getDateDoByTravelId(id));
+            while(date1.isBefore(date2)){
+                miesiace.add(date1.toString("MM"));
+                date1 = date1.plus(Period.months(1));
+            }
+        }
 
+       // Set<String> uniqueMonths = new HashSet<String>(miesiace);
+
+
+        ArrayList<BarEntry> entryArrayListInnaWaluta= new ArrayList<>();
+        entryArrayListInnaWaluta.add(new BarEntry(0, Collections.frequency(miesiace, "01")));
+        entryArrayListInnaWaluta.add(new BarEntry(1, Collections.frequency(miesiace, "02")));
+        entryArrayListInnaWaluta.add(new BarEntry(2, Collections.frequency(miesiace, "03")));
+        entryArrayListInnaWaluta.add(new BarEntry(3, Collections.frequency(miesiace, "04")));
+        entryArrayListInnaWaluta.add(new BarEntry(4, Collections.frequency(miesiace, "05")));
+        entryArrayListInnaWaluta.add(new BarEntry(5, Collections.frequency(miesiace, "06")));
+        entryArrayListInnaWaluta.add(new BarEntry(6, Collections.frequency(miesiace, "07")));
+        entryArrayListInnaWaluta.add(new BarEntry(7, Collections.frequency(miesiace, "08")));
+        entryArrayListInnaWaluta.add(new BarEntry(8, Collections.frequency(miesiace, "09")));
+        entryArrayListInnaWaluta.add(new BarEntry(9, Collections.frequency(miesiace, "10")));
+        entryArrayListInnaWaluta.add(new BarEntry(10, Collections.frequency(miesiace, "11")));
+        entryArrayListInnaWaluta.add(new BarEntry(11, Collections.frequency(miesiace, "12")));
+
+
+
+
+    }
+
+    LocalDate convertToLocalDate(Date date) {
+        if(date == null) return null;
+        return new LocalDate(date);
     }
 
     public static int getDifferenceDays(Date d1, Date d2) {
@@ -112,4 +163,6 @@ public class GlobalStatsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
