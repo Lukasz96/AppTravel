@@ -18,6 +18,9 @@ import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.ListaDoSpakowania;
 import com.example.lukasz.apptravel.db.entities.Podroz;
 import com.example.lukasz.apptravel.imageCalc.BackgroundImageCalc;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class NoExistingPacklistChioceActivity extends AppCompatActivity {
 
@@ -27,6 +30,7 @@ public class NoExistingPacklistChioceActivity extends AppCompatActivity {
     private boolean areExistingPacklists;
     private Podroz podroz;
     AppDatabase mDb;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,11 @@ public class NoExistingPacklistChioceActivity extends AppCompatActivity {
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             constraintLayout.setBackgroundResource(R.drawable.main_menu_background);
+            MobileAds.initialize(this, "ca-app-pub-9758633376103774~4671280518");
+            mAdView = findViewById(R.id.adView4);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+
         }
         else {
             constraintLayout.setBackgroundResource(R.drawable.main_menu_background_landscape);
@@ -84,6 +93,8 @@ public class NoExistingPacklistChioceActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     @Override

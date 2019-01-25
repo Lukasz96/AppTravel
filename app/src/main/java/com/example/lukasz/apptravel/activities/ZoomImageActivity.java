@@ -40,17 +40,10 @@ public class ZoomImageActivity extends Activity
 
 
 
-         Glide.with(this).load(uri).into(view);
-
-
-
-
+        Glide.with(this).load(uri).into(view);
         PhotoViewAttacher pAttacher;
-
         pAttacher = new PhotoViewAttacher(view);
-
         pAttacher.update();
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

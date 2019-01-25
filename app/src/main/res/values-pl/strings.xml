@@ -19,7 +19,7 @@
     <string name="decimalplaceserror">Maksymalnie 2 miejsca po przecinku</string>
     <string name="submittext">Dodaj</string>
     <string name="maxninenumbers">Maksymalnie 9 znaków</string>
-    <string name="maxthirtyletters">Maksymalnie 30 liter</string>
+    <string name="maxthirtyletters">Maksymalnie 30 znaków</string>
     <string name="shoppinglistbuttonlabel">Lista zakupów</string>
     <string name="topackbuttonlabel">Do spakowania</string>
     <string name="ridesbuttonlabel">Przejazdy</string>
@@ -55,7 +55,7 @@
     <string name="newitemtobacktitle">Nowa rzecz</string>
     <string name="namenewitemtopacklabel">Nazwa</string>
     <string name="nonameitemtopackerror">Proszę wpisac nazwę rzeczy</string>
-    <string name="quantitylabel">Ilość sztuk</string>
+    <string name="quantitylabel">Liczba sztuk</string>
     <string name="categorylabel">Kategoria</string>
     <string name="carlabel">Auto</string>
     <string name="planelabel">Samolot</string>
@@ -87,7 +87,7 @@
     <string name="cancellabel">Anuluj</string>
     <string name="addnewrideactivitylabel">Nowy przejazd</string>
     <string name="timehint">Godzina (GG MM, godziny 00-23)</string>
-    <string name="maxsixtylettererror">Maksymalnie 40 liter</string>
+    <string name="maxsixtylettererror">Maksymalnie 40 znaków</string>
     <string name="noridenameerror">Proszę wprowadzić nazwę przejazdu</string>
     <string name="noprzejazddateerror">Proszę podać datę przejazdu</string>
     <string name="ridenotbetweentraveldateerror">Data przejazdu musi się zawierać w datach podróży</string>

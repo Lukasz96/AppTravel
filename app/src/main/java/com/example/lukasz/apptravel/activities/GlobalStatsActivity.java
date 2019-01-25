@@ -27,6 +27,9 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
@@ -53,6 +56,7 @@ public class GlobalStatsActivity extends AppCompatActivity {
     private TextView numberilewlaut;
     private BarChart ileRazywMiesWykres;
     private PieChart jakieTransportyWykres;
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -211,7 +215,10 @@ public class GlobalStatsActivity extends AppCompatActivity {
         jakieTransportyWykres.setData(data1);
         jakieTransportyWykres.animateX(800);
 
-
+        MobileAds.initialize(this, "ca-app-pub-9758633376103774~4671280518");
+        mAdView = findViewById(R.id.adView3);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
     }
 

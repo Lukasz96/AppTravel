@@ -3,6 +3,8 @@
     package="com.example.lukasz.apptravel">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -69,6 +71,10 @@
         <activity android:name=".activities.ChooseTravelActivity" />
         <activity android:name=".activities.LocalStatsActivity" />
         <activity android:name=".activities.GlobalStatsActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9758633376103774~4671280518"/>
     </application>
 
 </manifest>

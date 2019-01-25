@@ -18,6 +18,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.lukasz.apptravel.R;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.AdRequest;
 import com.example.lukasz.apptravel.db.AppDatabase;
 import com.example.lukasz.apptravel.db.entities.ListaDoSpakowania;
 import com.example.lukasz.apptravel.db.entities.Podroz;
@@ -27,7 +30,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             constraintLayout.setBackgroundResource(R.drawable.main_menu_background);
+            MobileAds.initialize(this, "ca-app-pub-9758633376103774~4671280518");
+            mAdView = findViewById(R.id.adView1);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
         }
         else {
             constraintLayout.setBackgroundResource(R.drawable.main_menu_background_landscape);
@@ -68,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -81,12 +89,6 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
-            case R.id.author:
-                new AlertDialog.Builder(this)
-                        .setTitle(getString(R.string.authorlabel))
-                        .setMessage(getString(R.string.authorinfo))
-                        .setNeutralButton(getString(R.string.closelabel), null).show();
                 return true;
             case R.id.credits:
                 new AlertDialog.Builder(this)

@@ -31,6 +31,9 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +56,7 @@ public class LocalStatsActivity extends AppCompatActivity {
     private TextView addiotionalBudgetInfo;
     private LinearLayout dodatkoweWykresy;
     private TextView labelWydatki;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -382,7 +386,10 @@ public class LocalStatsActivity extends AppCompatActivity {
                 dodatkoweWykresy.addView(wykresWszystkieWydatkiInnaWaluta);
             }
         }
-
+        MobileAds.initialize(this, "ca-app-pub-9758633376103774~4671280518");
+        mAdView = findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
     }
 

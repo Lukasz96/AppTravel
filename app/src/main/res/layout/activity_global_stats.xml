@@ -25,37 +25,32 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="67dp"
+                android:layout_marginBottom="8dp"
                 android:orientation="horizontal">
 
 
+                <TextView
+                    android:id="@+id/numberilepodrozy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="38sp" />
 
-                    <TextView
-                        android:id="@+id/numberilepodrozy"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_marginTop="5dp"
-                        android:ellipsize="end"
-                        android:maxLines="3"
-                        android:textSize="38sp"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_alignParentTop="true"
-                         />
-
-                    <TextView
-                        android:id="@+id/travelscoveredlabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:maxLines="4"
-                        android:paddingTop="7dp"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-
-
-
+                <TextView
+                    android:id="@+id/travelscoveredlabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="4"
+                    android:paddingTop="7dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
             </LinearLayout>
@@ -208,10 +203,22 @@
             android:layout_width="match_parent"
             android:layout_height="340dp"
             android:layout_below="@id/labeltransporty"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="62dp"
             android:layout_marginTop="15dp" />
 
 
-
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/dodatkoweWykresy"
+            android:layout_centerHorizontal="true"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-9758633376103774/2625956701"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
     </RelativeLayout>
 </ScrollView>

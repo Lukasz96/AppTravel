@@ -137,6 +137,21 @@
         </LinearLayout>
 
 
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/dodatkoweWykresy"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-9758633376103774/8261426767"
+            ads:layout_constraintBottom_toBottomOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent"
+            ads:layout_constraintHorizontal_bias="1.0"
+            ads:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+
+
 
 
     </RelativeLayout>
