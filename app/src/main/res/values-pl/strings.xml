@@ -11,7 +11,7 @@
     <string name="nobudgeterror">Proszę wpisać budżet podróży</string>
     <string name="traveldataeditinfo">Proszę podać dane podróży. Będzie je można później zmienić.</string>
     <string name="labeldatefrom">Data od (DD MM RRRR)</string>
-    <string name="labeldateto">Data do (DD MM RRRR)</string>
+    <string name="labeldateto">Data do (DD MM RRRR)</string>1
     <string name="labeltravelname">Nazwa podróży</string>
     <string name="labelbudget">Budżet na podróż</string>
     <string name="baddateformaterror">Proszę podac poprawną datę</string>
