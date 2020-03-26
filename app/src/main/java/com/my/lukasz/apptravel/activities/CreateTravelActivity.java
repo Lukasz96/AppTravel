@@ -118,28 +118,28 @@ public class CreateTravelActivity extends AppCompatActivity {
         categoryHolidaysDropdown.setSelection(0);
         /////////////////////////////////////////////////////////////////////////////////////////
         List<String> kategorieTranportu;
-        kategorieWakacji=mDb.kategoriaTransportDao().getAllNazwyKategoriiTransportu();
+        kategorieTranportu=mDb.kategoriaTransportDao().getAllNazwyKategoriiTransportu();
 
         ArrayAdapter<String> adapterTypTranportu = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, kategorieWakacji);
+                R.layout.spinner_item, kategorieTranportu);
         adapterTypTranportu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoryTransportDropdown.setAdapter(adapterTypTranportu);
         categoryTransportDropdown.setSelection(0);
         /////////////////////////////////////////////////////////////////////////////////////////
         List<String> kategoriePogody;
-        kategorieWakacji=mDb.kategoriaPogodyDao().getAllNazwyKategoriiPogody();
+        kategoriePogody=mDb.kategoriaPogodyDao().getAllNazwyKategoriiPogody();
 
         ArrayAdapter<String> adapterTypPogody = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, kategorieWakacji);
+                R.layout.spinner_item, kategoriePogody);
         adapterTypPogody.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoryWeatherDropdown.setAdapter(adapterTypPogody);
         categoryWeatherDropdown.setSelection(0);
         /////////////////////////////////////////////////////////////////////////////////////////
         List<String> plci;
-        kategorieWakacji=mDb.plecDao().getAllNazwyPlci();
+        plci=mDb.plecDao().getAllNazwyPlci();
 
         ArrayAdapter<String> adapterPlci = new ArrayAdapter<String>(this,
-                R.layout.spinner_item, kategorieWakacji);
+                R.layout.spinner_item, plci);
         adapterPlci.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categoryPlecDropdown.setAdapter(adapterPlci);
         categoryPlecDropdown.setSelection(0);
@@ -479,6 +479,10 @@ public class CreateTravelActivity extends AppCompatActivity {
             int age = Integer.parseInt(s.toString());
             if (age < 1 || age > 140) {
                 ageLauout.setError(getString(R.string.typecorrectage));
+                checkIfEnableButton();
+            }
+            else {
+                ageLauout.setError(null);
                 checkIfEnableButton();
             }
         }

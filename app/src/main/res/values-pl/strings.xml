@@ -155,7 +155,7 @@
     <string name="statsgloballabel">Statystyki</string>
     <string name="daneIlePodrozy">- tyle już odbyto podróży</string>
     <string name="daneiledni">- dni w podróży</string>
-    <string name="genderLabel">Płeć</string>
+    <string name="age">Wiek</string>
     <string name="typeinteger">Proszę podać liczbę</string>
     <string name="typecorrectage">Podaj pooprawny wiek</string>
     <string name="noageerror">Prosze podać wiek</string>

@@ -102,7 +102,7 @@
     <string name="providepricemessage">You have to add items price in order to mark it as bought.</string>
     <string name="submitpricelabel">Submit</string>
     <string name="cancellabel">Cancel</string>
-    <string name="genderLabel">Gender</string>
+    <string name="age">Age</string>
     <string name="addnewrideactivitylabel">New ride</string>
     <string name="timehint">Time (HH MM, hours 00-23)</string>
     <string name="maxsixtylettererror">Max 40 letters</string>
