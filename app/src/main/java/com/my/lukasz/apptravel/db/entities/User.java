@@ -1,22 +1,27 @@
 package com.my.lukasz.apptravel.db.entities;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity(foreignKeys = {@ForeignKey(entity = Plec.class,
+        parentColumns = "id",
+        childColumns = "plecId",
+        onDelete = CASCADE)})
 public class User {
 
     @PrimaryKey(autoGenerate = true)
     private long id;
-    @NonNull
-    private String plec;
+    private long plecId;
     @NonNull
     private Integer wiek;
 
-    public User(long id, @NonNull String plec, @NonNull Integer wiek) {
+    public User(long id, long plecId, @NonNull Integer wiek) {
         this.id = id;
-        this.plec = plec;
+        this.plecId = plecId;
         this.wiek = wiek;
     }
 
@@ -28,13 +33,12 @@ public class User {
         this.id = id;
     }
 
-    @NonNull
-    public String getPlec() {
-        return plec;
+    public long getPlecId() {
+        return plecId;
     }
 
-    public void setPlec(@NonNull String plec) {
-        this.plec = plec;
+    public void setPlecId(long plecId) {
+        this.plecId = plecId;
     }
 
     @NonNull

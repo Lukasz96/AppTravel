@@ -163,9 +163,44 @@
             </LinearLayout>
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/holidayType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/transportCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/weatherCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/plecCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/ageinputlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="3"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/error_appearance">
+
+                <EditText
+                    android:id="@+id/agetinput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/genderLabel"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/travelbudgetlayout"

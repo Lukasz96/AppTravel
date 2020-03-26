@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ import com.my.lukasz.apptravel.db.AppDatabase;
 import com.my.lukasz.apptravel.db.entities.Podroz;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.my.lukasz.apptravel.db.entities.User;
 import com.mynameismidori.currencypicker.CurrencyPicker;
 import com.mynameismidori.currencypicker.CurrencyPickerListener;
 
@@ -35,6 +37,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class CreateTravelActivity extends AppCompatActivity {
@@ -43,8 +46,12 @@ public class CreateTravelActivity extends AppCompatActivity {
     private TextInputLayout dateFromLayout;
     private TextInputLayout dateToLayout;
     private TextInputLayout budgetLauout;
-    private Spinner travelType;
-    private Spinner weatherType;
+    private TextInputLayout ageLauout;
+    private Spinner categoryHolidaysDropdown;
+    private Spinner categoryTransportDropdown;
+    private Spinner categoryWeatherDropdown;
+    private Spinner categoryPlecDropdown;
+    private EditText ageInput;
     private Button buttonSubmit;
     private ImageButton dateFromButton;
     private ImageButton dateToButton;
@@ -68,7 +75,7 @@ public class CreateTravelActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getString(R.string.newtravellabel));
-
+        mDb= AppDatabase.getInstance(getApplicationContext());
 
         editName=findViewById(R.id.travelnameinput);
         nameTravel=findViewById(R.id.travelnamelayout);
@@ -77,8 +84,12 @@ public class CreateTravelActivity extends AppCompatActivity {
         dateToLayout=findViewById(R.id.datetolayout);
         buttonSubmit=findViewById(R.id.button6);
         budgetInput=findViewById(R.id.travelbudgetinput);
-        travelType=findViewById(R.id.spinner1);
-        weatherType=findViewById(R.id.spinner2);
+        ageLauout=findViewById(R.id.ageinputlayout);
+        categoryHolidaysDropdown=findViewById(R.id.holidayType);
+        categoryTransportDropdown=findViewById(R.id.transportCategory);
+        categoryWeatherDropdown=findViewById(R.id.weatherCategory);
+        categoryPlecDropdown=findViewById(R.id.plecCategory);
+        ageInput=findViewById(R.id.agetinput);
         buttonSubmit.setEnabled(false);
         dateFromButton=findViewById(R.id.imageButton);
         dateFromInput=findViewById(R.id.datefrominput);
@@ -96,6 +107,42 @@ public class CreateTravelActivity extends AppCompatActivity {
         else {
             scrollView.setBackgroundResource(R.drawable.main_menu_background_landscape);
         }
+
+        List<String> kategorieWakacji;
+        kategorieWakacji=mDb.kategoriaWakacjiDao().getAllNazwyKategoriiWakacji();
+
+        ArrayAdapter<String> adapterTypWakacj = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, kategorieWakacji);
+        adapterTypWakacj.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoryHolidaysDropdown.setAdapter(adapterTypWakacj);
+        categoryHolidaysDropdown.setSelection(0);
+        /////////////////////////////////////////////////////////////////////////////////////////
+        List<String> kategorieTranportu;
+        kategorieWakacji=mDb.kategoriaTransportDao().getAllNazwyKategoriiTransportu();
+
+        ArrayAdapter<String> adapterTypTranportu = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, kategorieWakacji);
+        adapterTypTranportu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoryTransportDropdown.setAdapter(adapterTypTranportu);
+        categoryTransportDropdown.setSelection(0);
+        /////////////////////////////////////////////////////////////////////////////////////////
+        List<String> kategoriePogody;
+        kategorieWakacji=mDb.kategoriaPogodyDao().getAllNazwyKategoriiPogody();
+
+        ArrayAdapter<String> adapterTypPogody = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, kategorieWakacji);
+        adapterTypPogody.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoryWeatherDropdown.setAdapter(adapterTypPogody);
+        categoryWeatherDropdown.setSelection(0);
+        /////////////////////////////////////////////////////////////////////////////////////////
+        List<String> plci;
+        kategorieWakacji=mDb.plecDao().getAllNazwyPlci();
+
+        ArrayAdapter<String> adapterPlci = new ArrayAdapter<String>(this,
+                R.layout.spinner_item, kategorieWakacji);
+        adapterPlci.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categoryPlecDropdown.setAdapter(adapterPlci);
+        categoryPlecDropdown.setSelection(0);
 
         waluta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,9 +186,6 @@ public class CreateTravelActivity extends AppCompatActivity {
             }
         });
 
-        travelType.setPrompt("Wybierz typ podróży...");
-        weatherType.setPrompt("Wybierz prognozowaną pogodę...");
-
         editName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
@@ -162,6 +206,16 @@ public class CreateTravelActivity extends AppCompatActivity {
                 validateBudget(s); }
         });
 
+        ageInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+            @Override
+            public void afterTextChanged(Editable s) {
+                validateAge(s); }
+        });
+
         editName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -171,6 +225,17 @@ public class CreateTravelActivity extends AppCompatActivity {
                 }
             }
         });
+
+        ageInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    validateAge(((EditText) v).getText());
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         budgetInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -203,7 +268,7 @@ public class CreateTravelActivity extends AppCompatActivity {
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mDb= AppDatabase.getInstance(getApplicationContext());
+
                 String travelName=editName.getText().toString().trim();
                 Date date1 = null;
                 Date date2 = null;
@@ -215,8 +280,14 @@ public class CreateTravelActivity extends AppCompatActivity {
                 }
                 double budget=Double.parseDouble(budgetInput.getText().toString());
 
+                long plecId = mDb.plecDao().getIdPlciOdNazwy(categoryPlecDropdown.getSelectedItem().toString());
+                long userId = mDb.userDao().insertUser(new User(0, plecId, Integer.parseInt(ageInput.getText().toString())));
+                long kategoriaTransportuId = mDb.kategoriaTransportDao().getIdTransportuOdNazwy(categoryTransportDropdown.getSelectedItem().toString());
+                long kategoriaWakacjiId = mDb.kategoriaWakacjiDao().getIdKatWakacjiOdNazwy(categoryHolidaysDropdown.getSelectedItem().toString());
+                long kategoriaPogodyId = mDb.kategoriaPogodyDao().getIdPogodyOdNazwy(categoryWeatherDropdown.getSelectedItem().toString());
 
-                long travelId=mDb.podrozDao().insertPodroz(new Podroz(0,travelName,date1,date2,budget,walutaInput));
+
+                long travelId=mDb.podrozDao().insertPodroz(new Podroz(0, userId, kategoriaTransportuId, kategoriaWakacjiId, kategoriaPogodyId, travelName,date1,date2,budget,walutaInput));
                 Intent intent=new Intent(CreateTravelActivity.this, TravelMainMenuActivity.class);
                 intent.putExtra("travelId",travelId);
                 startActivity(intent);
@@ -390,6 +461,42 @@ public class CreateTravelActivity extends AppCompatActivity {
         }
     }
 
+    private void validateAge(Editable s) {
+        if (TextUtils.isEmpty(s)) {
+            ageLauout.setError(getString(R.string.noageerror));
+            checkIfEnableButton();
+        }
+
+        else if(!tryParseInt(s.toString())) {
+            ageLauout.setError(getString(R.string.typeinteger));
+            checkIfEnableButton();
+        }
+        else if (s.toString().length()>3){
+            ageLauout.setError(getString(R.string.maxthreenumbers));
+            checkIfEnableButton();
+        }
+        else if(tryParseInt(s.toString())) {
+            int age = Integer.parseInt(s.toString());
+            if (age < 1 || age > 140) {
+                ageLauout.setError(getString(R.string.typecorrectage));
+                checkIfEnableButton();
+            }
+        }
+        else {
+            ageLauout.setError(null);
+            checkIfEnableButton();
+        }
+    }
+
+    boolean tryParseInt(String value) {
+        try {
+            Integer.parseInt(value);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     private void validateBudget(Editable s){
         if (TextUtils.isEmpty(s)) {
             budgetLauout.setError(getString(R.string.nobudgeterror));
@@ -444,10 +551,12 @@ public class CreateTravelActivity extends AppCompatActivity {
                 TextUtils.isEmpty(dateToLayout.getError()) &&
                 TextUtils.isEmpty(dateFromLayout.getError()) &&
                 TextUtils.isEmpty(budgetLauout.getError()) &&
+                TextUtils.isEmpty(ageLauout.getError()) &&
                 TextUtils.isEmpty(nameTravel.getError()) &&
                 !dateToInput.getText().toString().equals("") &&
                 !dateFromInput.getText().toString().equals("") &&
                 !budgetInput.getText().toString().equals("") &&
+                !ageInput.getText().toString().equals("") &&
                 !editName.getText().toString().equals("")){
             buttonSubmit.setEnabled(true);
         }

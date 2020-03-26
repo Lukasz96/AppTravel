@@ -9,6 +9,7 @@ import com.my.lukasz.apptravel.db.entities.KategoriaPrzejazdu;
 import com.my.lukasz.apptravel.db.entities.KategoriaTransport;
 import com.my.lukasz.apptravel.db.entities.KategoriaWakacji;
 import com.my.lukasz.apptravel.db.entities.KategoriaWydatku;
+import com.my.lukasz.apptravel.db.entities.Plec;
 
 public class DataGenerator {
 
@@ -42,10 +43,10 @@ public class DataGenerator {
         };
     }
 
-    public static String[] populatePlci(Context context) {
-        return new String[] {
-                context.getString(R.string.femalelabel),
-                context.getString(R.string.malelabel)
+    public static Plec[] populatePlci(Context context) {
+        return new Plec[] {
+                new Plec(0, context.getString(R.string.femalelabel)),
+                new Plec(0, context.getString(R.string.malelabel))
         };
     }
 

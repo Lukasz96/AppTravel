@@ -155,6 +155,11 @@
     <string name="statsgloballabel">Statystyki</string>
     <string name="daneIlePodrozy">- tyle już odbyto podróży</string>
     <string name="daneiledni">- dni w podróży</string>
+    <string name="genderLabel">Płeć</string>
+    <string name="typeinteger">Proszę podać liczbę</string>
+    <string name="typecorrectage">Podaj pooprawny wiek</string>
+    <string name="noageerror">Prosze podać wiek</string>
+    <string name="maxthreenumbers">Maksymalnie 3 cyfry</string>
     <string name="daneilewalut">- tyloma różnymi walutami płacono</string>
     <string name="daneileprzejazdów">- ilość przejazdów w trakcie wszystkich podróży</string>
     <string name="howmanytimesintravel">Ile razy danego miesiąca byłeś(byłaś) w podróży?</string>
