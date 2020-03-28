@@ -57,6 +57,12 @@
                 android:icon="@drawable/documentsicon"
                 android:text="@string/tabdocumentslabel" />
             <android.support.design.widget.TabItem
+                android:id="@+id/tabelectronics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:icon="@drawable/electronicsicon"
+                android:text="@string/tabelectroinicslabel" />
+            <android.support.design.widget.TabItem
                 android:id="@+id/tabItem3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

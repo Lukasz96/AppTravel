@@ -26,6 +26,7 @@ import com.my.lukasz.apptravel.db.AppDatabase;
 import com.my.lukasz.apptravel.db.entities.ElementListyDoSpakowania;
 import com.my.lukasz.apptravel.fragments.PackListClothesFragment;
 import com.my.lukasz.apptravel.fragments.PackListDocumentsFragment;
+import com.my.lukasz.apptravel.fragments.PackListElectronicsFragment;
 import com.my.lukasz.apptravel.fragments.PackListHygieneFragment;
 import com.my.lukasz.apptravel.fragments.PackListOthersFragment;
 import com.my.lukasz.apptravel.packlisttools.CustomTabLayout;
@@ -226,6 +227,10 @@ public class PackListActivity extends AppCompatActivity {
                     fragment.setArguments(bundlePackListId);
                     break;
                 case 3:
+                    fragment=new PackListElectronicsFragment();
+                    fragment.setArguments(bundlePackListId);
+                    break;
+                case 4:
                     fragment=new PackListOthersFragment();
                     fragment.setArguments(bundlePackListId);
                     break;
