@@ -18,6 +18,10 @@
     <string name="datetosmallererror">Druga data nie może być wcześniejsza</string>
     <string name="decimalplaceserror">Maksymalnie 2 miejsca po przecinku</string>
     <string name="submittext">Dodaj</string>
+    <string name="holidaytypelabel">Typ wyjazdu</string>
+    <string name="meanoftransportlabel">Środek transportu</string>
+    <string name="expectedweatherlabel">Spodziewana pogoda</string>
+    <string name="genderlabel">Płeć</string>
     <string name="maxninenumbers">Maksymalnie 9 znaków</string>
     <string name="maxthirtyletters">Maksymalnie 30 znaków</string>
     <string name="shoppinglistbuttonlabel">Lista zakupów</string>

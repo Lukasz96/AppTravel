@@ -157,20 +157,48 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/holidaytypelabel"
+                android:textSize="17sp"/>
+
             <Spinner
                 android:id="@+id/holidayType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/meanoftransportlabel"
+                android:textSize="17sp"/>
 
             <Spinner
                 android:id="@+id/transportCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/expectedweatherlabel"
+                android:textSize="17sp"/>
+
             <Spinner
                 android:id="@+id/weatherCategory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/genderlabel"
+                android:textSize="17sp"/>
 
             <Spinner
                 android:id="@+id/plecCategory"
