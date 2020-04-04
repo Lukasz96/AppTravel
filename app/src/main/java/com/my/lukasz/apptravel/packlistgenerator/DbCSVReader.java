@@ -1,9 +1,5 @@
-package com.my.lukasz.apptravel.packlistgenerator.cosine;
+package com.my.lukasz.apptravel.packlistgenerator;
 
-import android.content.Context;
-
-
-import com.my.lukasz.apptravel.packlistgenerator.DbColumns;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,13 +9,12 @@ import java.util.List;
 
 public class DbCSVReader {
 
-    public List<DbColumns> getDataFromCsv() throws IOException {
+    public List<DbRow> getDataFromCsv() throws IOException {
         InputStreamReader is;
         ClassLoader object = getClass().getClassLoader();
-        System.out.println(object == null);
         is = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("dane_do_kodu.csv"));
 
-        List<DbColumns> result = new ArrayList<>();
+        List<DbRow> result = new ArrayList<>();
 
         BufferedReader reader = new BufferedReader(is);
         String line = "";
@@ -33,9 +28,7 @@ public class DbCSVReader {
             String gender = dbRow[4];
             int age = Integer.parseInt(dbRow[5]);
 
-            System.out.println(line);
-
-            result.add(new DbColumns(numberOfDays, travelType, transportTypeId, weatherTypeId, gender, age));
+            result.add(new DbRow(numberOfDays, travelType, transportTypeId, weatherTypeId, gender, age));
         }
         return result;
     }

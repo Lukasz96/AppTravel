@@ -1,6 +1,6 @@
 package com.my.lukasz.apptravel.packlistgenerator;
 
-public class DbColumns {
+public class DbRow {
 
     private int numberOfDays;
     private int travelTypeId;
@@ -9,7 +9,7 @@ public class DbColumns {
     private String gender;
     private int age;
 
-    public DbColumns(int numberOfDays, int travelTypeId, int transportTypeId, int weatherTypeId, String gender, int age) {
+    public DbRow(int numberOfDays, int travelTypeId, int transportTypeId, int weatherTypeId, String gender, int age) {
         this.numberOfDays = numberOfDays;
         this.travelTypeId = travelTypeId;
         this.transportTypeId = transportTypeId;
@@ -64,5 +64,17 @@ public class DbColumns {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "DbRow{" +
+                "numberOfDays=" + numberOfDays +
+                ", travelTypeId=" + travelTypeId +
+                ", transportTypeId=" + transportTypeId +
+                ", weatherTypeId=" + weatherTypeId +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

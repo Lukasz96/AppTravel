@@ -1,5 +1,7 @@
 package com.my.lukasz.apptravel.packlistgenerator.cosine;
 
+import com.my.lukasz.apptravel.packlistgenerator.DbCSVReader;
+
 import org.junit.Test;
 
 import java.io.IOException;
