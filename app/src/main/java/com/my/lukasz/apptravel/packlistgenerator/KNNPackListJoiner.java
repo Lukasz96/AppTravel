@@ -1,5 +1,7 @@
 package com.my.lukasz.apptravel.packlistgenerator;
 
+import android.content.Context;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,12 +14,14 @@ public class KNNPackListJoiner {
     private List<RzeczDoSpakowania> allThingsFromNeighbours;
     private int nNearestNeighbours;
     private List<ParaRowPodobienstwo> similarUsers;
+    private Context context;
 
-    public KNNPackListJoiner(List<RzeczDoSpakowania> allThingsFromNeighbours, int nNearestNeighbours, List<ParaRowPodobienstwo> similarUsers) {
+    public KNNPackListJoiner(List<RzeczDoSpakowania> allThingsFromNeighbours, int nNearestNeighbours, List<ParaRowPodobienstwo> similarUsers, Context context) {
         this.allThingsFromNeighbours = allThingsFromNeighbours;
         this.nNearestNeighbours = nNearestNeighbours;
         this.similarUsers = similarUsers;
         thingsAndAppearancesNumber = new HashMap<>();
+        this.context = context;
     }
 
     public List<RzeczDoSpakowania> getJoinedList() throws IOException {
@@ -46,7 +50,7 @@ public class KNNPackListJoiner {
     private RzeczDoSpakowania getThingWithCoorectNumberAndCategory(String thingName) throws IOException {
         for (ParaRowPodobienstwo user: similarUsers) {
             int travelId = user.getPodrozUzytkownik().getTravelId();
-            List<RzeczDoSpakowania> listaRzeczyUsera = ListItemsFromDb.getInstance().getPackLists().get(travelId);
+            List<RzeczDoSpakowania> listaRzeczyUsera = ListItemsFromDb.getInstance(context).getPackLists().get(travelId);
             for (RzeczDoSpakowania rzecz : listaRzeczyUsera) {
                 if (rzecz.getNazwa().equals(thingName)) {
                     return rzecz;

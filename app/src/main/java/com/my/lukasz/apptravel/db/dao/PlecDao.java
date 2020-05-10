@@ -20,6 +20,9 @@ public interface PlecDao {
     @Query("SELECT nazwaPlci FROM plec")
     List<String> getAllNazwyPlci();
 
+    @Query("SELECT nazwaPlci FROM plec WHERE id=:id")
+    String getNazwaPlciById(Long id);
+
     @Query("SELECT id FROM plec WHERE nazwaPlci=:nazwaPlci")
     long getIdPlciOdNazwy(String nazwaPlci);
 }

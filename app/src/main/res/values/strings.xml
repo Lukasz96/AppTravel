@@ -46,6 +46,9 @@
     <string name="creditsinfo">Background photo by Jake Blucker on Unsplash.</string>
     <string name="creditsinfotwo">Icons made by Freepik and Pause08 from www.flaticon.com</string>
     <string name="makenewpacklistlabel">Create list from scratch</string>
+    <string name="collaborativefilteringlabel">Generate list using collaborative filtering</string>
+    <string name="decisiontreelabel">Generate list using decision tree</string>
+    <string name="newmethodlabel">Generate list using new method</string>
     <string name="copyexistingpacklistlabel">Copy and edit existing list</string>
     <string name="noexistinglistlabel">You have not created any list yet.</string>
     <string name="createingnewpacklistlabel">Creating new list</string>

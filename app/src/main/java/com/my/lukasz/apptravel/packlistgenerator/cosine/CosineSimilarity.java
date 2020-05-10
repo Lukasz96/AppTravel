@@ -1,8 +1,11 @@
 package com.my.lukasz.apptravel.packlistgenerator.cosine;
 
+import android.content.Context;
+
 import com.my.lukasz.apptravel.packlistgenerator.DbCSVReader;
 import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
 import com.my.lukasz.apptravel.packlistgenerator.ParaRowPodobienstwo;
+import com.my.lukasz.apptravel.packlistgenerator.TravelsUsersFromDB;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,10 +16,16 @@ import java.util.Map;
 
 public class CosineSimilarity {
 
+    private Context context;
+
+    public CosineSimilarity(Context context) {
+        this.context = context;
+    }
+
     public List<ParaRowPodobienstwo> getTopNSimilarPacksForGivenTravelData(PodrozUzytkownik newTravelData, int topN) throws IOException {
         DataToVectorChanger vectorChanger = new DataToVectorChanger();
         final double[] newTravelDataVector = vectorChanger.castToVector(newTravelData);
-        Map<Integer, PodrozUzytkownik> podrozUzytkownikMap  = new DbCSVReader().getUserAndTravelDataAsMap();
+        Map<Integer, PodrozUzytkownik> podrozUzytkownikMap  = TravelsUsersFromDB.getInstance(context).getPackLists();
         List<ParaRowPodobienstwo> rowAndSimilarityPairs = new ArrayList<>();
         for (PodrozUzytkownik podrozUzytkownik : podrozUzytkownikMap.values()) {
             double similarity = cosineSimilarity(newTravelDataVector, vectorChanger.castToVector(podrozUzytkownik));

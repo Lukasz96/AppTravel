@@ -61,6 +61,9 @@
     <string name="holidaycategorytourist">Zwiedzanie</string>
     <string name="holidaycategorybusiness">Służbowo</string>
     <string name="deletepacklistquestion">Czy na pewno chcesz usunąć tą listę rzeczy do spakowania?</string>
+    <string name="collaborativefilteringlabel">Generuj listę - collaborative filtering</string>
+    <string name="decisiontreelabel">Generuj listę - drzewa decyzyjne</string>
+    <string name="newmethodlabel">Generuj listę - nowa metoda</string>
     <string name="newitemtobacktitle">Nowa rzecz</string>
     <string name="namenewitemtopacklabel">Nazwa</string>
     <string name="nonameitemtopackerror">Proszę wpisac nazwę rzeczy</string>

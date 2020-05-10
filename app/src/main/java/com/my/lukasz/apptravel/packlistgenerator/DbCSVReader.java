@@ -1,6 +1,8 @@
 package com.my.lukasz.apptravel.packlistgenerator;
 
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,9 +16,15 @@ import java.util.Map;
 
 public class DbCSVReader {
 
+    private Context context;
+
+    public DbCSVReader(Context context) {
+        this.context = context;
+    }
+
     public Map<Integer, PodrozUzytkownik> getUserAndTravelDataAsMap() throws IOException {
         InputStreamReader is;
-        is = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("dane_do_kodu.csv"));
+        is = new InputStreamReader(context.getAssets().open("dane_do_kodu.csv"));
 
         Map<Integer, PodrozUzytkownik> result = new HashMap<>();
 
@@ -40,7 +48,7 @@ public class DbCSVReader {
 
     public Map<Integer, List<RzeczDoSpakowania>> getPackListsAsMap() throws IOException {
         InputStreamReader is;
-        is = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("rzeczy_spakowane_do_kodu.csv"));
+        is = new InputStreamReader(context.getAssets().open("rzeczy_spakowane_do_kodu.csv"));
         Map<Integer, List<RzeczDoSpakowania>> result = new HashMap<>();
         BufferedReader reader = new BufferedReader(is);
         String line = "";

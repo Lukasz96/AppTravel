@@ -14,6 +14,7 @@ public interface UserDao {
     @Insert
     long insertUser (User user);
 
-
+    @Query("SELECT * FROM User WHERE id=:id ")
+    User getUserById(long id);
 
 }
