@@ -5,16 +5,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DbCSVReader {
 
-    public List<DbRow> getDataFromCsv() throws IOException {
+    public Map<Integer, PodrozUzytkownik> getUserAndTravelDataAsMap() throws IOException {
         InputStreamReader is;
-        ClassLoader object = getClass().getClassLoader();
         is = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("dane_do_kodu.csv"));
 
-        List<DbRow> result = new ArrayList<>();
+        Map<Integer, PodrozUzytkownik> result = new HashMap<>();
 
         BufferedReader reader = new BufferedReader(is);
         String line = "";
@@ -27,8 +31,35 @@ public class DbCSVReader {
             int weatherTypeId = Integer.parseInt(dbRow[3]);
             String gender = dbRow[4];
             int age = Integer.parseInt(dbRow[5]);
+            int podrozId = Integer.parseInt(dbRow[6]);
 
-            result.add(new DbRow(numberOfDays, travelType, transportTypeId, weatherTypeId, gender, age));
+            result.put(podrozId, new PodrozUzytkownik(numberOfDays, travelType, transportTypeId, weatherTypeId, gender, age, podrozId));
+        }
+        return result;
+    }
+
+    public Map<Integer, List<RzeczDoSpakowania>> getPackListsAsMap() throws IOException {
+        InputStreamReader is;
+        is = new InputStreamReader(getClass().getClassLoader().getResourceAsStream("rzeczy_spakowane_do_kodu.csv"));
+        Map<Integer, List<RzeczDoSpakowania>> result = new HashMap<>();
+        BufferedReader reader = new BufferedReader(is);
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            String[] dbRow = line.split(",");
+
+            String nazwa = dbRow[0];
+            int ilosc = Integer.parseInt(dbRow[1]);
+            String kategoria = dbRow[2];
+            int podrozId = Integer.parseInt(dbRow[3]);
+
+            if (result.containsKey(podrozId)) {
+                List<RzeczDoSpakowania> rzeczyDotychczas = result.get(podrozId);
+                rzeczyDotychczas.add(new RzeczDoSpakowania(nazwa, ilosc, kategoria));
+                result.put(podrozId, rzeczyDotychczas);
+            }
+            else {
+                result.put(podrozId, new ArrayList<>(Arrays.asList(new RzeczDoSpakowania(nazwa, ilosc, kategoria))));
+            }
         }
         return result;
     }

@@ -1,13 +1,13 @@
 package com.my.lukasz.apptravel.packlistgenerator.cosine;
 
-import com.my.lukasz.apptravel.packlistgenerator.DbRow;
+import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
+import com.my.lukasz.apptravel.packlistgenerator.ParaRowPodobienstwo;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-
-import static org.junit.Assert.*;
+import java.util.List;
 
 public class CosineSimilarityTest {
 
@@ -26,7 +26,10 @@ public class CosineSimilarityTest {
         int weather = 5;
         String gender = "Kobieta";
         int age = 26;
-        DbRow newRow = new DbRow(days, travelType, transport, weather, gender, age);
-        cosineSimilarity.getTopNSimilarPacksForGivenTravelData(newRow, 10);
+        PodrozUzytkownik newRow = new PodrozUzytkownik(days, travelType, transport, weather, gender, age, 1);
+        List<ParaRowPodobienstwo> result = cosineSimilarity.getTopNSimilarPacksForGivenTravelData(newRow, 10);
+        for (ParaRowPodobienstwo pair : result) {
+            System.out.println("Similarity: " + pair.getSimilarity() + " -> " + pair.getPodrozUzytkownik().toString());
+        }
     }
 }

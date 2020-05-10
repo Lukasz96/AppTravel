@@ -1,9 +1,7 @@
 package com.my.lukasz.apptravel.packlistgenerator.cosine;
 
-import android.util.Pair;
-
 import com.my.lukasz.apptravel.packlistgenerator.DbCSVReader;
-import com.my.lukasz.apptravel.packlistgenerator.DbRow;
+import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
 import com.my.lukasz.apptravel.packlistgenerator.ParaRowPodobienstwo;
 
 import java.io.IOException;
@@ -11,17 +9,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 public class CosineSimilarity {
 
-    public void getTopNSimilarPacksForGivenTravelData(DbRow newTravelData, int topN) throws IOException {
+    public List<ParaRowPodobienstwo> getTopNSimilarPacksForGivenTravelData(PodrozUzytkownik newTravelData, int topN) throws IOException {
         DataToVectorChanger vectorChanger = new DataToVectorChanger();
         final double[] newTravelDataVector = vectorChanger.castToVector(newTravelData);
-        List<DbRow> dbRowList = new DbCSVReader().getDataFromCsv();
+        Map<Integer, PodrozUzytkownik> podrozUzytkownikMap  = new DbCSVReader().getUserAndTravelDataAsMap();
         List<ParaRowPodobienstwo> rowAndSimilarityPairs = new ArrayList<>();
-        for (DbRow dbRow : dbRowList) {
-            double similarity = cosineSimilarity(newTravelDataVector, vectorChanger.castToVector(dbRow));
-            rowAndSimilarityPairs.add(new ParaRowPodobienstwo(dbRow, similarity));
+        for (PodrozUzytkownik podrozUzytkownik : podrozUzytkownikMap.values()) {
+            double similarity = cosineSimilarity(newTravelDataVector, vectorChanger.castToVector(podrozUzytkownik));
+            rowAndSimilarityPairs.add(new ParaRowPodobienstwo(podrozUzytkownik, similarity));
         }
         Collections.sort(rowAndSimilarityPairs, new Comparator<ParaRowPodobienstwo>() {
             @Override
@@ -30,9 +29,7 @@ public class CosineSimilarity {
             }
         });
         Collections.reverse(rowAndSimilarityPairs);
-        for (ParaRowPodobienstwo pair : rowAndSimilarityPairs) {
-            System.out.println("Similarity: " + pair.getSimilarity() + " -> " + pair.getDbRow().toString());
-        }
+        return rowAndSimilarityPairs.subList(0, topN);
     }
 
 

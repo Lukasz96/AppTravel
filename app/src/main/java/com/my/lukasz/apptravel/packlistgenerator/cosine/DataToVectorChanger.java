@@ -2,13 +2,13 @@ package com.my.lukasz.apptravel.packlistgenerator.cosine;
 
 
 import com.google.android.gms.common.internal.Preconditions;
-import com.my.lukasz.apptravel.packlistgenerator.DbRow;
+import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
 
 public class DataToVectorChanger {
 
     private static final int arraySize = 28;
 
-    public double[] castToVector(DbRow rowFromDbQuery) {
+    public double[] castToVector(PodrozUzytkownik rowFromDbQuery) {
         double[] result = new double[arraySize];
         castDaysToVector(result, rowFromDbQuery);
         castGenderToVector(result, rowFromDbQuery);
@@ -19,7 +19,7 @@ public class DataToVectorChanger {
         return result;
     }
 
-    private void castDaysToVector(double[] result, DbRow rowFromDbQuery) {
+    private void castDaysToVector(double[] result, PodrozUzytkownik rowFromDbQuery) {
         int days = rowFromDbQuery.getNumberOfDays();
         Preconditions.checkArgument(days > 0);
         if (days == 1) result[0] = 1;
@@ -29,14 +29,14 @@ public class DataToVectorChanger {
         else if (days > 10) result[4] = 1;
     }
 
-    private void castGenderToVector(double[] result, DbRow rowFromDbQuery) {
+    private void castGenderToVector(double[] result, PodrozUzytkownik rowFromDbQuery) {
         String gender = rowFromDbQuery.getGender();
         Preconditions.checkArgument(gender != null && !gender.isEmpty());
         if (gender.equals("Kobieta")) result[5] = 1;
         else result[6] = 1;
     }
 
-    private void castTransportToVector(double[] result, DbRow rowFromDbQuery) {
+    private void castTransportToVector(double[] result, PodrozUzytkownik rowFromDbQuery) {
         int transportType = rowFromDbQuery.getTransportTypeId();
         Preconditions.checkArgument(transportType > 0 && transportType < 7);
         if (transportType == 1) result[7] = 1;
@@ -47,7 +47,7 @@ public class DataToVectorChanger {
         else if (transportType == 6) result[12] = 1;
     }
 
-    private void castTravelTypeToVector(double[] result, DbRow rowFromDbQuery) {
+    private void castTravelTypeToVector(double[] result, PodrozUzytkownik rowFromDbQuery) {
         int travelType = rowFromDbQuery.getTravelTypeId();
         Preconditions.checkArgument(travelType > 0 && travelType < 5);
         if (travelType == 1) result[13] = 1;
@@ -56,7 +56,7 @@ public class DataToVectorChanger {
         else if (travelType == 4) result[16] = 1;
     }
 
-    private void castWeatherToVector(double[] result, DbRow rowFromDbQuery) {
+    private void castWeatherToVector(double[] result, PodrozUzytkownik rowFromDbQuery) {
         int weatherType = rowFromDbQuery.getWeatherTypeId();
         Preconditions.checkArgument(weatherType > 0 && weatherType < 6);
         if (weatherType == 1) result[17] = 1;
@@ -66,7 +66,7 @@ public class DataToVectorChanger {
         else if (weatherType == 5) result[21] = 1;
     }
 
-    private void castAgeToVector(double[] result, DbRow rowFromDbQuery) {
+    private void castAgeToVector(double[] result, PodrozUzytkownik rowFromDbQuery) {
         int age = rowFromDbQuery.getAge();
         Preconditions.checkArgument(age > 0 && age < 120);
         if (age > 0 && age <= 10) result[22] = 1;

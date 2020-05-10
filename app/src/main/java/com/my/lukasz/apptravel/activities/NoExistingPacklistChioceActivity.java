@@ -90,8 +90,6 @@ public class NoExistingPacklistChioceActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     @Override

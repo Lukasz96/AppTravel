@@ -1,6 +1,6 @@
 package com.my.lukasz.apptravel.packlistgenerator;
 
-public class DbRow {
+public class PodrozUzytkownik {
 
     private int numberOfDays;
     private int travelTypeId;
@@ -8,14 +8,16 @@ public class DbRow {
     private int weatherTypeId;
     private String gender;
     private int age;
+    private int travelId;
 
-    public DbRow(int numberOfDays, int travelTypeId, int transportTypeId, int weatherTypeId, String gender, int age) {
+    public PodrozUzytkownik(int numberOfDays, int travelTypeId, int transportTypeId, int weatherTypeId, String gender, int age, int travelId) {
         this.numberOfDays = numberOfDays;
         this.travelTypeId = travelTypeId;
         this.transportTypeId = transportTypeId;
         this.weatherTypeId = weatherTypeId;
         this.gender = gender;
         this.age = age;
+        this.travelId = travelId;
     }
 
     public int getNumberOfDays() {
@@ -65,16 +67,24 @@ public class DbRow {
     public void setAge(int age) {
         this.age = age;
     }
+    public int getTravelId() {
+        return travelId;
+    }
+
+    public void setTravelId(int travelId) {
+        this.travelId = travelId;
+    }
 
     @Override
     public String toString() {
-        return "DbRow{" +
+        return "PodrozUzytkownik{" +
                 "numberOfDays=" + numberOfDays +
                 ", travelTypeId=" + travelTypeId +
                 ", transportTypeId=" + transportTypeId +
                 ", weatherTypeId=" + weatherTypeId +
                 ", gender='" + gender + '\'' +
                 ", age=" + age +
+                ", travel ID=" + travelId +
                 '}';
     }
 }

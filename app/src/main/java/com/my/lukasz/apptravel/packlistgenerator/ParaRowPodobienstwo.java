@@ -2,20 +2,20 @@ package com.my.lukasz.apptravel.packlistgenerator;
 
 public class ParaRowPodobienstwo {
 
-    private DbRow dbRow;
+    private PodrozUzytkownik podrozUzytkownik;
     private double similarity;
 
-    public ParaRowPodobienstwo(DbRow dbRow, double similarity) {
-        this.dbRow = dbRow;
+    public ParaRowPodobienstwo(PodrozUzytkownik podrozUzytkownik, double similarity) {
+        this.podrozUzytkownik = podrozUzytkownik;
         this.similarity = similarity;
     }
 
-    public DbRow getDbRow() {
-        return dbRow;
+    public PodrozUzytkownik getPodrozUzytkownik() {
+        return podrozUzytkownik;
     }
 
-    public void setDbRow(DbRow dbRow) {
-        this.dbRow = dbRow;
+    public void setPodrozUzytkownik(PodrozUzytkownik podrozUzytkownik) {
+        this.podrozUzytkownik = podrozUzytkownik;
     }
 
     public double getSimilarity() {
@@ -29,7 +29,7 @@ public class ParaRowPodobienstwo {
     @Override
     public String toString() {
         return "ParaRowPodobienstwo{" +
-                "dbRow=" + dbRow +
+                "podrozUzytkownik=" + podrozUzytkownik +
                 ", similarity=" + similarity +
                 '}';
     }

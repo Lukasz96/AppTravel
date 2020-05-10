@@ -13,7 +13,7 @@ public class DbCSVReaderTest {
     @Test
     public void test() throws IOException {
         DbCSVReader reader = new DbCSVReader();
-        int size = reader.getDataFromCsv().size();
+        int size = reader.getUserAndTravelDataAsMap().size();
         assertEquals(107, size);
     }
 
