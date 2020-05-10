@@ -1,7 +1,7 @@
 package com.my.lukasz.apptravel.packlistgenerator.cosine;
 
-import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
 import com.my.lukasz.apptravel.packlistgenerator.ParaRowPodobienstwo;
+import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,13 +9,16 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static org.junit.Assert.*;
+
 public class CosineSimilarityTest {
 
     private CosineSimilarity cosineSimilarity;
 
     @Before
     public void setUp() {
-        cosineSimilarity = new CosineSimilarity();
+        cosineSimilarity = new CosineSimilarity(getInstrumentation().getTargetContext());
     }
 
     @Test
@@ -32,4 +35,5 @@ public class CosineSimilarityTest {
             System.out.println("Similarity: " + pair.getSimilarity() + " -> " + pair.getPodrozUzytkownik().toString());
         }
     }
+
 }

@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static org.junit.Assert.*;
 
 public class CollaborativeFilteringTest {
@@ -20,10 +21,13 @@ public class CollaborativeFilteringTest {
         int weather = 5;
         String gender = "Mężczyzna";
         int age = 26;
-        CollaborativeFiltering collaborativeFiltering = new CollaborativeFiltering(5, new PodrozUzytkownik(days, travelType, transport, weather, gender, age, 1));
-        List <RzeczDoSpakowania> result = collaborativeFiltering.getPackListRecommendation();
+        CollaborativeFiltering collaborativeFiltering =
+                new CollaborativeFiltering(5, new PodrozUzytkownik(days, travelType,
+                        transport, weather, gender, age, 1), getInstrumentation().getTargetContext());
+        List<RzeczDoSpakowania> result = collaborativeFiltering.getPackListRecommendation();
         for (RzeczDoSpakowania rzeczDoSpakowania : result) {
             System.out.println(rzeczDoSpakowania.toString());
         }
     }
+
 }
