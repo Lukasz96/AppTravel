@@ -23,6 +23,7 @@ import com.my.lukasz.apptravel.db.entities.User;
 import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
 import com.my.lukasz.apptravel.packlistgenerator.RzeczDoSpakowania;
 import com.my.lukasz.apptravel.packlistgenerator.collaborativeFiltering.CollaborativeFiltering;
+import com.my.lukasz.apptravel.packlistgenerator.decisionTree.DecisionTree;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -133,6 +134,49 @@ public class NoExistingPacklistChioceActivity extends AppCompatActivity {
                 List<RzeczDoSpakowania> rzeczDoSpakowania = new ArrayList<>();
                 try {
                     rzeczDoSpakowania = collaborativeFiltering.getPackListRecommendation();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String waluta= mDb.podrozDao().getWalutaByTravelId(travelId);
+                for (RzeczDoSpakowania rzeczDoSpakowaniaThing : rzeczDoSpakowania) {
+                    long kategoria = getKategoriaRzeczyOdNazwy(rzeczDoSpakowaniaThing.getKategoria());
+                    mDb.elementListyDoSpakowaniaDao().insertElementListyDoSpakowania(
+                            new ElementListyDoSpakowania(0, packListId, rzeczDoSpakowaniaThing.getNazwa(), true,
+                                    false, false, rzeczDoSpakowaniaThing.getIlosc(),
+                                    rzeczDoSpakowaniaThing.getIlosc(), 0, waluta, false, kategoria)
+                    );
+                }
+
+                intent.putExtra("packListId",packListId);
+                finish();
+                startActivity(intent);
+            }
+        });
+
+        decisionTreeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent=new Intent(NoExistingPacklistChioceActivity.this, PackListActivity.class);
+                intent.putExtra("travelId",travelId);
+                long packListId;
+                if(mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId)==null) {
+                    packListId = mDb.listaDoSpakowaniaDao().insertListeDoSpakowania(
+                            new ListaDoSpakowania(0, podroz.getNazwa(), podroz.getId()));
+                }
+                else {
+                    packListId=mDb.listaDoSpakowaniaDao().getListaDoSpakowaniaByTravelId(travelId).getId();
+                }
+                long userId = mDb.podrozDao().getPodrozById(travelId).getUserId();
+                Podroz podroz = mDb.podrozDao().getPodrozById(travelId);
+                User user = mDb.userDao().getUserById(userId);
+                int iloscDni = getDifferenceDays(podroz.getDataOd(), podroz.getDataDo());
+                PodrozUzytkownik podrozUzytkownik =
+                        new PodrozUzytkownik(iloscDni, (int)podroz.getKategoriaWakacjiId(), (int) podroz.getKategoriaTransportuId(),
+                                (int) podroz.getKategoriaPogodyId(), mDb.plecDao().getNazwaPlciById(user.getPlecId()),
+                                user.getWiek(), (int)travelId);
+                DecisionTree decisionTree = new DecisionTree(getApplicationContext(), podrozUzytkownik);
+                List<RzeczDoSpakowania> rzeczDoSpakowania = new ArrayList<>();
+                try {
+                    rzeczDoSpakowania = decisionTree.getPackListRecommendation();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
