@@ -1,6 +1,7 @@
 package com.my.lukasz.apptravel.packlistgenerator.cosine;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.my.lukasz.apptravel.packlistgenerator.DbCSVReader;
 import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
@@ -25,6 +26,19 @@ public class CosineSimilarity {
     public List<ParaRowPodobienstwo> getTopNSimilarPacksForGivenTravelData(PodrozUzytkownik newTravelData, int topN) throws IOException {
         DataToVectorChanger vectorChanger = new DataToVectorChanger();
         final double[] newTravelDataVector = vectorChanger.castToVector(newTravelData);
+        List<ParaRowPodobienstwo> rowAndSimilarityPairs = countSimilarityPairs(vectorChanger, newTravelDataVector);
+        return rowAndSimilarityPairs.subList(0, topN);
+    }
+
+    public List<ParaRowPodobienstwo> getTopNSimilarPacksForGivenTravelDataNewMethod(PodrozUzytkownik newTravelData, int topN) throws IOException {
+        WeightedDataToVectorChanger vectorChanger = new WeightedDataToVectorChanger();
+        final double[] newTravelDataVector = vectorChanger.castToVector(newTravelData);
+        List<ParaRowPodobienstwo> rowAndSimilarityPairs = countSimilarityPairs(vectorChanger, newTravelDataVector);
+        return rowAndSimilarityPairs.subList(0, topN);
+    }
+
+    @NonNull
+    private List<ParaRowPodobienstwo> countSimilarityPairs(ChangerToVector vectorChanger, double[] newTravelDataVector) throws IOException {
         Map<Integer, PodrozUzytkownik> podrozUzytkownikMap  = TravelsUsersFromDB.getInstance(context).getPackLists();
         List<ParaRowPodobienstwo> rowAndSimilarityPairs = new ArrayList<>();
         for (PodrozUzytkownik podrozUzytkownik : podrozUzytkownikMap.values()) {
@@ -38,9 +52,8 @@ public class CosineSimilarity {
             }
         });
         Collections.reverse(rowAndSimilarityPairs);
-        return rowAndSimilarityPairs.subList(0, topN);
+        return rowAndSimilarityPairs;
     }
-
 
     private double cosineSimilarity(double[] vectorA, double[] vectorB) throws IOException {
         double dotProduct = 0.0;

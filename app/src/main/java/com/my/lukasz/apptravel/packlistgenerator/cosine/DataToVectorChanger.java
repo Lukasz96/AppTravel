@@ -4,10 +4,11 @@ package com.my.lukasz.apptravel.packlistgenerator.cosine;
 import com.google.android.gms.common.internal.Preconditions;
 import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
 
-public class DataToVectorChanger {
+public class DataToVectorChanger implements ChangerToVector {
 
     private static final int arraySize = 28;
 
+    @Override
     public double[] castToVector(PodrozUzytkownik rowFromDbQuery) {
         double[] result = new double[arraySize];
         castDaysToVector(result, rowFromDbQuery);
