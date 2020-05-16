@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.my.lukasz.apptravel.packlistgenerator.DbCSVReader;
+import com.my.lukasz.apptravel.packlistgenerator.NewMethod.KParameterCounter;
 import com.my.lukasz.apptravel.packlistgenerator.PodrozUzytkownik;
 import com.my.lukasz.apptravel.packlistgenerator.ParaRowPodobienstwo;
 import com.my.lukasz.apptravel.packlistgenerator.TravelsUsersFromDB;
@@ -14,6 +15,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+
+import static com.my.lukasz.apptravel.packlistgenerator.NewMethod.TravelIdToCut.TRAVEL_ID_TO_CUT;
 
 public class CosineSimilarity {
 
@@ -39,7 +42,12 @@ public class CosineSimilarity {
 
     @NonNull
     private List<ParaRowPodobienstwo> countSimilarityPairs(ChangerToVector vectorChanger, double[] newTravelDataVector) throws IOException {
+
         Map<Integer, PodrozUzytkownik> podrozUzytkownikMap  = TravelsUsersFromDB.getInstance(context).getPackLists();
+        // TODO dla testow można odkomentowac
+//        Map<Integer, PodrozUzytkownik> podrozUzytkownikMap  = TravelsUsersFromDB.getInstance(context).getPackListsWithoutGivenTravels(
+//               TRAVEL_ID_TO_CUT
+//        );
         List<ParaRowPodobienstwo> rowAndSimilarityPairs = new ArrayList<>();
         for (PodrozUzytkownik podrozUzytkownik : podrozUzytkownikMap.values()) {
             double similarity = cosineSimilarity(newTravelDataVector, vectorChanger.castToVector(podrozUzytkownik));

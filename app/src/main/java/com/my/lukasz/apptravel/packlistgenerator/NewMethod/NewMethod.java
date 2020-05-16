@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.my.lukasz.apptravel.packlistgenerator.NewMethod.TravelIdToCut.TRAVEL_ID_TO_CUT;
+
 public class NewMethod {
 
     private Context context;
@@ -40,13 +42,17 @@ public class NewMethod {
         setThingsToListByTravelId(travelId);
         KNNPackListJoiner joiner = new KNNPackListJoiner(allThingsFromNNeighbours, nNearestNeighbours, similarUsers, context);
         List<RzeczDoSpakowania> joinedList =  joiner.getJoinedList();
-        /////////// TODO jak wyliczać te ilości rzeczy ?
-        ThingsQuantityCalculator calculator = new ThingsQuantityCalculator(joinedList, numberOfDays);
+        Map<RzeczDoSpakowania, Integer> thingsWithDays = joiner.getDaysOfTravelForEachThing();
+        ThingsQuantityCalculator calculator = new ThingsQuantityCalculator(joinedList, newUserData.getNumberOfDays(), thingsWithDays);
         return calculator.getListWithUpdatedQuantities();
     }
 
     private void setThingsToListByTravelId(int[] travelId) throws IOException {
-        Map<Integer, List<RzeczDoSpakowania>> allThingsFromDb = ListItemsFromDb.getInstance(context).getPackLists();
+         Map<Integer, List<RzeczDoSpakowania>> allThingsFromDb = ListItemsFromDb.getInstance(context).getPackLists();
+        // TODO dla testow można odkomentowac
+//        Map<Integer, List<RzeczDoSpakowania>> allThingsFromDb = ListItemsFromDb.getInstance(context).getPackListsWithoutGivenTravels(
+//                TRAVEL_ID_TO_CUT
+//        );
         for (int i = 0; i < travelId.length; i++) {
             allThingsFromNNeighbours.addAll(allThingsFromDb.get(travelId[i]));
         }

@@ -11,6 +11,7 @@ import java.util.Map;
 public class KNNPackListJoiner {
 
     private Map<String, Integer> thingsAndAppearancesNumber;
+    private Map<RzeczDoSpakowania, Integer> daysOfTravelForEachThing;
     private List<RzeczDoSpakowania> allThingsFromNeighbours;
     private int nNearestNeighbours;
     private List<ParaRowPodobienstwo> similarUsers;
@@ -21,6 +22,7 @@ public class KNNPackListJoiner {
         this.nNearestNeighbours = nNearestNeighbours;
         this.similarUsers = similarUsers;
         thingsAndAppearancesNumber = new HashMap<>();
+        daysOfTravelForEachThing = new HashMap<>();
         this.context = context;
     }
 
@@ -34,6 +36,10 @@ public class KNNPackListJoiner {
             }
         }
         return  result;
+    }
+
+    public Map<RzeczDoSpakowania, Integer> getDaysOfTravelForEachThing() {
+        return daysOfTravelForEachThing;
     }
 
     private void setThingsWithAppearancesToMap() {
@@ -51,8 +57,10 @@ public class KNNPackListJoiner {
         for (ParaRowPodobienstwo user: similarUsers) {
             int travelId = user.getPodrozUzytkownik().getTravelId();
             List<RzeczDoSpakowania> listaRzeczyUsera = ListItemsFromDb.getInstance(context).getPackLists().get(travelId);
+            int daysForThisThing = TravelsUsersFromDB.getInstance(context).getPackLists().get(travelId).getNumberOfDays();
             for (RzeczDoSpakowania rzecz : listaRzeczyUsera) {
                 if (rzecz.getNazwa().equals(thingName)) {
+                    daysOfTravelForEachThing.put(rzecz, daysForThisThing);
                     return rzecz;
                 }
             }

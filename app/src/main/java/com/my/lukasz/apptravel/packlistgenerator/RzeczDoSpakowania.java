@@ -1,5 +1,7 @@
 package com.my.lukasz.apptravel.packlistgenerator;
 
+import java.util.Objects;
+
 public class RzeczDoSpakowania {
 
     private String nazwa;
@@ -34,6 +36,21 @@ public class RzeczDoSpakowania {
 
     public void setKategoria(String kategoria) {
         this.kategoria = kategoria;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RzeczDoSpakowania that = (RzeczDoSpakowania) o;
+        return ilosc == that.ilosc &&
+                Objects.equals(nazwa, that.nazwa) &&
+                Objects.equals(kategoria, that.kategoria);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nazwa, ilosc, kategoria);
     }
 
     @Override
